@@ -2,7 +2,7 @@ import React from 'react'
 
 function page() {
   return (
-    <h1>hh11</h1>
+    <h1>hhss11</h1>
   )
 }
 
