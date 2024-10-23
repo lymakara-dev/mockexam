@@ -1,11 +1,4 @@
-name: Notify Telegram on Push
 
-on: push
-jobs:
-  notify:
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Send Telegram Notification
       env:
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
