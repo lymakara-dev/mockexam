@@ -1,11 +1,13 @@
+"use client";
+
 import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
-function ClassCard() {
+function ExamPage() {
   const list = [
     {
-      title: "Orange",
-      img: "/images/fruit-1.jpeg",
+      title: "ការប្រលងគណិត",
+      img: "/images/cal.png",
       price: "$5.50",
     },
     {
@@ -45,26 +47,26 @@ function ClassCard() {
     },
   ];
   return (
-    <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
+    <div className="bg-red-700">
       {list.map((item, index) => (
         <Card
           shadow="sm"
           key={index}
           isPressable
           onPress={() => console.log("item pressed")}
+          className="w-[185px] h-[279px] p-[12px] flex flex-col items-cente"
         >
-          <CardBody className="overflow-visible p-0">
+          <CardBody className="bg-blue-600 grow-0">
             <Image
-              shadow="sm"
               radius="lg"
               width="100%"
               alt={item.title}
-              className="w-full object-cover h-[140px]"
+              className="w-[115px] h-[120px]"
               src={item.img}
             />
           </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b>{item.title}</b>
+          <CardFooter className="grow flex flex-col bg-red-500 items-start">
+            <p className="text-[16px] font-normal bg-blue-700">{item.title}</p>
             <p className="text-default-500">{item.price}</p>
           </CardFooter>
         </Card>
@@ -73,4 +75,4 @@ function ClassCard() {
   );
 }
 
-export default ClassCard;
+export default ExamPage;
