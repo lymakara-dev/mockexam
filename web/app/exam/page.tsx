@@ -1,76 +1,35 @@
 "use client";
 
 import React from "react";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import ClassCard from "@/components/card";
+import { Image } from "@nextui-org/image";
 
 function ExamPage() {
-  const list = [
-    {
-      title: "ការប្រលងគណិត",
-      img: "/images/cal.png",
-      price: "$5.50",
-    },
-    {
-      title: "Tangerine",
-      img: "/images/fruit-2.jpeg",
-      price: "$3.00",
-    },
-    {
-      title: "Raspberry",
-      img: "/images/fruit-3.jpeg",
-      price: "$10.00",
-    },
-    {
-      title: "Lemon",
-      img: "/images/fruit-4.jpeg",
-      price: "$5.30",
-    },
-    {
-      title: "Avocado",
-      img: "/images/fruit-5.jpeg",
-      price: "$15.70",
-    },
-    {
-      title: "Lemon 2",
-      img: "/images/fruit-6.jpeg",
-      price: "$8.00",
-    },
-    {
-      title: "Banana",
-      img: "/images/fruit-7.jpeg",
-      price: "$7.50",
-    },
-    {
-      title: "Watermelon",
-      img: "/images/fruit-8.jpeg",
-      price: "$12.20",
-    },
-  ];
   return (
-    <div className="bg-red-700">
-      {list.map((item, index) => (
-        <Card
-          shadow="sm"
-          key={index}
-          isPressable
-          onPress={() => console.log("item pressed")}
-          className="w-[185px] h-[279px] p-[12px] flex flex-col items-cente"
-        >
-          <CardBody className="bg-blue-600 grow-0">
-            <Image
-              radius="lg"
-              width="100%"
-              alt={item.title}
-              className="w-[115px] h-[120px]"
-              src={item.img}
-            />
-          </CardBody>
-          <CardFooter className="grow flex flex-col bg-red-500 items-start">
-            <p className="text-[16px] font-normal bg-blue-700">{item.title}</p>
-            <p className="text-default-500">{item.price}</p>
-          </CardFooter>
-        </Card>
-      ))}
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-row gap-2">
+        <Image
+          src="/images/orng.jpeg"
+          width="100%"
+          className="rounded-full w-[64px] h-[64px]"
+        />
+        <div className="flex flex-col justify-center gap-1">
+          <p className="text-xl font-normal not-italic text-[#64748B]">
+            ស្វាគមន៍,&nbsp;
+            <span>ឃាង អួយអ័ង</span>
+          </p>
+          <a
+            href="#"
+            className="text-base font-normal not-italic text-[#64748B]"
+          >
+            មើលប្រូហ្វាល់ &gt;
+          </a>
+        </div>
+      </div>
+      <p className="text-2xl not-italic font-medium text-[#64748B] mt-5">
+        ថ្នាក់ប្រលង
+      </p>
+      <ClassCard />
     </div>
   );
 }
