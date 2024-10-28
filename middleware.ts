@@ -11,5 +11,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/blog"] // List of protected routes
+  matcher: ["/blog","/"] // List of protected routes
 };
