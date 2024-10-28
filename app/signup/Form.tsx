@@ -16,6 +16,8 @@ const Form = () => {
   const [passwordError, setPasswordError] = useState<string>("");
   const [rePasswordError, setRePasswordError] = useState<string>("");
   const [termsError, setTermsError] = useState<string>("");
+  const [error, setError] = useState<boolean>(false);
+  const [ButtonErr, setBtnErr] = useState<string>("");
   const router = useRouter();
 
 
@@ -67,8 +69,6 @@ const Form = () => {
     setTermsError(checked ? "" : "You must accept the Terms and Conditions.");
     validateForm();
   };
-  //Validate
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -134,14 +134,18 @@ fetch(url, {
     e.preventDefault();
     if (isFormValid) {
       console.log("Form submitted successfully!");
+      
       // Proceed with form submission logic (e.g., API call)
+      setError(true)
       submitForm();
       router.push('/signin');
+    }else{
+      setBtnErr("Please fill in all required fields.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} >
       {/* Full Name Input */}
       <div className="mb-8">
         <label htmlFor="name" className="mb-3 block text-sm text-dark dark:text-white">
@@ -242,7 +246,8 @@ fetch(url, {
       {termsError && <p className="text-red-500 text-sm mt-2">{termsError}</p>}
 
       {/* Submit Button */}
-      <button type='submit' disabled={!isFormValid} className="shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">
+      <p className="text-red-500 text-sm mt-2">{ButtonErr}</p>
+      <button disabled={error} type='submit' id='signup' className="shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">
         Sign Up
       </button>
     </form>
