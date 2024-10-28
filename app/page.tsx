@@ -2,7 +2,7 @@ import React from 'react'
 
 function page() {
   return (
-    <div>page</div>
+    <h1>You are login with cookies set to 2mn and all routes are protected with middleware </h1>
   )
 }
 
