@@ -105,7 +105,7 @@ const Form = () => {
         console.log("Error");
     }
 }
-function postRecord(accessToken) {
+function postRecord(accessToken:any) {
   const jsonObject = {
     "email": email,
     "name": fullName,
@@ -125,7 +125,7 @@ fetch(url, {
 	 .then(url => url.json())
   .then(url => console.log("Record created successfully!", url))
   .catch(error => {
-    alert.error("Error creating record:", url);
+    console.log("Error creating record:", url);
 		});
     }
 
