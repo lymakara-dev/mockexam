@@ -1,9 +1,14 @@
-import React from 'react'
+import App from "@/components/sidebar";
+import React from "react";
+import MyNavBar from "@/components/MyNavBar";
 
 function page() {
   return (
-    <h1>You are login with cookies set to 2mn and all routes are protected with middleware </h1>
-  )
+<div className="flex flex-col-reverse md:flex-row">
+  <App />
+  <MyNavBar />
+</div>
+  );
 }
 
-export default page
+export default page;
