@@ -108,7 +108,7 @@ const SigninPage = () => {
 
     setEmail(value);
     setEmailError(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "" : "Invalid email address.",
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "" : "Invalid email address."
     );
     validateForm();
   };
@@ -117,7 +117,7 @@ const SigninPage = () => {
 
     setPassword(value);
     setPasswordError(
-      value.length >= 8 ? "" : "Password must be at least 8 characters long.",
+      value.length >= 8 ? "" : "Password must be at least 8 characters long."
     );
     validateForm();
   };
@@ -128,20 +128,22 @@ const SigninPage = () => {
 
     if (isFormValid) {
       const user = users.find(
-        (u) => u.email === email && u.password === password,
+        (u) => u.email === email && u.password === password
       );
       
       if (user) {
         console.log("Form submitted successfully!");
         setCheck(true);
         setTimeout(() => {
+        setTimeout(() => {
           setCheck(false);
           Cookies.set("authenticated", email , { expires: 1 });
           router.push("/");
+        }, 2000);
         }, 300);
       } else {
         // Show an error message on invalid login
-        setBtnInit("Incorrect Account")
+        setBtnInit("Incorrect Account");
       }
     }
   };
@@ -150,6 +152,7 @@ const SigninPage = () => {
   return (
     <>
       <section className="bg-[#EBF1FA] flex justify-center items-center w-screen h-screen">
+        {check ? <Loading /> : ""}
         {check ? <Loading /> : ""}
         <div className=" container rounded-2xl md:grid-cols-2 grid-cols-1 py-12 md:py-0 grid bg-white md:w-[60%] w-[80%]">
           <div className="left flex flex-col justify-center items-center gap-3">
@@ -185,14 +188,24 @@ const SigninPage = () => {
                   onChange={handlePasswordChange}
                   endContent={<RiLockPasswordFill />}
                 />
-                {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
+                {passwordError && (
+                  <p className="text-red-500 text-sm">{passwordError}</p>
+                )}
               </div>
+              <p className=" text-center text-red-500 text-sm mt-2">
+                {BtnInit}
+              </p>
               <p className=" text-center text-red-500 text-sm mt-2">
                 {BtnInit}
               </p>
               <button
                 className="shadow-submit py-2 rounded-2xl dark:shadow-submit-dark flex w-full items-center justify-center bg-blue-800 text-base font-medium text-white duration-300 hover:bg-primary/90"
                 type="submit"
+                onClick={() => {
+                  if (!isFormValid) {
+                    setBtnInit("All fields are required*");
+                  } else {
+                    setBtnInit("");
                 onClick={()=>{
                   if (!isFormValid) {
                     setBtnInit("All fields are required*")
@@ -201,7 +214,7 @@ const SigninPage = () => {
                   }
                 }}
               >
-               ចូល
+                ចូល
               </button>
             </form>
             <div className="flex justify-center items-center w-full">
@@ -210,9 +223,10 @@ const SigninPage = () => {
               <span className="bg-gray-500 h-[1px] w-full max-w-[60px] sm:block" />
             </div>
             <Link href={"/signup"} className="w-[55%]">
+            <Link href={"/signup"} className="w-[55%]">
               <button className="w-full shadow-submit py-2 rounded-2xl dark:shadow-submit-dark flex items-center justify-center border-1 border-blue-600 bg-white text-base font-medium text-blue-600 duration-300 hover:bg-blue-900">
-                 ចុះឈ្មោះ
-                </button>
+                ចុះឈ្មោះ
+              </button>
             </Link>
           </div>
           <div className="md:flex hidden right justify-end aspect-square w-full">
