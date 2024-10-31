@@ -41,7 +41,7 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "" }}>
           <div className={`relative flex flex-col ${Kantumruy.className}`}>
             {/* <Navbar /> */}
             <main className="container flex-grow">
