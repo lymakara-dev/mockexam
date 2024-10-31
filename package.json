@@ -16,6 +16,7 @@
 		"@nextui-org/link": "2.0.35",
 		"@nextui-org/listbox": "2.1.27",
 		"@nextui-org/navbar": "2.0.37",
+		"@nextui-org/react": "^2.4.8",
 		"@nextui-org/snippet": "2.0.43",
 		"@nextui-org/switch": "2.0.34",
 		"@nextui-org/system": "2.2.6",
@@ -25,12 +26,17 @@
 		"clsx": "2.1.1",
 		"framer-motion": "~11.1.1",
 		"intl-messageformat": "^10.5.0",
+		"js-cookie": "^3.0.5",
 		"next": "14.2.4",
+		"next-app-template": "file:",
 		"next-themes": "^0.2.1",
 		"react": "18.3.1",
-		"react-dom": "18.3.1"
+		"react-dom": "18.3.1",
+		"react-icons": "^5.3.0",
+		"react-spinners": "^0.14.1"
 	},
 	"devDependencies": {
+		"@types/js-cookie": "^3.0.6",
 		"@types/node": "20.5.7",
 		"@types/react": "18.3.3",
 		"@types/react-dom": "18.3.0",
