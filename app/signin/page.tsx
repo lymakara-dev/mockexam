@@ -206,13 +206,7 @@ const SigninPage = () => {
                     setBtnInit("All fields are required*");
                   } else {
                     setBtnInit("");
-                onClick={()=>{
-                  if (!isFormValid) {
-                    setBtnInit("All fields are required*")
-                  } else {
-                    setBtnInit("")
-                  }
-                }}
+                }}}
               >
                 ចូល
               </button>
@@ -222,7 +216,6 @@ const SigninPage = () => {
               <p className="text-gray-500 px-4">បង្កើតគណនី</p>
               <span className="bg-gray-500 h-[1px] w-full max-w-[60px] sm:block" />
             </div>
-            <Link href={"/signup"} className="w-[55%]">
             <Link href={"/signup"} className="w-[55%]">
               <button className="w-full shadow-submit py-2 rounded-2xl dark:shadow-submit-dark flex items-center justify-center border-1 border-blue-600 bg-white text-base font-medium text-blue-600 duration-300 hover:bg-blue-900">
                 ចុះឈ្មោះ

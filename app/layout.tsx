@@ -44,6 +44,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "" }}>
           <div className={`relative flex flex-col ${Kantumruy.className}`}>
             {/* <Navbar /> */}
+            <div className="flex-grow-0 px-4 py-4 bg-background"></div>
             <main className="container flex-grow">
               {children}
             </main>
