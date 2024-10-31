@@ -52,18 +52,14 @@ const MyNavBar = () => {
 
   const { onOpen, isOpen: sidebarOpen, onOpenChange } = useDisclosure();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   const closeMenu = () => {
     setIsOpen(false);
   };
 
   // Handle clicks outside of the dropdown
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current) {
         closeMenu();
       }
     };
@@ -85,7 +81,7 @@ const MyNavBar = () => {
       <div className="flex w-full h-[56px] p-[7px_16px] md:justify-end justify-between items-center md:bg-white bg-[#0A3A7A] shadow-md relative">
         {/* Logo for Mobile */}
         <div className="flex items-center md:hidden">
-          <img src="/img/logo_IMG&Title.svg" alt="Logo Image and Title" />
+          <img src="/img/logo_IMG&Title.svg" alt="" />
         </div>
 
         {/* Hamburger Menu for Mobile */}
@@ -104,27 +100,30 @@ const MyNavBar = () => {
         <ul className="hidden md:flex gap-x-6 text-black items-center">
           <li>
             <Link href="/mode">
-              <img src="/img/mode.svg" alt="Mode Icon" />
+              <img src="/img/mode.svg" alt="Mode dark or light Icon" />
             </Link>
           </li>
           <li>
             <Link href="/notification">
-              <img src="/img/notification.png" alt="Notification Icon" />
+              <img
+                src="/img/notification.png"
+                alt="Notification setting Icon"
+              />
             </Link>
           </li>
           <li>
             <Link href="/flag_kh">
-              <img src="/img/flag_kh.png" alt="Flag Icon" />
+              <img src="/img/flag_kh.png" alt="flag of language Icon" />
             </Link>
           </li>
           <li>
             <Link href="/fullscr">
-              <img src="/img/fullscr.png" alt="Fullscreen Icon" />
+              <img src="/img/fullscr.png" alt="Fullscreen or normal Icon" />
             </Link>
           </li>
           <li>
             <Link href="/user-circle">
-              <img src="/img/user-circle.png" alt="User Icon" />
+              <img src="/img/user-circle.png" alt="User setting Icon" />
             </Link>
           </li>
         </ul>
@@ -139,43 +138,38 @@ const MyNavBar = () => {
       >
         <ModalContent className="bg-[#0A3A7A]">
           <ModalHeader>
-            <img src="/img/logo_IMG&Title.svg" alt="Logo Image and Title" />
+            <img src="/img/logo_IMG&Title.svg" alt="" />
           </ModalHeader>
           <ModalBody className="flex flex-col">
-  <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
-    <img src="/img/homeIcon.svg" alt="Home Icon" />
-    <span className="mt-1">ថ្នាក់ប្រលង</span>
-  </button>
-  <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
-    <img src="/img/clipboard-document-check.svg" alt="DUC Icon" />
-    <span className="mt-1">ប្រវត្តិការប្រលង</span>
-  </button>
-  <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
-    <img src="/img/user-circle.png" alt="User Icon" />
-    <span className="mt-1">គណនី</span>
-  </button>
-  <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
-    <img src="/img/Language.png" alt="language" />
-    <span className="mt-1">ភាសារ</span>
-  </button>
-  <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
-    <img src="/img/noti.png" alt="User Icon" />
-    <span className="mt-1">ជូនដំណឹង</span>
-  </button>
-  <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
-    <img src="/img/full.png" alt="User Icon" />
-    <span className="mt-1">មើលពេញ</span>
-  </button>
-  <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
-    <img src="/img/mode-icon.svg" alt="User Icon" />
-    <span className="mt-1"> ម៉ូត</span>
-  </button>
-</ModalBody>
-
-
-
-
-
+            <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
+              <img src="/img/homeIcon.svg" alt="" />
+              <span className="mt-1">ថ្នាក់ប្រលង</span>
+            </button>
+            <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
+              <img src="/img/clipboard-document-check.svg" alt="" />
+              <span className="mt-1">ប្រវត្តិការប្រលង</span>
+            </button>
+            <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
+              <img src="/img/user-circle.png" alt="" />
+              <span className="mt-1">គណនី</span>
+            </button>
+            <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
+              <img src="/img/Language.png" alt="language switch" />
+              <span className="mt-1">ភាសារ</span>
+            </button>
+            <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
+              <img src="/img/noti.png" alt="notification ring " />
+              <span className="mt-1">ជូនដំណឹង</span>
+            </button>
+            <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
+              <img src="/img/full.png" alt="full xd" />
+              <span className="mt-1">មើលពេញ</span>
+            </button>
+            <button className="flex items-start text-white gap-x-6 pb-[0.5rem]">
+              <img src="/img/mode-icon.svg" alt="Mode" />
+              <span className="mt-1"> ម៉ូត</span>
+            </button>
+          </ModalBody>
         </ModalContent>
       </Sidebar>
     </>
