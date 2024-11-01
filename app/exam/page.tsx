@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import Cookies from "js-cookie";
 
 import ExamCard from "@/components/card";
 
@@ -76,7 +75,9 @@ function ExamPage() {
   ];
 
   useEffect(()=>{
-    setName(Cookies.get("authenticated"));
+    const name1 = document.cookie;
+    const email = name1.split("authenticated=")[1];
+    setName(email)
   },[])
 
   return (
