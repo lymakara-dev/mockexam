@@ -150,32 +150,32 @@ export default function BlogPage() {
   
   return (
     <>
+   {isLoading? "Loading" : 
+     <div className="flex flex-col">
+       <h1 className={''}>សំណួរ</h1>
+       <img
+         alt="Tests Question"
+         height={0}
+         sizes="100vw"
+         src={url+apiResponseData[0].picquestions.link.href}
+        style={{ width: "100%", height: "100" }}
+        width={0}
+      />
+      <img
+        alt="Tests Question"
+        height={0}
+        sizes="100vw"
+        src={url+apiResponseData[0].answer.link.href}
+        style={{ width: "100%", height: "100" }}
+        width={0}
+      />
+      <h1>ចម្លើយ</h1>
+      <div className="multiplechoice">
+      {createCard(apiResponseData[0])}
+      </div>
+      {/* <button onClick={handlesubmit}>submit</button> */}
+    </div>
+  }
     </>
   );
 }
-// {isLoading? "Loading" : 
-//   <div className="flex flex-col">
-//     <h1 className={''}>សំណួរ</h1>
-//     <img
-//       alt="Tests Question"
-//       height={0}
-//       sizes="100vw"
-//       src={url+apiResponseData[0].picquestions.link.href}
-//       style={{ width: "100%", height: "100" }}
-//       width={0}
-//     />
-//     <img
-//       alt="Tests Question"
-//       height={0}
-//       sizes="100vw"
-//       src={url+apiResponseData[0].answer.link.href}
-//       style={{ width: "100%", height: "100" }}
-//       width={0}
-//     />
-//     <h1>ចម្លើយ</h1>
-//     <div className="multiplechoice">
-//     {createCard(apiResponseData[0])}
-//     </div>
-//     {/* <button onClick={handlesubmit}>submit</button> */}
-//   </div>
-// }

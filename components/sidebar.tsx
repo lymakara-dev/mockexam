@@ -9,6 +9,8 @@ import {
   extendVariants,
   ModalHeader,
 } from "@nextui-org/react";
+import Router from "next/router";
+import Link from "next/link";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -75,10 +77,12 @@ function App() {
         <div className="flex flex-col gap-1 p-4">
           <img src="/img/logo_IMG&Title.svg" alt="Logo" />
           <div className="flex-col flex mt-5">
-          <button className="flex text-white gap-4 pb-[1rem]">
-            <img src="/img/homeIcon.svg" alt="Home" />
-            <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
-          </button>
+            <Link href="/mockexam">
+              <button className="flex text-white gap-4 pb-[1rem]">
+                  <img src="/img/homeIcon.svg" alt="Home" />
+                  <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
+              </button>
+            </Link>
           <button className="flex text-white gap-4 pb-[1rem]">
             <img src="/img/clipboard-document-check.svg" alt="DUC" />
             <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
