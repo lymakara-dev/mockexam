@@ -130,7 +130,6 @@ function postRecord(accessToken:any) {
     "password": password
   };
 	const url = 'https://techbox.developimpact.net/o/c/users/';
-console.log(url);
 
 fetch(url, {
         method: 'POST',
@@ -140,8 +139,12 @@ fetch(url, {
        },
         body: JSON.stringify(jsonObject)
   })
-	 .then(url => url.json())
-  .then(url => console.log("Record created successfully!", url))
+	//  .then(url => url.json())
+  .then(url => {
+    // console.log("Record created successfully!", url)
+    setCheck(false);
+    router.push('/signin')
+  })
   .catch(error => {
     console.log("Error creating record:", url);
 		});
@@ -154,14 +157,12 @@ fetch(url, {
       setError(true)
       submitForm();
       setCheck(true);
-      setTimeout(() => {
-        setCheck(false);
-        router.push('/signin');
-      },2000)
+      // setTimeout(() => {
+      //   setCheck(false);
+      //   router.push('/signin');
+      // },2000)
     }else{
-      setBtnErr("Please fill in all required fields*");
-      console.log("Click");
-      
+      setBtnErr("Please fill in all required fields*");  
     }
   };
 

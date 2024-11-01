@@ -75,19 +75,20 @@ function App() {
       {/* Sidebar Content for Larger Screens */}
       <div className="hidden md:flex md:flex-col bg-[#0A3A7A] h-[1024px] text-white w-[230px]">
         <div className="flex flex-col gap-1 p-4">
-          <img src="/img/logo_IMG&Title.svg" alt="Logo" />
+          <img src="/Auth/ITCLogo.png" alt="Logo" />
           <div className="flex-col flex mt-5">
-            <Link href="/mockexam">
+            <Link href="/">
               <button className="flex text-white gap-4 pb-[1rem]">
                   <img src="/img/homeIcon.svg" alt="Home" />
                   <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
-          <button className="flex text-white gap-4 pb-[1rem]">
+            <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p>
+          <button disabled className="flex text-white gap-4 pb-[1rem]">
             <img src="/img/clipboard-document-check.svg" alt="DUC" />
             <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
           </button>
-          <button className="flex text-white gap-4 pb-[1rem]">
+          <button disabled className="flex text-white gap-4 pb-[1rem]">
             <img src="/img/user-circle.png" alt="User" />
             <span className="pt-[0.1rem]">គណនី</span>
           </button>

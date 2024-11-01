@@ -3,10 +3,12 @@ import { Checkbox } from "@nextui-org/checkbox";
 import React from "react";
 import { useState,useEffect } from "react";
 
-import CheckboxGroup from "./Checkbox";
+import CheckboxGroup from "../Checkbox";
 
 import { HeartFilledIcon } from "@/components/icons";
 import Cookies from "js-cookie";
+import { useParams } from "next/navigation";
+import { button } from "@nextui-org/theme";
 
 
 interface child  {
@@ -72,9 +74,12 @@ const ChildComponent: React.FC<child> = ({ option, amount}) => {
   );
 };
 
-export default function BlogPage() {
+export default function Page() {
   const [apiResponseData, setApiResponseData] = useState<data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [btn, setBtn] = useState<string>("បន្ទាប់");
+  const [index, setIndex] = useState<number>(0);
+  const [bg,setBg] = useState<string>("#0A3A7A")
   // Initialize an array to store questions
 
   const getForm = async () => {
@@ -135,8 +140,14 @@ export default function BlogPage() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       getForm();
-  }, []);
+    }, []);
 
+
+  const router = useParams();
+  const {slug} = router;
+
+  const mathItems = apiResponseData.filter(item => item.type?.name === slug);
+  
   const url = "https://techbox.developimpact.net";
 
   function createCard (ans: data){
@@ -144,36 +155,48 @@ export default function BlogPage() {
   }
 
   const userIdFromCookie = Cookies.get('authenticated');
-  console.log(userIdFromCookie);
-  
-  // console.log(userIdFromCookie);
-  
+
+
+  function handlesubmit(): void {
+    if(index == mathItems.length -1){
+      setBtn("Submit")
+      setBg("#ffffff")
+      
+    }else{
+      setIndex(index + 1);
+    }
+  }
+
   return (
     <>
    {isLoading? "Loading" : 
-     <div className="flex flex-col">
-       <h1 className={''}>សំណួរ</h1>
+     <div className="flex flex-col mt-4">
+       <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
        <img
          alt="Tests Question"
          height={0}
          sizes="100vw"
-         src={url+apiResponseData[0].picquestions.link.href}
+         src={url+mathItems[index].picquestions.link.href}
         style={{ width: "100%", height: "100" }}
         width={0}
       />
+      {apiResponseData[0]?.answer?.link?.href ?
       <img
-        alt="Tests Question"
-        height={0}
-        sizes="100vw"
-        src={url+apiResponseData[0].answer.link.href}
-        style={{ width: "100%", height: "100" }}
-        width={0}
+      alt="Tests Question"
+      height={0}
+      sizes="100vw"
+      src={url+mathItems[index].answer.link.href}
+      style={{ width: "100%", height: "100" }}
+      width={0}
       />
-      <h1>ចម្លើយ</h1>
+      :
+      ""
+      }
+      <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
       <div className="multiplechoice">
       {createCard(apiResponseData[0])}
       </div>
-      {/* <button onClick={handlesubmit}>submit</button> */}
+      <button className={`mt-4 font-xl font-bold p-2 bg-[${bg}]`}onClick={handlesubmit}>{btn}</button>
     </div>
   }
     </>

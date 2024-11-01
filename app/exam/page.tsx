@@ -1,15 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { IoPersonCircleOutline } from "react-icons/io5";
+import Cookies from "js-cookie";
+
 import ExamCard from "@/components/card";
-import { Image } from "@nextui-org/image";
-import ExamQuestion from "@/components/question";
-import { Link } from "@nextui-org/link";
+
 
 function ExamPage() {
+  const [name,setName] = useState('Default');
   const list = [
     {
-      title: "ការប្រលងគណិតគណនា",
+      title: "ការប្រលងគណិតវិទ្យា",
+      href: "/mockexam/Math",
       img: "/images/cal.png",
       price: "$5.50",
       time: new Date().toLocaleTimeString("en-US", {
@@ -25,6 +28,7 @@ function ExamPage() {
 
     {
       title: "ការប្រលងតក្កវិទ្យា",
+      href: "/mockexam/IQ",
       img: "/images/logic.png",
       price: "$5.50",
       time: new Date().toLocaleTimeString("en-US", {
@@ -40,6 +44,7 @@ function ExamPage() {
 
     {
       title: "ការប្រលងរូបវិទ្យា",
+      href: "/mockexam/Physics",
       img: "/images/physic.png",
       price: "$5.50",
       time: new Date().toLocaleTimeString("en-US", {
@@ -55,6 +60,7 @@ function ExamPage() {
 
     {
       title: "ការប្រលងគីមីវិទ្យា",
+      href: "/mockexam/Chemistry",
       img: "/images/chemistry.png",
       price: "$5.50",
       time: new Date().toLocaleTimeString("en-US", {
@@ -68,25 +74,30 @@ function ExamPage() {
       }),
     },
   ];
+
+  useEffect(()=>{
+    setName(Cookies.get("authenticated"));
+  },[])
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-row gap-2">
-        <Image
+        {/* <Image
+          className="rounded-full w-[64px] h-[64px]"
           src="/images/orng.jpeg"
           width="100%"
-          className="rounded-full w-[64px] h-[64px]"
-        />
+        /> */}
+        <IoPersonCircleOutline className="w-12 h-full" />
         <div className="flex flex-col justify-center gap-1">
           <p className="text-xl font-normal not-italic text-[#64748B]">
             ស្វាគមន៍,&nbsp;
-            <span>ឃាង អួយអ័ង</span>
+            <span>{name}</span>
           </p>
-          <a
-            href="#"
-            className="text-base font-normal not-italic text-[#64748B]"
+          <p
+            className="text-base font-normal not-italic text-[#64748B]"            
           >
             មើលប្រូហ្វាល់ &gt;
-          </a>
+          </p>
         </div>
       </div>
       <p className="text-2xl not-italic font-medium text-[#64748B] mt-5">
@@ -95,15 +106,14 @@ function ExamPage() {
 
       <div className="flex flex-col gap-4 md:flex-row items-center flex-wrap">
         {list.map((item, index) => (
-          <Link href="/exam/questonId">
             <ExamCard
               key={index}
-              title={item.title}
+              date={item.date}
+              href={item.href}
               img={item.img}
               time={item.time}
-              date={item.date}
+              title={item.title}
             />
-          </Link>
         ))}
       </div>
     </div>

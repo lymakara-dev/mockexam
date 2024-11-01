@@ -148,6 +148,7 @@ const MyNavBar = () => {
                 <span className="mt-1">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
+            <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p>
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/clipboard-document-check.svg" alt="" />
               <span className="mt-1">ប្រវត្តិការប្រលង</span>

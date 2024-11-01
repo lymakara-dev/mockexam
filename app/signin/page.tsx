@@ -159,9 +159,9 @@ const SigninPage = () => {
             <Image
               alt="ITC logo"
               className=""
-              height={200}
+              height={300}
               src={"/Auth/ITCLogo.png"}
-              width={200}
+              width={300}
             />
             <form onSubmit={handlelogin}>
               <div className="my-3">
@@ -169,7 +169,7 @@ const SigninPage = () => {
                   className="border-1 border-gray-500 rounded-xl"
                   endContent={<MdOutlineEmail />}
                   name="email"
-                  placeholder="អុីម៉ែល"
+                  placeholder="អ៊ីម៉ែល"
                   type="email"
                   value={email}
                   onChange={handleEmailChange}
@@ -192,9 +192,6 @@ const SigninPage = () => {
                   <p className="text-red-500 text-sm">{passwordError}</p>
                 )}
               </div>
-              <p className=" text-center text-red-500 text-sm mt-2">
-                {BtnInit}
-              </p>
               <p className=" text-center text-red-500 text-sm mt-2">
                 {BtnInit}
               </p>
@@ -221,6 +218,7 @@ const SigninPage = () => {
                 ចុះឈ្មោះ
               </button>
             </Link>
+            <p>Made by <strong>25<sup>th</sup> GIC student</strong></p>
           </div>
           <div className="md:flex hidden right justify-end aspect-square w-full">
             <Image
