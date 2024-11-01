@@ -105,7 +105,7 @@ const MyNavBar = () => {
             <ThemeSwitch />
           </li>
           <li>
-            <Link href="/notification">
+            <Link href="/">
               <img
                 src="/img/notification.png"
                 alt="Notification setting Icon"
@@ -113,17 +113,17 @@ const MyNavBar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/flag_kh">
+            <Link href="/">
               <img src="/img/flag_kh.png" alt="flag of language Icon" />
             </Link>
           </li>
           <li>
-            <Link href="/fullscr">
+            <Link href="/">
               <img src="/img/fullscr.png" alt="Fullscreen or normal Icon" />
             </Link>
           </li>
           <li>
-            <Link href="/user-circle">
+            <Link href="/">
               <img src="/img/user-circle.png" alt="User setting Icon" />
             </Link>
           </li>
