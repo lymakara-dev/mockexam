@@ -111,7 +111,7 @@ export default function Page() {
   };
 
   function fetchRecord (accessToken: string) {
-    const url = "https://techbox.developimpact.net/o/c/mockquestions/";
+    const url = "https://techbox.developimpact.net/o/c/mockquestions/?pageSize=-1";
 
     // Clear the users array to avoid duplication
     fetch(url, {
@@ -161,7 +161,7 @@ export default function Page() {
     if(index == mathItems.length -1){
       setBtn("Submit")
       setBg("#ffffff")
-      
+            
     }else{
       setIndex(index + 1);
     }
