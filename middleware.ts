@@ -11,10 +11,11 @@ export function middleware(req: NextRequest) {
   if (!isAuthenticated && req.nextUrl.pathname !== "/signin") {
     return NextResponse.redirect(new URL("/signin", req.url));
   }
-
+  
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/mockexam", "/", "/signin"]
+  matcher: ["/mockexam", "/", "/signin","/api","/about",
+    "/mockexam/chemistry","/mockexam/math","/mockexam/iq","/mockexam/physic","/exam"],
 };
