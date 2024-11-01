@@ -135,12 +135,10 @@ const SigninPage = () => {
         console.log("Form submitted successfully!");
         setCheck(true);
         setTimeout(() => {
-        setTimeout(() => {
           setCheck(false);
           Cookies.set("authenticated", email , { expires: 1 });
           router.push("/");
-        }, 2000);
-        }, 300);
+        }, 1300);
       } else {
         // Show an error message on invalid login
         setBtnInit("Incorrect Account");

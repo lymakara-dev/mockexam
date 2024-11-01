@@ -75,7 +75,7 @@ function App() {
       {/* Sidebar Content for Larger Screens */}
       <div className="hidden md:flex md:flex-col bg-[#0A3A7A] h-[1024px] text-white w-[230px]">
         <div className="flex flex-col gap-1 p-4">
-          <img src="/Auth/ITCLogo.png" alt="Logo" />
+          <img src="/img/logo_IMG&Title.svg" alt="Logo" />
           <div className="flex-col flex mt-5">
             <Link href="/">
               <button className="flex text-white gap-4 pb-[1rem]">
@@ -83,7 +83,7 @@ function App() {
                   <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
-            <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p>
+            {/* <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p> */}
           <button disabled className="flex text-white gap-4 pb-[1rem]">
             <img src="/img/clipboard-document-check.svg" alt="DUC" />
             <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
