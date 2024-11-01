@@ -2,21 +2,10 @@ import { Image } from "@nextui-org/image";
 import { Button, Radio, RadioGroup } from "@nextui-org/react";
 import React from "react";
 
-interface QuestionIdProps {
-  param: string;
-}
-
-const ExamQuestion: React.FC<QuestionIdProps> = ({ param }) => {
-  // const router = useRouter();
-
-  // const handleClick = () => {
-  //   router.push("/exam");
-  // };
+const ExamQuestion = () => {
   return (
     <div className="flex flex-col gap-6 bg-[#F1F5F9] p-8">
-      <p className="font-medium text-[#0F172A] text-2xl not-italic">
-        សំនួរ {param}
-      </p>
+      <p className="font-medium text-[#0F172A] text-2xl not-italic">សំនួរ</p>
       <Image src="/images/question.png" radius="none" />
       <p className="font-medium text-[#0F172A] text-2xl not-italic">ចំម្លើយ</p>
       <RadioGroup label="">
