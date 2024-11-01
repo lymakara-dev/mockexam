@@ -9,6 +9,7 @@ import { HeartFilledIcon } from "@/components/icons";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
 import { button } from "@nextui-org/theme";
+import { SyncLoader } from "react-spinners";
 
 
 interface child  {
@@ -169,9 +170,10 @@ export default function Page() {
 
   return (
     <>
-   {isLoading? "Loading" : 
+   {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
      <div className="flex flex-col mt-4">
        <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
+       {apiResponseData[0]?.answer?.link?.href ?
        <img
          alt="Tests Question"
          height={0}
@@ -179,18 +181,18 @@ export default function Page() {
          src={url+mathItems[index].picquestions.link.href}
         style={{ width: "100%", height: "100" }}
         width={0}
-      />
+      /> : "Content not found"}
       {apiResponseData[0]?.answer?.link?.href ?
-      <img
-      alt="Tests Question"
-      height={0}
-      sizes="100vw"
-      src={url+mathItems[index].answer.link.href}
-      style={{ width: "100%", height: "100" }}
-      width={0}
-      />
-      :
-      ""
+        <img
+        alt="Tests Question"
+        height={0}
+        sizes="100vw"
+        src={url+mathItems[index].answer.link.href}
+        style={{ width: "100%", height: "100" }}
+        width={0}
+        />
+        :
+        ""
       }
       <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
       <div className="multiplechoice">
