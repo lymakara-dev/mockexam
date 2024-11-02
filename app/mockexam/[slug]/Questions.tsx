@@ -6,12 +6,11 @@ import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
 import { SyncLoader } from "react-spinners";
 import { Radio, RadioGroup } from "@nextui-org/react";
+import { ThemeSwitch } from "@/components/theme-switch";
 
 interface child  {
   option : string;
   amount : number;
-  // selected : number;
-  // setSelect : (numbers : number) => void;
 }
 interface ans{
   option:string
@@ -72,8 +71,6 @@ export default function Page() {
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
   const [corIndex, setcorIndex] = React.useState(5);
-  const [selectedValue, setSelectedValue] = useState<string>('');
-
   enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
   
   const RadioGroupComponent = ({
@@ -179,22 +176,13 @@ export default function Page() {
       getForm();
     }, []);
 
-    // useEffect(()=>{
-    //   console.log(correctedAnswer);
-    // }, [correctedAnswer]);
-
-
   const router = useParams();
   const {slug} = router;
-
+  
+  const userIdFromCookie = Cookies.get('authenticated');
   const mathItems = testquestion.filter(item => item.type?.name === slug);
   
   const url = "https://techbox.developimpact.net";
-
-  const a = Array.from({ length : corIndex}, (_, index) => ({
-    value: (index + 1).toString(),
-    label: `${index + 1}`,
-  }));
 
   function createCard (ans: Data){
     return <RadioGroupComponent  
@@ -202,7 +190,6 @@ export default function Page() {
     multiplechoice={ans.multiplechoices} />
   }
 
-  const userIdFromCookie = Cookies.get('authenticated');
 
   function handlesubmit(): void {
     if(index == mathItems.length -1){
@@ -218,6 +205,14 @@ export default function Page() {
     <>
    {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
      <div className="flex flex-col mt-4">
+       <nav className='flex justify-between bg-[#0A3A7A] w-[600px] p-2 rounded-xl'>
+          <div className='flex items-center justify-center gap-2'>
+            <img src="" alt="" />
+            <h1>{slug} Exam</h1>
+            <ThemeSwitch />
+          </div>
+        <p className="font-bold text-xl">{index}/{mathItems.length} Questions</p>
+    </nav>
        <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
        {mathItems[0]?.picquestions?.link?.href ?
        <img

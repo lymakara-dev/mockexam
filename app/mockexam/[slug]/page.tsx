@@ -14,7 +14,6 @@ export const runtime = 'edge';
   const [start, setStart] = useState<boolean>(false);
   return (
     <div className='flex justify-center items-center flex-col'>
-      <Exambar/>
       {start? "" : <Page/>}
     </div>
   )
