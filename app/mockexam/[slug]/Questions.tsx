@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
 import { button } from "@nextui-org/theme";
 import { SyncLoader } from "react-spinners";
+import test from "node:test";
 
 
 interface child  {
@@ -21,7 +22,7 @@ interface child  {
 interface ans{
   option:string
 }
-interface data {
+interface Data {
   id: number;
   picquestions: {
     id: number;
@@ -40,12 +41,31 @@ interface data {
     };
     name: string;
   };
+  solution: { // Changed from answer to solution
+    id: number;
+    link: {
+      href: string;
+      label: string;
+    };
+    name: string;
+  };
   correctedAns: number;
   type: {
     key: string;
     name: string;
   };
+  year: {
+    key: string;
+    name: string;
+  };
+  status: { // Added status if you plan to use it
+    code: number;
+    label: string;
+    label_i18n: string;
+  };
 }
+
+
 
 const ChildComponent: React.FC<child> = ({ option, amount}) => {
   const [selected, setSelected] = useState<string | null>(null);
@@ -76,11 +96,13 @@ const ChildComponent: React.FC<child> = ({ option, amount}) => {
 };
 
 export default function Page() {
-  const [apiResponseData, setApiResponseData] = useState<data[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [btn, setBtn] = useState<string>("បន្ទាប់");
   const [index, setIndex] = useState<number>(0);
-  const [bg,setBg] = useState<string>("#0A3A7A")
+  const [bg,setBg] = useState<string>("#0A3A7A");
+  const [testquestion, setTestQuestion] = React.useState<Data[]>([]); // Use useState for testquestion
+
+
   // Initialize an array to store questions
 
   const getForm = async () => {
@@ -129,11 +151,14 @@ export default function Page() {
 
         return response.json();
       })
-      .then((data) => {
-        setApiResponseData(data.items)
-        setIsLoading(false);
-        
-      })
+      .then(data => {
+        if (data.items && Array.isArray(data.items)) {
+            setTestQuestion(data.items); // Set testquestion with the API response
+            setIsLoading(false);
+        } else {
+            console.log("Unexpected data format:", data);
+        }
+    })
       .catch((error) => {
         console.log("Error fetching records:", error);
       });
@@ -147,16 +172,15 @@ export default function Page() {
   const router = useParams();
   const {slug} = router;
 
-  const mathItems = apiResponseData.filter(item => item.type?.name === slug);
+  const mathItems = testquestion.filter(item => item.type?.name === slug);
   
   const url = "https://techbox.developimpact.net";
 
-  function createCard (ans: data){
+  function createCard (ans: Data){
     return <ChildComponent amount={ans.multiplechoices} option={""} />
   }
 
   const userIdFromCookie = Cookies.get('authenticated');
-
 
   function handlesubmit(): void {
     if(index == mathItems.length -1){
@@ -173,7 +197,7 @@ export default function Page() {
    {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
      <div className="flex flex-col mt-4">
        <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
-       {apiResponseData[0]?.answer?.link?.href ?
+       {mathItems[0]?.picquestions?.link?.href ?
        <img
          alt="Tests Question"
          height={0}
@@ -182,7 +206,7 @@ export default function Page() {
         style={{ width: "100%", height: "100" }}
         width={0}
       /> : "Content not found"}
-      {apiResponseData[0]?.answer?.link?.href ?
+      {mathItems[0]?.answer?.link?.href ?
         <img
         alt="Tests Question"
         height={0}
@@ -196,7 +220,7 @@ export default function Page() {
       }
       <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
       <div className="multiplechoice">
-      {createCard(apiResponseData[0])}
+      {createCard(testquestion[0])}
       </div>
       <button className={`mt-4 font-xl font-bold p-2 bg-[${bg}]`}onClick={handlesubmit}>{btn}</button>
     </div>
