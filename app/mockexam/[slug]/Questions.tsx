@@ -1,17 +1,11 @@
 'use client'
-import { Checkbox } from "@nextui-org/checkbox";
 import React from "react";
 import { useState,useEffect } from "react";
 
-import CheckboxGroup from "../Checkbox";
-
-import { HeartFilledIcon } from "@/components/icons";
 import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
-import { button } from "@nextui-org/theme";
 import { SyncLoader } from "react-spinners";
-import test from "node:test";
-
+import { Radio, RadioGroup } from "@nextui-org/react";
 
 interface child  {
   option : string;
@@ -21,6 +15,10 @@ interface child  {
 }
 interface ans{
   option:string
+}
+interface RadioOption {
+  value: string;
+  label: string;
 }
 interface Data {
   id: number;
@@ -65,46 +63,59 @@ interface Data {
   };
 }
 
-
-
-const ChildComponent: React.FC<child> = ({ option, amount}) => {
-  const [selected, setSelected] = useState<string | null>(null);
-  const checkboxes = Array.from({ length: amount }, (_, index) => `Option ${index + 1}`);
-  
-  const handleCheckboxChange = (value: string) => {
-    setSelected(selected === value ? null : value);
-  };
-
-  enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
-
-  return (
-    <>
-      {checkboxes.map((opt, index) => (
-        <Checkbox
-          key={index}
-          checked={selected === opt}
-          className="mr-4 font-bold" 
-          icon={<HeartFilledIcon />} 
-          onChange={() => handleCheckboxChange(opt)}
-          >
-            
-          {ans[index]}
-        </Checkbox>
-      ))}
-    </>
-  );
-};
-
 export default function Page() {
+
   const [isLoading, setIsLoading] = useState(true);
   const [btn, setBtn] = useState<string>("បន្ទាប់");
   const [index, setIndex] = useState<number>(0);
   const [bg,setBg] = useState<string>("#0A3A7A");
-  const [testquestion, setTestQuestion] = React.useState<Data[]>([]); // Use useState for testquestion
+  const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
+  const [correctedAnswer, setCorrectAnswer] = useState(0);
+  const [corIndex, setcorIndex] = React.useState(5);
+  const [selectedValue, setSelectedValue] = useState<string>('');
 
+  enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
+  
+  const RadioGroupComponent = ({
+    multiplechoice
+  }: {
+    testquestion: number;
+    multiplechoice: number;
+  }) => {
+    const [selectedValue, setSelectedValue] = useState<string>('');
 
-  // Initialize an array to store questions
-
+    const a = Array.from({ length : multiplechoice}, (_, index) => ({
+      value: (index + 1).toString(),
+      label: `${index + 1}`,
+    }));
+  
+    const handleChange = (value: string) => {
+      setSelectedValue(value);
+  
+      const checkBox = parseInt(value);
+      if (checkBox === testquestion[index].correctedAns) {
+        setCorrectAnswer(correctedAnswer + 1);
+        console.log("Correct answer");  
+      } else {
+        console.log("Not correct");
+      }
+    };
+  
+    return (
+      <RadioGroup label="" onChange={(e) => handleChange(e.target.value)}>
+        <div className="flex gap-4">
+          {a.map((option, i) => (
+            <div key={i} className="rounded-[10px] p-4">
+              <Radio value={option.value} className="font-semibold dark:text-black">
+                {ans[i]}
+              </Radio>
+            </div>
+          ))}
+        </div>
+      </RadioGroup>
+    );
+  };
+  
   const getForm = async () => {
     const clientId = "id-ff33fd67-2662-23d2-e387-7e660796b71";
     const clientSecret = "secret-16433662-63e6-dea2-91b5-c0be0d0db7c";
@@ -168,6 +179,10 @@ export default function Page() {
       getForm();
     }, []);
 
+    // useEffect(()=>{
+    //   console.log(correctedAnswer);
+    // }, [correctedAnswer]);
+
 
   const router = useParams();
   const {slug} = router;
@@ -176,8 +191,15 @@ export default function Page() {
   
   const url = "https://techbox.developimpact.net";
 
+  const a = Array.from({ length : corIndex}, (_, index) => ({
+    value: (index + 1).toString(),
+    label: `${index + 1}`,
+  }));
+
   function createCard (ans: Data){
-    return <ChildComponent amount={ans.multiplechoices} option={""} />
+    return <RadioGroupComponent  
+    testquestion={ans.correctedAns} 
+    multiplechoice={ans.multiplechoices} />
   }
 
   const userIdFromCookie = Cookies.get('authenticated');
