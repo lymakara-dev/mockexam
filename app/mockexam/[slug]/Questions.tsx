@@ -70,7 +70,6 @@ export default function Page() {
   const [bg,setBg] = useState<string>("#0A3A7A");
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
-  const [corIndex, setcorIndex] = React.useState(5);
   enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
   
   const RadioGroupComponent = ({
@@ -171,15 +170,11 @@ export default function Page() {
         console.log("Error fetching records:", error);
       });
     }
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      getForm();
-    }, []);
 
   const router = useParams();
   const {slug} = router;
-  
-  const userIdFromCookie = Cookies.get('authenticated');
+  const userEmailFromCookie = Cookies.get('authenticated');  
+
   const mathItems = testquestion.filter(item => item.type?.name === slug);
   
   const url = "https://techbox.developimpact.net";
@@ -190,16 +185,64 @@ export default function Page() {
     multiplechoice={ans.multiplechoices} />
   }
 
+  //Post data
+  const submitForm = async () => {
+    const clientId = 'id-779ff131-33fb-fd23-3acd-97dd81ce3';
+    const clientSecret = 'secret-6d2c88b7-70ef-5ed4-76a7-75558deb4b7c';
+    const tokenUrl = 'https://techbox.developimpact.net/o/oauth2/token';
+    const response = await fetch(tokenUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'grant_type': 'client_credentials',
+            'client_id': clientId,
+            'client_secret': clientSecret
+        })
+    });
+    if (response.ok) {
+        const data = await response.json();
+        postRecord(data.access_token);
+    } else {
+        console.log("Error");
+    }
+  }
+  function postRecord(accessToken:string) {
+    const jsonObject = {
+      "email": userEmailFromCookie,
+      "score": 0,
+      "type": slug
+    };
+  const url = "https://techbox.developimpact.net/o/c/mockresults/";
+    console.log(url);
+  
+  fetch(url, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + accessToken
+       },
+        body: JSON.stringify(jsonObject),
+  })
+   .then(url => url.json())
+  .then(url => console.log("Record created successfully!", url))
+  .catch(error => {
+    alert("Error creating record:");
+    });
+  };
 
   function handlesubmit(): void {
     if(index == mathItems.length -1){
       setBtn("Submit")
       setBg("#ffffff")
+      submitForm();
             
     }else{
       setIndex(index + 1);
     }
   }
+
 
   return (
     <>
@@ -213,6 +256,7 @@ export default function Page() {
           </div>
         <p className="font-bold text-xl">{index}/{mathItems.length} Questions</p>
     </nav>
+     <button onClick={submitForm}>Submit</button>
        <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
        {mathItems[0]?.picquestions?.link?.href ?
        <img

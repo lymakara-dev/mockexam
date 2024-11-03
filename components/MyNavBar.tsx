@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
 import {
   Modal,
@@ -104,7 +105,7 @@ const MyNavBar = () => {
           <li className="flex items-center">
             <ThemeSwitch />
           </li>
-          <li>
+          {/* <li>
             <Link href="/">
               <img
                 src="/img/notification.png"
@@ -116,15 +117,15 @@ const MyNavBar = () => {
             <Link href="/">
               <img src="/img/flag_kh.png" alt="flag of language Icon" />
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link href="/">
               <img src="/img/fullscr.png" alt="Fullscreen or normal Icon" />
             </Link>
-          </li>
+          </li> */}
           <li>
-            <Link href="/">
-              <img src="/img/user-circle.png" alt="User setting Icon" />
+            <Link href="/signout">
+              <PiSignOutBold className="w-6 h-full" />
             </Link>
           </li>
         </ul>
