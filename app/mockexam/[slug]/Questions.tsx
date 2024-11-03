@@ -6,12 +6,11 @@ import Cookies from "js-cookie";
 import { useParams } from "next/navigation";
 import { SyncLoader } from "react-spinners";
 import { Radio, RadioGroup } from "@nextui-org/react";
+import { ThemeSwitch } from "@/components/theme-switch";
 
 interface child {
   option: string;
   amount: number;
-  // selected : number;
-  // setSelect : (numbers : number) => void;
 }
 interface ans {
   option: string;
@@ -73,18 +72,10 @@ export default function Page() {
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
   const [corIndex, setcorIndex] = React.useState(5);
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  const [selectedValue, setSelectedValue] = useState<string>('');
 
-  enum ans {
-    ក,
-    ខ,
-    គ,
-    ឃ,
-    ង,
-    ច,
-    ឆ,
-  }
-
+  enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
+  
   const RadioGroupComponent = ({
     multiplechoice,
   }: {
@@ -186,24 +177,25 @@ export default function Page() {
       .catch((error) => {
         console.log("Error fetching records:", error);
       });
-  }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    getForm();
-  }, []);
+    }
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+      getForm();
+    }, []);
 
-  // useEffect(()=>{
-  //   console.log(correctedAnswer);
-  // }, [correctedAnswer]);
+    // useEffect(()=>{
+    //   console.log(correctedAnswer);
+    // }, [correctedAnswer]);
+
 
   const router = useParams();
-  const { slug } = router;
+  const {slug} = router;
 
   const mathItems = testquestion.filter((item) => item.type?.name === slug);
 
   const url = "https://techbox.developimpact.net";
 
-  const a = Array.from({ length: corIndex }, (_, index) => ({
+  const a = Array.from({ length : corIndex}, (_, index) => ({
     value: (index + 1).toString(),
     label: `${index + 1}`,
   }));
@@ -217,73 +209,52 @@ export default function Page() {
     );
   }
 
-  const userIdFromCookie = Cookies.get("authenticated");
+  const userIdFromCookie = Cookies.get('authenticated');
 
   function handlesubmit(): void {
-    if (index == mathItems.length - 1) {
-      setBtn("Submit");
-      setBg("#0D4DA2");
-    } else {
+    if(index == mathItems.length -1){
+      setBtn("Submit")
+      setBg("#ffffff")
+            
+    }else{
       setIndex(index + 1);
     }
   }
 
+
   return (
     <>
-      {isLoading ? (
-        <SyncLoader className="mt-12" color="#0A3A7A" />
-      ) : (
-        <div className="flex flex-col mt-4 ">
-          <h1
-            className={
-              "font-medium text-[#0F172A] text-2xl not-italic text-left"
-            }
-          >
-            សំណួរ
-          </h1>
-          {mathItems[0]?.picquestions?.link?.href ? (
-            <div style={{ width: "1200px", height: "300px", overflow: "auto" }}>
-              <img
-                alt="Tests Question"
-                src={url + mathItems[index].picquestions.link.href}
-                style={{ width: "100%", height: "auto" }}
-              />
-            </div>
-          ) : (
-            "Content not found"
-          )}
-          {mathItems[0]?.answer?.link?.href ? (
-            <div style={{ width: "1200px", height: "600px", overflow: "auto" }}>
-              <img
-                alt="Tests Question"
-                src={url + mathItems[index].answer.link.href}
-                style={{ width: "100%", height: "auto" }}
-              />
-            </div>
-          ) : (
-            ""
-          )}
-          <h1 className="font-medium text-[#0F172A] text-2xl not-italic">
-            ចម្លើយ
-          </h1>
-          <div className="multiplechoice">{createCard(testquestion[0])}</div>
-          <div className="flex flex-row justify-between pt-3 pb-3">
-            <p className="text-[#94A3B8] text-xl font-normal not-italic">
-              រយះពេលនៅសល់ :
-            </p>
-            <p className="text-[#53E635] text-xl font-normal not-italic">
-              01:59:26
-            </p>
-          </div>
-          <button
-            className={`w-[123px] h-[40px] self-end rounded-[10px] text-[16px] font-normal p-2 bg-[${bg}] text-white`}
-            style={{ backgroundColor: bg }}
-            onClick={handlesubmit}
-          >
-            {btn}
-          </button>
-        </div>
-      )}
+   {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
+     <div className="flex flex-col mt-4">
+       <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
+       {mathItems[0]?.picquestions?.link?.href ?
+       <img
+         alt="Tests Question"
+         height={0}
+         sizes="100vw"
+         src={url+mathItems[index].picquestions.link.href}
+        style={{ width: "100%", height: "100" }}
+        width={0}
+      /> : "Content not found"}
+      {mathItems[0]?.answer?.link?.href ?
+        <img
+        alt="Tests Question"
+        height={0}
+        sizes="100vw"
+        src={url+mathItems[index].answer.link.href}
+        style={{ width: "100%", height: "100" }}
+        width={0}
+        />
+        :
+        ""
+      }
+      <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
+      <div className="multiplechoice">
+      {createCard(testquestion[0])}
+      </div>
+      <button className={`mt-4 font-xl font-bold p-2 bg-[${bg}]`}onClick={handlesubmit}>{btn}</button>
+    </div>
+  }
     </>
   );
 }

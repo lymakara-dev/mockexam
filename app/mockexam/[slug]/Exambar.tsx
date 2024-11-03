@@ -1,7 +1,7 @@
 import { ThemeSwitch } from "@/components/theme-switch";
 import React from "react";
 
-function Exambar() {
+const Exambar =({index,length,Subject}:{index:number,length:number,Subject:String}) => {
   return (
     <nav className="flex w-[1200px] text-white justify-between bg-[#0D4DA2] p-2 rounded-[10px]">
       <div className="">

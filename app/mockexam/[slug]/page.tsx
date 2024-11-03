@@ -12,9 +12,8 @@ function page() {
 
   const [start, setStart] = useState<boolean>(false);
   return (
-    <div className="flex justify-center items-center flex-col">
-      <Exambar />
-      {start ? "" : <Page />}
+    <div className='flex justify-center items-center flex-col'>
+      {start? "" : <Page/>}
     </div>
   );
 }

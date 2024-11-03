@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Image from "next/image";
@@ -91,46 +91,34 @@ const SigninPage = () => {
     getForm();
   }, []);
   const [email, setEmail] = useState<string>("");
-  const [emailError, setEmailError] = useState<string>("");
-  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<boolean>(false);
   const [BtnInit, setBtnInit] = useState<string>("");
 
-  //Validate
-  const validateForm = () => {
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    setIsFormValid(isValid);
-  };
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     setEmail(value);
     setEmailError(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "" : "Invalid email address."
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? true : false
     );
-    validateForm();
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     setPassword(value);
-    setPasswordError(
-      value.length >= 8 ? "" : "Password must be at least 8 characters long."
-    );
-    validateForm();
+    setPasswordError(value.length >= 8? true : false);
   };
 
-  //Check
-  const handlelogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handlelogin = (e: React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
-
-    if (isFormValid) {
+    if(!emailError){
+      setBtnInit("Invalid email address")
+    }else if(!passwordError){
+      setBtnInit("Password must be at least 8 characters")
+    }else{
       const user = users.find(
         (u) => u.email === email && u.password === password
       );
-      
       if (user) {
         console.log("Form submitted successfully!");
         setCheck(true);
@@ -140,13 +128,10 @@ const SigninPage = () => {
           router.push("/");
         }, 1300);
       } else {
-        // Show an error message on invalid login
         setBtnInit("Incorrect Account");
       }
     }
-  };
-
-  //Compare
+  }
   return (
     <>
       <section className="bg-[#EBF1FA] flex justify-center items-center w-screen h-screen">
@@ -157,9 +142,9 @@ const SigninPage = () => {
             <Image
               alt="ITC logo"
               className=""
-              height={300}
+              height={250}
               src={"/Auth/ITCLogo.png"}
-              width={300}
+              width={250}
             />
             <form onSubmit={handlelogin}>
               <div className="my-3">
@@ -196,12 +181,6 @@ const SigninPage = () => {
               <button
                 className="shadow-submit py-2 rounded-2xl dark:shadow-submit-dark flex w-full items-center justify-center bg-blue-800 text-base font-medium text-white duration-300 hover:bg-primary/90"
                 type="submit"
-                onClick={() => {
-                  if (!isFormValid) {
-                    setBtnInit("All fields are required*");
-                  } else {
-                    setBtnInit("");
-                }}}
               >
                 ចូល
               </button>
