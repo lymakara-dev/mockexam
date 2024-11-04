@@ -2,11 +2,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import Cookies from "js-cookie";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { SyncLoader } from "react-spinners";
 import { Radio, RadioGroup } from "@nextui-org/react";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { FaCircleChevronLeft } from "react-icons/fa6";
+import RotateToLandscape from "../RotateToLandscape";
 
 interface child {
   option: string;
@@ -71,11 +72,12 @@ export default function Page() {
   const [bg, setBg] = useState<string>("#0D4DA2");
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
+  const router = useParams();
+  const routerLink = useRouter();
+  const {slug} = router;
   const mathItems = testquestion.filter((item) => item.type?.name === slug);
   const url = "https://techbox.developimpact.net";
-  const router = useParams();
   
-  const {slug} = router;
   enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
   
 
@@ -154,6 +156,12 @@ export default function Page() {
     }
   }
 
+  function handleleft() {
+    if (window.confirm("Are you sure you want to leave?")) {
+      routerLink.push("/");
+    }
+  }
+
   const RadioGroupComponent = ({multiplechoice}: { multiplechoice: number }) => {
     
     const [selectedValue, setSelectedValue] = useState<string>("");
@@ -177,7 +185,7 @@ export default function Page() {
   
     return (
       <RadioGroup label="" onChange={(e) => handleChange(e.target.value)}>
-        <div className="flex flex-col gap-2">
+        <div className="flex gap-2">
           {a.map((option, i) => (
             <div key={i} className="rounded-[10px] p-4">
               <Radio
@@ -200,43 +208,56 @@ export default function Page() {
   return (
     <>
    {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
-     <div className="flex flex-col mt-4">
-      <nav className="flex w-[1200px] text-white justify-between bg-[#0D4DA2] p-2 rounded-[10px]">
-        <div className="">
-          <div className="flex items-center justify-center gap-2">
-            <img src="" alt="" />
-            <h1>{slug} Exam</h1>
-            <ThemeSwitch />
+     <div className="flex w-full flex-col overflow-hidden">
+        <nav className="flex w-full text-white justify-between bg-[#0D4DA2] p-2">
+            <div className="flex items-center justify-center gap-2">
+              <img src="" alt="" />
+              <h1>{slug} ប្រលងសាកល្បង</h1>
+              <ThemeSwitch />
+            </div>
+            <div className="flex gap-4 justify-center items-center mr-4">
+              <div>{index}/{mathItems.length} សំណួរ</div>
+              <button onClick={handleleft}>
+                <FaCircleChevronLeft className="w-6 hover:text-red-600 h-full" />
+              </button>
+            </div>
+        </nav>
+        <div className="p-12"> 
+          <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
+          {mathItems[0]?.picquestions?.link?.href ?
+          <div className="w-[100%] h-[50vh] flex items-center">
+            <img
+              alt="Tests Question"
+              height={0}
+              width={0}
+              sizes="100vw"
+              src={url+mathItems[index].picquestions.link.href}
+              style={{ width: "100%", height: "100" }}
+              className="w-[50%]" 
+            />
+          </div>: "Content not found"}
+          {mathItems[0]?.answer?.link?.href ?
+            <img
+            alt="Tests Question"
+            height={0}
+            sizes="100vw"
+            src={url+mathItems[index].answer.link.href}
+            style={{ width: "100%", height: "100" }}
+            width={0}
+            />
+            : ""
+          }
+          <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
+          <div className="multiplechoice">
+            {createCard(testquestion[0])}
           </div>
+          <button className={`
+            mt-4 w-20 p-2
+            text-white bg-[${bg}] font-xl font-bold
+            rounded-2xl`}
+            onClick={handlesubmit}>{btn}</button>
         </div>
-        <div>{index}/{mathItems.length} Questions</div>
-      </nav>
-       <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
-       {mathItems[0]?.picquestions?.link?.href ?
-       <img
-         alt="Tests Question"
-         height={0}
-         sizes="100vw"
-         src={url+mathItems[index].picquestions.link.href}
-        style={{ width: "100%", height: "100" }}
-        width={0}
-      /> : "Content not found"}
-      {mathItems[0]?.answer?.link?.href ?
-        <img
-        alt="Tests Question"
-        height={0}
-        sizes="100vw"
-        src={url+mathItems[index].answer.link.href}
-        style={{ width: "100%", height: "100" }}
-        width={0}
-        />
-        : ""
-      }
-      <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
-      <div className="multiplechoice">
-      {createCard(testquestion[0])}
-      </div>
-      <button className={`mt-4 font-xl font-bold p-2 bg-[${bg}]`}onClick={handlesubmit}>{btn}</button>
+      <RotateToLandscape/>
     </div>
   }
     </>
