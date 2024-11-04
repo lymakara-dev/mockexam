@@ -71,53 +71,13 @@ export default function Page() {
   const [bg, setBg] = useState<string>("#0D4DA2");
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
-  const [corIndex, setcorIndex] = React.useState(5);
-  const [selectedValue, setSelectedValue] = useState<string>('');
-
+  const mathItems = testquestion.filter((item) => item.type?.name === slug);
+  const url = "https://techbox.developimpact.net";
+  const router = useParams();
+  
+  const {slug} = router;
   enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
   
-  const RadioGroupComponent = ({
-    multiplechoice,
-  }: {
-    testquestion: number;
-    multiplechoice: number;
-  }) => {
-    const [selectedValue, setSelectedValue] = useState<string>("");
-
-    const a = Array.from({ length: multiplechoice }, (_, index) => ({
-      value: (index + 1).toString(),
-      label: `${index + 1}`,
-    }));
-
-    const handleChange = (value: string) => {
-      setSelectedValue(value);
-
-      const checkBox = parseInt(value);
-      if (checkBox === testquestion[index].correctedAns) {
-        setCorrectAnswer(correctedAnswer + 1);
-        console.log("Correct answer");
-      } else {
-        console.log("Not correct");
-      }
-    };
-
-    return (
-      <RadioGroup label="" onChange={(e) => handleChange(e.target.value)}>
-        <div className="flex flex-col gap-2">
-          {a.map((option, i) => (
-            <div key={i} className="rounded-[10px] p-4">
-              <Radio
-                value={option.value}
-                className="font-semibold dark:text-black"
-              >
-                {ans[i]}
-              </Radio>
-            </div>
-          ))}
-        </div>
-      </RadioGroup>
-    );
-  };
 
   const getForm = async () => {
     const clientId = "id-ff33fd67-2662-23d2-e387-7e660796b71";
@@ -142,7 +102,6 @@ export default function Page() {
 
       fetchRecord(data.access_token);
     } else {
-      // eslint-disable-next-line no-console
       console.log("Error obtaining token");
     }
   };
@@ -151,7 +110,6 @@ export default function Page() {
     const url =
       "https://techbox.developimpact.net/o/c/mockquestions/?pageSize=-1";
 
-    // Clear the users array to avoid duplication
     fetch(url, {
       method: "GET",
       headers: {
@@ -178,49 +136,66 @@ export default function Page() {
         console.log("Error fetching records:", error);
       });
     }
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      getForm();
-    }, []);
-
-    // useEffect(()=>{
-    //   console.log(correctedAnswer);
-    // }, [correctedAnswer]);
-
-
-  const router = useParams();
-  const {slug} = router;
-
-  const mathItems = testquestion.filter((item) => item.type?.name === slug);
-
-  const url = "https://techbox.developimpact.net";
-
-  const a = Array.from({ length : corIndex}, (_, index) => ({
-    value: (index + 1).toString(),
-    label: `${index + 1}`,
-  }));
 
   function createCard(ans: Data) {
     return (
       <RadioGroupComponent
-        testquestion={ans.correctedAns}
         multiplechoice={ans.multiplechoices}
       />
     );
   }
 
-  const userIdFromCookie = Cookies.get('authenticated');
-
   function handlesubmit(): void {
     if(index == mathItems.length -1){
       setBtn("Submit")
       setBg("#ffffff")
-            
     }else{
       setIndex(index + 1);
     }
   }
 
+  const RadioGroupComponent = ({multiplechoice}: { multiplechoice: number }) => {
+    
+    const [selectedValue, setSelectedValue] = useState<string>("");
+  
+    const a = Array.from({ length: multiplechoice }, (_, index) => ({
+      value: (index + 1).toString(),
+      label: `${index + 1}`,
+    }));
+  
+    const handleChange = (value: string) => {
+      setSelectedValue(value);
+  
+      const checkBox = parseInt(value);
+      if (checkBox === testquestion[index].correctedAns) {
+        setCorrectAnswer(correctedAnswer + 1);
+        console.log("Correct answer");
+      } else {
+        console.log("Not correct");
+      }
+    };
+  
+    return (
+      <RadioGroup label="" onChange={(e) => handleChange(e.target.value)}>
+        <div className="flex flex-col gap-2">
+          {a.map((option, i) => (
+            <div key={i} className="rounded-[10px] p-4">
+              <Radio
+                value={option.value}
+                className="font-semibold dark:text-black"
+              >
+                {ans[i]}
+              </Radio>
+            </div>
+          ))}
+        </div>
+      </RadioGroup>
+    );
+  };
+
+  useEffect(() => {
+    getForm();
+  }, []);
 
   return (
     <>
@@ -255,8 +230,7 @@ export default function Page() {
         style={{ width: "100%", height: "100" }}
         width={0}
         />
-        :
-        ""
+        : ""
       }
       <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
       <div className="multiplechoice">
