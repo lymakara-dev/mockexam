@@ -5,11 +5,6 @@ on:
   push:
     branches:
       - main
-      - release/* # Monitors all branches for push events
-  pull_request:
-    branches:
-      - main
-    types: [opened, reopened, closed, merged] # Monitors pull requests
   issues:
     types: [opened, reopened, closed] # Monitors issues
   workflow_run:
