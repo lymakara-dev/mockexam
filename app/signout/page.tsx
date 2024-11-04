@@ -12,7 +12,7 @@ function page() {
     router.push('/signin')
   }, []);
 
-  return <>s</>
+  return <>signed out</>
 }
 
 export default page;
