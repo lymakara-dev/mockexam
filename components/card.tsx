@@ -8,12 +8,18 @@ interface ExamCardProps {
   img: string;
   time: string;
   date: string;
-  href : string
+  href: string;
 }
 
-const ExamCard: React.FC<ExamCardProps> = ({ title, img, time, date, href }) => {
+const ExamCard: React.FC<ExamCardProps> = ({
+  title,
+  img,
+  time,
+  date,
+  href,
+}) => {
   return (
-    <Link href={href} >
+    <Link href={href}>
       <Card
         shadow="sm"
         isPressable
@@ -30,7 +36,7 @@ const ExamCard: React.FC<ExamCardProps> = ({ title, img, time, date, href }) => 
           />
         </CardBody>
         <CardFooter className="grow flex flex-col p-0 pt-[10px] items-start">
-          <p className="grow text-[22px] font-normal​​ font-bold">{title}</p>
+          <p className="grow text-[16px] font-normal​​ font-medium">{title}</p>
           <div className="grow-0">
             <div className="flex flex-row gap-1">
               <Image src="/svg/clock.svg" />
