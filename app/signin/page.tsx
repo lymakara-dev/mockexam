@@ -99,23 +99,21 @@ const SigninPage = () => {
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
-    setEmailError(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? true : false
-    );
+    setEmailError(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? true : false);
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPassword(value);
-    setPasswordError(value.length >= 8? true : false);
+    setPasswordError(value.length >= 8 ? true : false);
   };
 
-  const handlelogin = (e: React.FormEvent<HTMLFormElement>) =>{
+  const handlelogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(!emailError){
-      setBtnInit("Invalid email address")
-    }else if(!passwordError){
-      setBtnInit("Password must be at least 8 characters")
-    }else{
+    if (!emailError) {
+      setBtnInit("Invalid email address");
+    } else if (!passwordError) {
+      setBtnInit("Password must be at least 8 characters");
+    } else {
       const user = users.find(
         (u) => u.email === email && u.password === password
       );
@@ -124,14 +122,14 @@ const SigninPage = () => {
         setCheck(true);
         setTimeout(() => {
           setCheck(false);
-          Cookies.set("authenticated", email , { expires: 1 });
+          Cookies.set("authenticated", email, { expires: 1 });
           router.push("/");
         }, 1300);
       } else {
         setBtnInit("Incorrect Account");
       }
     }
-  }
+  };
   return (
     <>
       <section className="bg-[#EBF1FA] flex justify-center items-center w-screen h-screen">
@@ -195,7 +193,12 @@ const SigninPage = () => {
                 ចុះឈ្មោះ
               </button>
             </Link>
-            <p>Made by <strong>25<sup>th</sup> GIC student</strong></p>
+            <p>
+              Made by{" "}
+              <strong>
+                25<sup>th</sup> GIC student
+              </strong>
+            </p>
           </div>
           <div className="md:flex hidden right justify-end aspect-square w-full">
             <Image

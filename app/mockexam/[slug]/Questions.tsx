@@ -72,10 +72,18 @@ export default function Page() {
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
   const [corIndex, setcorIndex] = React.useState(5);
-  const [selectedValue, setSelectedValue] = useState<string>('');
+  const [selectedValue, setSelectedValue] = useState<string>("");
 
-  enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
-  
+  enum ans {
+    ក,
+    ខ,
+    គ,
+    ឃ,
+    ង,
+    ច,
+    ឆ,
+  }
+
   const RadioGroupComponent = ({
     multiplechoice,
   }: {
@@ -177,25 +185,24 @@ export default function Page() {
       .catch((error) => {
         console.log("Error fetching records:", error);
       });
-    }
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      getForm();
-    }, []);
+  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    getForm();
+  }, []);
 
-    // useEffect(()=>{
-    //   console.log(correctedAnswer);
-    // }, [correctedAnswer]);
-
+  // useEffect(()=>{
+  //   console.log(correctedAnswer);
+  // }, [correctedAnswer]);
 
   const router = useParams();
-  const {slug} = router;
+  const { slug } = router;
 
   const mathItems = testquestion.filter((item) => item.type?.name === slug);
 
   const url = "https://techbox.developimpact.net";
 
-  const a = Array.from({ length : corIndex}, (_, index) => ({
+  const a = Array.from({ length: corIndex }, (_, index) => ({
     value: (index + 1).toString(),
     label: `${index + 1}`,
   }));
@@ -209,62 +216,70 @@ export default function Page() {
     );
   }
 
-  const userIdFromCookie = Cookies.get('authenticated');
+  const userIdFromCookie = Cookies.get("authenticated");
 
   function handlesubmit(): void {
-    if(index == mathItems.length -1){
-      setBtn("Submit")
-      setBg("#ffffff")
-            
-    }else{
+    if (index == mathItems.length - 1) {
+      setBtn("Submit");
+      setBg("#ffffff");
+    } else {
       setIndex(index + 1);
     }
   }
 
-
   return (
     <>
-   {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
-     <div className="flex flex-col mt-4">
-      <nav className="flex w-[1200px] text-white justify-between bg-[#0D4DA2] p-2 rounded-[10px]">
-        <div className="">
-          <div className="flex items-center justify-center gap-2">
-            <img src="" alt="" />
-            <h1>{slug} Exam</h1>
-            <ThemeSwitch />
-          </div>
+      {isLoading ? (
+        <SyncLoader className="mt-12" color="#0A3A7A" />
+      ) : (
+        <div className="flex flex-col mt-4">
+          <nav className="flex w-[1200px] text-white justify-between bg-[#0D4DA2] p-2 rounded-[10px]">
+            <div className="">
+              <div className="flex items-center justify-center gap-2">
+                <img src="" alt="" />
+                <h1>{slug} Exam</h1>
+                <ThemeSwitch />
+              </div>
+            </div>
+            <div>
+              {index}/{mathItems.length} Questions
+            </div>
+          </nav>
+          <h1 className={"font-bold text-2xl text-left"}>សំណួរ</h1>
+          {mathItems[0]?.picquestions?.link?.href ? (
+            <img
+              alt="Tests Question"
+              height={0}
+              sizes="100vw"
+              src={url + mathItems[index].picquestions.link.href}
+              style={{ width: "100%", height: "100" }}
+              width={0}
+            />
+          ) : (
+            "Content not found"
+          )}
+          {mathItems[0]?.answer?.link?.href ? (
+            <img
+              alt="Tests Question"
+              height={0}
+              sizes="100vw"
+              src={url + mathItems[index].answer.link.href}
+              style={{ width: "100%", height: "100" }}
+              width={0}
+            />
+          ) : (
+            ""
+          )}
+          <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
+          <div className="multiplechoice">{createCard(testquestion[0])}</div>
+          <button
+            className={`mt-4 font-xl font-bold p-2 bg-[${bg}]`}
+            onClick={handlesubmit}
+          >
+            {btn}
+          </button>
         </div>
-        <div>{index}/{mathItems.length} Questions</div>
-      </nav>
-       <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
-       {mathItems[0]?.picquestions?.link?.href ?
-       <img
-         alt="Tests Question"
-         height={0}
-         sizes="100vw"
-         src={url+mathItems[index].picquestions.link.href}
-        style={{ width: "100%", height: "100" }}
-        width={0}
-      /> : "Content not found"}
-      {mathItems[0]?.answer?.link?.href ?
-        <img
-        alt="Tests Question"
-        height={0}
-        sizes="100vw"
-        src={url+mathItems[index].answer.link.href}
-        style={{ width: "100%", height: "100" }}
-        width={0}
-        />
-        :
-        ""
-      }
-      <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
-      <div className="multiplechoice">
-      {createCard(testquestion[0])}
-      </div>
-      <button className={`mt-4 font-xl font-bold p-2 bg-[${bg}]`}onClick={handlesubmit}>{btn}</button>
-    </div>
-  }
+      )}
     </>
   );
 }
