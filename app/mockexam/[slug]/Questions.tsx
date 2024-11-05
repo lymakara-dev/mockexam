@@ -75,10 +75,11 @@ export default function Page() {
   const router = useParams();
   const routerLink = useRouter();
   const {slug} = router;
-  const mathItems = testquestion.filter((item) => item.type?.name === slug);
+  const mathItems = testquestion.filter((item) => item.type?.name === slug).slice(0,10);
   const url = "https://techbox.developimpact.net";
   
   enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
+  var checkScore : boolean = false;
   
 
   const getForm = async () => {
@@ -142,7 +143,6 @@ export default function Page() {
   function createCard(ans: Data) {
     return (
       <RadioGroupComponent
-        multiplechoice={ans.multiplechoices}
       />
     );
   }
@@ -151,8 +151,15 @@ export default function Page() {
     if(index == mathItems.length -1){
       setBtn("Submit")
       setBg("#ffffff")
+      setIndex(index + 1);
+      if(checkScore){
+        setCorrectAnswer(correctedAnswer + 1)
+        console.log(correctedAnswer);
+      }
     }else{
       setIndex(index + 1);
+      if(checkScore)setCorrectAnswer(correctedAnswer + 1)
+      console.log(correctedAnswer);
     }
   }
 
@@ -162,36 +169,33 @@ export default function Page() {
     }
   }
 
-  const RadioGroupComponent = ({multiplechoice}: { multiplechoice: number }) => {
-    
-    const [selectedValue, setSelectedValue] = useState<string>("");
-  
-    const a = Array.from({ length: multiplechoice }, (_, index) => ({
-      value: (index + 1).toString(),
-      label: `${index + 1}`,
+  const RadioGroupComponent = () => {
+    const [selectedValue, setSelectedValue] = useState<string>('');
+    const a = Array.from({ length : mathItems[index].multiplechoices }, (_, index) => ({
+    value: (index + 1).toString(),
+    label: `${index + 1}`,
     }));
-  
+
     const handleChange = (value: string) => {
-      setSelectedValue(value);
+      setSelectedValue(value); // Set the selected radio button value for UI updates
   
       const checkBox = parseInt(value);
       if (checkBox === testquestion[index].correctedAns) {
-        setCorrectAnswer(correctedAnswer + 1);
-        console.log("Correct answer");
+        checkScore = true;
+        console.log(checkScore);
       } else {
-        console.log("Not correct");
+        checkScore = false;
+        console.log(checkScore);
       }
     };
   
+  
     return (
       <RadioGroup label="" onChange={(e) => handleChange(e.target.value)}>
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           {a.map((option, i) => (
-            <div key={i} className="rounded-[10px] p-4">
-              <Radio
-                value={option.value}
-                className="font-semibold dark:text-black"
-              >
+            <div key={i} className="bg-white rounded-[10px] p-4">
+              <Radio value={option.value} className="dark:text-black" >
                 {ans[i]}
               </Radio>
             </div>
@@ -200,7 +204,7 @@ export default function Page() {
       </RadioGroup>
     );
   };
-
+  
   useEffect(() => {
     getForm();
   }, []);
@@ -208,8 +212,9 @@ export default function Page() {
   return (
     <>
    {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
-     <div className="flex w-full flex-col overflow-hidden">
-        <nav className="flex w-full text-white justify-between bg-[#0D4DA2] p-2">
+     <div className="flex flex-col">
+        <nav className="fixed w-full top-0 left-0 right-0 text-white bg-[#0D4DA2] p-2">
+          <div className="flex justify-between">
             <div className="flex items-center justify-center gap-2">
               <img src="" alt="" />
               <h1>{slug} ប្រលងសាកល្បង</h1>
@@ -221,11 +226,14 @@ export default function Page() {
                 <FaCircleChevronLeft className="w-6 hover:text-red-600 h-full" />
               </button>
             </div>
+          </div>
         </nav>
-        <div className="p-12"> 
+
+        <div className="mt-12 bg-blue-500"> 
           <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
+          <span className="bg-gray-500 h-[1px] w-full max-w-[500px] ml-4 mt-4 sm:block" />
           {mathItems[0]?.picquestions?.link?.href ?
-          <div className="w-[100%] h-[50vh] flex items-center">
+          <div className="w-[100%] md:h-[50vh] flex items-center">
             <img
               alt="Tests Question"
               height={0}
@@ -248,6 +256,7 @@ export default function Page() {
             : ""
           }
           <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
+          <span className="bg-gray-500 h-[1px] w-full max-w-[500px] ml-4 mt-4 sm:block" />
           <div className="multiplechoice">
             {createCard(testquestion[0])}
           </div>

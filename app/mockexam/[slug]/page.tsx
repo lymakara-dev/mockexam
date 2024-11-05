@@ -11,7 +11,7 @@ function page() {
 
   const [start, setStart] = useState<boolean>(false);
   return (
-    <div className='flex w-full flex-grow justify-center items-center flex-col'>
+    <div className='flex flex-grow justify-center items-center flex-col'>
       {start? "" : <Page/>}
     </div>
   );
