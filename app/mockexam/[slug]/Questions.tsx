@@ -8,6 +8,7 @@ import { Radio, RadioGroup } from "@nextui-org/react";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { FaCircleChevronLeft } from "react-icons/fa6";
 import RotateToLandscape from "../RotateToLandscape";
+import Result from "./Result";
 
 interface child {
   option: string;
@@ -72,14 +73,17 @@ export default function Page() {
   const [bg, setBg] = useState<string>("#0D4DA2");
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
+  const [isSubmitted, setIsSubmitted] = useState(true);
+  const [warning, setWarning] = useState(false);
   const router = useParams();
   const routerLink = useRouter();
   const {slug} = router;
-  const mathItems = testquestion.filter((item) => item.type?.name === slug).slice(0,10);
+  const mathItems = testquestion.filter((item) => item.type?.name === slug).slice(0,30);
+
   const url = "https://techbox.developimpact.net";
   
   enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
-  var checkScore : boolean = false;
+  var checkScore : boolean | null = false;
   
 
   const getForm = async () => {
@@ -147,55 +151,37 @@ export default function Page() {
     );
   }
 
-  function handlesubmit(): void {
-    if(index == mathItems.length -1){
-      setBtn("Submit")
-      setBg("#ffffff")
-      setIndex(index + 1);
-      if(checkScore){
-        setCorrectAnswer(correctedAnswer + 1)
-        console.log(correctedAnswer);
-      }
-    }else{
-      setIndex(index + 1);
-      if(checkScore)setCorrectAnswer(correctedAnswer + 1)
-      console.log(correctedAnswer);
-    }
-  }
-
-  function handleleft() {
-    if (window.confirm("Are you sure you want to leave?")) {
-      routerLink.push("/");
-    }
-  }
-
   const RadioGroupComponent = () => {
-    const [selectedValue, setSelectedValue] = useState<string>('');
+    const [selectedValue, setSelectedValue] = useState<string | null>(null);
     const a = Array.from({ length : mathItems[index].multiplechoices }, (_, index) => ({
     value: (index + 1).toString(),
     label: `${index + 1}`,
     }));
 
+    useEffect(() => {
+      if (selectedValue === null) {
+        checkScore = null
+      }
+    }, [selectedValue]);
+    
     const handleChange = (value: string) => {
       setSelectedValue(value); // Set the selected radio button value for UI updates
-  
-      const checkBox = parseInt(value);
+      const checkBox = parseInt(value);      
       if (checkBox === testquestion[index].correctedAns) {
         checkScore = true;
-        console.log(checkScore);
-      } else {
+        console.log("Select: "+ checkBox);
+      }else{
         checkScore = false;
-        console.log(checkScore);
+        console.log("Select: "+ checkScore);
       }
     };
   
-  
     return (
-      <RadioGroup label="" onChange={(e) => handleChange(e.target.value)}>
+      <RadioGroup isInvalid={warning} label="" onChange={(e) => handleChange(e.target.value)}>
         <div className="flex gap-4">
           {a.map((option, i) => (
             <div key={i} className="bg-white rounded-[10px] p-4">
-              <Radio value={option.value} className="dark:text-black" >
+              <Radio value={option.value} checked={selectedValue == option.value} >
                 {ans[i]}
               </Radio>
             </div>
@@ -204,16 +190,44 @@ export default function Page() {
       </RadioGroup>
     );
   };
-  
+
+  function handlesubmit(): void {
+      if(index + 1 == mathItems.length - 1){
+        setBtn("បញ្ជូន")
+        setBg("#ffffff")
+      }
+      if(index == mathItems.length -1){
+        if(checkScore){
+          setCorrectAnswer(correctedAnswer + 1)
+          setIsSubmitted(false)
+          }else{
+          setIsSubmitted(false)
+        }
+      }else if (checkScore == null){
+        alert("សូមជ្រើសរើសចម្លើយ")
+      }
+      else{
+        setIndex(index + 1);
+        if(checkScore)setCorrectAnswer(correctedAnswer + 1)
+        console.log("Corrected: " +correctedAnswer);      
+      }    
+  }
+
+  function handleleft() {
+    if (window.confirm("Are you sure you want to leave?")) {
+      routerLink.push("/");
+    }
+  }
+
   useEffect(() => {
     getForm();
   }, []);
 
   return (
     <>
-   {isLoading? <SyncLoader className="mt-12" color="#0A3A7A"/> : 
+   {isLoading? <SyncLoader className="text-center mt-[50vh]" color="#0A3A7A"/> : isSubmitted? (
      <div className="flex flex-col">
-        <nav className="fixed w-full top-0 left-0 right-0 text-white bg-[#0D4DA2] p-2">
+        <nav className="fixed w-[100%] top-0 left-0 right-0 text-white bg-[#0D4DA2] p-2">
           <div className="flex justify-between">
             <div className="flex items-center justify-center gap-2">
               <img src="" alt="" />
@@ -221,19 +235,18 @@ export default function Page() {
               <ThemeSwitch />
             </div>
             <div className="flex gap-4 justify-center items-center mr-4">
-              <div>{index}/{mathItems.length} សំណួរ</div>
+              <div>{index+1}/{mathItems.length} សំណួរ</div>
               <button onClick={handleleft}>
                 <FaCircleChevronLeft className="w-6 hover:text-red-600 h-full" />
               </button>
             </div>
           </div>
         </nav>
-
-        <div className="mt-12 bg-blue-500"> 
+        <div className="mt-10 p-8"> 
           <h1 className={'font-bold text-2xl text-left'}>សំណួរ</h1>
           <span className="bg-gray-500 h-[1px] w-full max-w-[500px] ml-4 mt-4 sm:block" />
           {mathItems[0]?.picquestions?.link?.href ?
-          <div className="w-[100%] md:h-[50vh] flex items-center">
+          <div className="w-[100%] md:h-[100%] flex items-center">
             <img
               alt="Tests Question"
               height={0}
@@ -241,7 +254,6 @@ export default function Page() {
               sizes="100vw"
               src={url+mathItems[index].picquestions.link.href}
               style={{ width: "100%", height: "100" }}
-              className="w-[50%]" 
             />
           </div>: "Content not found"}
           {mathItems[0]?.answer?.link?.href ?
@@ -267,7 +279,7 @@ export default function Page() {
             onClick={handlesubmit}>{btn}</button>
         </div>
       <RotateToLandscape/>
-    </div>
+    </div>) : <Result score={correctedAnswer} />
   }
     </>
   );

@@ -10,11 +10,9 @@ function page() {
   const { slug } = router;
 
   const [start, setStart] = useState<boolean>(false);
-  return (
-    <div className='flex flex-grow justify-center items-center flex-col'>
-      {start? "" : <Page/>}
-    </div>
-  );
-}
-
-export default page;
+  return<>
+    {start? "<p>Hello</p" : <Page/>}
+  </> 
+  }
+  
+  export default page;
