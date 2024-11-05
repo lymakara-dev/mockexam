@@ -100,7 +100,7 @@ function ExamPage() {
         ថ្នាក់ប្រលង
       </p>
 
-      <div className="flex flex-col gap-4 md:flex-row items-center flex-wrap">
+      <div className="grid grid-cols-2 gap-4 md:flex ">
         {list.map((item, index) => (
             <ExamCard
               key={index}

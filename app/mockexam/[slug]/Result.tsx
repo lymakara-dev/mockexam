@@ -1,13 +1,43 @@
-import { Kantumruy } from '@/config/fonts'
+import Link from 'next/link';
+import DoughnutChart from '../Doughnut';
 import React from 'react'
+import { Button } from '@nextui-org/button';
+import { Kantumruy } from '@/config/fonts';
 
-function page() {
+const Result =({score}:{score:number})=> {
+
+    const incorrect = 30 -score;
+    
+    const data = {
+        labels: ['ត្រឹមត្រូវ', 'ខុស'],
+        datasets: [
+            {
+                label: 'លទ្ធផលប្រលង',
+                data: [score, incorrect],
+                backgroundColor: ['#23C552', '#F84F31', ],
+                borderColor: ['#23C552', '#F84F31',],
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top' as const,
+            },
+            tooltip: {
+                enabled: true,
+            },
+        },
+    };
   return (
-    <div className="font-Kantumruy px-4">
+    <div className={`${Kantumruy.className} font-Kantumruy m-4 flex justify-center items-center flex-col md:flex-row md:flex`}>
         <div className="max-w-lg bg-white p-6 md:p-8 rounded-lg shadow-md text-gray-800">
             <p className="text-lg font-semibold text-gray-600 text-center">លទ្ធផលតេស្តរបស់អ្នក</p>
             <h1 className="text-2xl md:text-3xl font-bold text-purple-800 mt-2 mb-4 border-dashed border-4 border-red-400 p-4 text-center">
-                អ្នកទទួលបាន <span className="text-pink-600">SEO Master</span> /30
+                អ្នកទទួលបាន <span className="text-green-600">{score}</span> /30
             </h1>
             <p className="text-lg font-bold text-gray-800 mb-2 text-left">កត់ចំណាំ</p>
             
@@ -19,7 +49,7 @@ function page() {
 
             <p className="text-lg font-semibold text-gray-800 text-left">ខាងក្រោមនេះអ្នកអាចស្វែងរកវិញ្ញាសារចាស់ៗ ជាមួយដំណោះស្រាយតាមមុខវិជ្ជានីមួយៗ។</p>
 
-            <div className="flex items-center justify-center mt-4 space-x-2 space-y-2">
+            <div className="flex flex-wrap items-center justify-center mt-4 space-x-2 space-y-2">
                 <button className="flex items-center border-2 border-gray-500 px-3 py-1 rounded-xl">
                     <div className="w-4 h-4 rounded-full bg-red-500 mr-2"></div>
                     <span className="text-gray-600">គណិតវិទ្យា</span>
@@ -36,11 +66,24 @@ function page() {
                     <div className="w-4 h-4 rounded-full bg-yellow-500 mr-2"></div>
                     <span className="text-gray-600">គីមីវិទ្យា</span>
                 </button>
-                {/* <Dou */}
             </div>
         </div>
+        <div className="flex justify-center items-center mt-4 flex-grow">
+            <div className={`${Kantumruy.className} w-full md:w-4/6`}>
+                <h1 className="text-2xl font-bold text-center mb-4">ក្រាបលទ្ធផល</h1>
+                <DoughnutChart data={data} options={options} />
+            </div>
+        </div>
+        <Button
+            className="text-sm mt-4 md:hidden block font-normal text-default-600 bg-default-100"
+            href={'/'}
+            // startContent={<HeartFilledIcon className="text-danger" />}
+            variant="flat"
+          >
+            <Link href={'/'}>Back Home</Link>
+          </Button>
     </div>
   )
 }
 
-export default page
+export default Result
