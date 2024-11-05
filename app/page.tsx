@@ -5,7 +5,7 @@ import ExamPage from "./exam/page";
 
 function page() {
   return (
-    <div className="flex flex-grow-0">
+    <div className="flex">
       <App />
       <div className="flex flex-col flex-grow">
         <MyNavBar />

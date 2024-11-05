@@ -6,7 +6,7 @@ const RotateToLandscape: React.FC = ({  }) => {
   const isPortrait = useOrientation();
 
   return (
-    <div>
+    <div className=''>
       {isPortrait ? (
         <div style={styles.overlay}>
           <div style={styles.message}>
@@ -33,8 +33,8 @@ const styles = {
     position: 'fixed' as 'fixed',
     top: 0,
     left: 0,
-    width: '100vw',
-    height: '100vh',
+    width: '100%',
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
