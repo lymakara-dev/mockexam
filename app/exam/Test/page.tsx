@@ -36,7 +36,6 @@ function page() {
                     <div className="w-4 h-4 rounded-full bg-yellow-500 mr-2"></div>
                     <span className="text-gray-600">គីមីវិទ្យា</span>
                 </button>
-                {/* <Dou */}
             </div>
         </div>
     </div>
