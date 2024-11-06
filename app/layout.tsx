@@ -39,7 +39,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className={`relative flex flex-col ${Kantumruy.className}`}>
             {/* <Navbar /> */}
             <div className="bg-background" />
