@@ -11,6 +11,7 @@ import RotateToLandscape from "../RotateToLandscape";
 import Result from "./Result";
 import Cookies from "js-cookie";
 import CountdownTimer from "../counter";
+import { log } from "console";
 interface Data {
   id: number;
   picquestions: {
@@ -70,7 +71,7 @@ export default function Page() {
   const router = useParams();
   const routerLink = useRouter();
   const {slug} = router;
-  const mathItems = testquestion.filter((item) => item.type?.name === slug).slice(0,2);
+  const mathItems = testquestion.filter((item) => item.type?.name === slug).slice(0,30);
 
   const url = "https://techbox.developimpact.net";
   
@@ -195,7 +196,7 @@ fetch(url, {
   const RadioGroupComponent = () => {
     const [selectedValue, setSelectedValue] = useState<string | null>(null);
     const a = Array.from({ length : mathItems[index].multiplechoices }, (_, index) => ({
-    value: (index + 1).toString(),
+    value: (index + 1),
     label: `${index + 1}`,
     }));
 
@@ -208,10 +209,12 @@ fetch(url, {
     const handleChange = (value: string) => {
       setSelectedValue(value);
       const checkBox = parseInt(value);      
-      if (checkBox === testquestion[index].correctedAns) {
-        checkScore = true;        
+          
+      if (checkBox === mathItems[index].correctedAns) {
+        checkScore = true;
+            
       }else{
-        checkScore = false;
+        checkScore = false;        
       }
     };
   
@@ -220,7 +223,7 @@ fetch(url, {
         <div className="flex gap-4">
           {a.map((option, i) => (
             <div key={i} className="bg-white rounded-[10px] p-4">
-              <Radio value={option.value} >
+              <Radio value={option.label} >
                 {ans[i]}
               </Radio>
             </div>
@@ -239,6 +242,8 @@ fetch(url, {
             setCorrectAnswer(correctedAnswer + 1)
             submitForm()
             setIsSubmitted(false)
+            console.log(true);
+            
           }else{
             submitForm()
             setIsSubmitted(false)
