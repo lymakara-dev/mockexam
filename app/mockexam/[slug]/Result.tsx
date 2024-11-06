@@ -68,7 +68,7 @@ const Result =({score}:{score:number})=> {
                 </button>
             </div>
         </div>
-        <div className="flex justify-center items-center mt-4 flex-grow">
+        {/* <div className="flex justify-center items-center mt-4 flex-grow">
             <div className={`${Kantumruy.className} w-full md:w-4/6`}>
                 <h1 className="text-2xl font-bold text-center mb-4">ក្រាបលទ្ធផល</h1>
                 <div className="flex flex-col gap-6 w-full max-w-md">
@@ -80,7 +80,7 @@ const Result =({score}:{score:number})=> {
                     <Progress color="danger" aria-label="Loading..." value={70} />
                 </div> 
             </div>
-        </div>
+        </div> */}
         <Button
             className="text-sm mt-4 md:hidden block font-normal text-default-600 bg-default-100"
             href={'/'}

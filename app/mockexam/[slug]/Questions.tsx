@@ -65,7 +65,8 @@ export default function Page() {
   const [correctedAnswer, setCorrectAnswer] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(true);
   const [warning, setWarning] = useState(false);
-  const [currentTime , setCurrentTime] = useState<number>()
+  // const [currentTime , setCurrentTime] = useState<number>()
+  let currentTime = 0;
   const router = useParams();
   const routerLink = useRouter();
   const {slug} = router;
@@ -96,7 +97,6 @@ export default function Page() {
 
     if (response.ok) {
       const data = await response.json();
-
       fetchRecord(data.access_token);
     } else {
       console.log("Error obtaining token");
@@ -145,7 +145,7 @@ fetch(url, {
   })
 	//  .then(url => url.json())
   .then(url => {
-    console.log("Record created successfully!", url)
+    // console.log("Record created successfully!", url)
     // setCheck(false);
     // router.push('/signin')
   })
@@ -206,23 +206,21 @@ fetch(url, {
     }, [selectedValue]);
     
     const handleChange = (value: string) => {
-      setSelectedValue(value); // Set the selected radio button value for UI updates
+      setSelectedValue(value);
       const checkBox = parseInt(value);      
       if (checkBox === testquestion[index].correctedAns) {
-        checkScore = true;
-        console.log("Select: "+ checkBox);
+        checkScore = true;        
       }else{
         checkScore = false;
-        console.log("Select: "+ checkScore);
       }
     };
   
     return (
-      <RadioGroup isInvalid={warning} label="" onChange={(e) => handleChange(e.target.value)}>
+      <RadioGroup label="" onChange={(e) => handleChange(e.target.value)}>
         <div className="flex gap-4">
           {a.map((option, i) => (
             <div key={i} className="bg-white rounded-[10px] p-4">
-              <Radio value={option.value} checked={selectedValue == option.value} >
+              <Radio value={option.value} >
                 {ans[i]}
               </Radio>
             </div>
@@ -236,14 +234,24 @@ fetch(url, {
       if(index + 1 == mathItems.length - 1){
         setBtn("បញ្ជូន")
       }
-      if(index == mathItems.length -1){
+      if(index + 1 == mathItems.length){
         if(checkScore){
-          setCorrectAnswer(correctedAnswer + 1)
-          setIsSubmitted(false)
+            setCorrectAnswer(correctedAnswer + 1)
             submitForm()
+            setIsSubmitted(false)
           }else{
             submitForm()
-          setIsSubmitted(false)
+            setIsSubmitted(false)
+        }
+      }
+      if(index == mathItems.length -1){
+        if(checkScore){
+            setCorrectAnswer(correctedAnswer + 1)
+            submitForm()
+            setIsSubmitted(false)
+          }else{
+            submitForm()
+            setIsSubmitted(false)
         }
       }else if (checkScore == null){
         alert("សូមជ្រើសរើសចម្លើយ")
@@ -251,7 +259,6 @@ fetch(url, {
       else{
         setIndex(index + 1);
         if(checkScore)setCorrectAnswer(correctedAnswer + 1)
-        console.log("Corrected: " +correctedAnswer);      
       }    
   }
 
@@ -266,7 +273,7 @@ fetch(url, {
   }
 
   const handleTimeUpdate = (timeLeft: number) => {
-    setCurrentTime(timeLeft); // Store the current time left in the parent state    
+    currentTime = timeLeft
   };
 
   useEffect(() => {
@@ -282,7 +289,7 @@ fetch(url, {
             <div className="flex items-center justify-center gap-2">
               <img src="" alt="" />
               <h1>{slug} ប្រលងសាកល្បង</h1>
-              <ThemeSwitch />
+              {/* <ThemeSwitch /> */}
             </div>
             <CountdownTimer onTimeUpdate={handleTimeUpdate} initialTime={1*60*60} onSubmit={handleAutoSubmit}/>
             <div className="flex gap-4 justify-center items-center mr-4">
