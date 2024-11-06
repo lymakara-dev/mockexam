@@ -79,7 +79,7 @@ const SigninPage = () => {
             });
             setResponse(true);
           } else {
-            console.log("Unexpected data format:", data);
+            // console.log("Unexpected data format:", data);
           }
         }
       })
@@ -120,7 +120,7 @@ const SigninPage = () => {
         (u) => u.email === email && u.password === password
       );
       if (user) {
-        console.log("Form submitted successfully!");
+        // console.log("Form submitted successfully!");
         setCheck(true);
         setTimeout(() => {
           setCheck(false);
@@ -128,7 +128,7 @@ const SigninPage = () => {
           router.push("/");
         }, 1300);
       } else {
-        setBtnInit("Incorrect Account");
+        setBtnInit("Cannot find your account");
       }
     }
   }
