@@ -1,5 +1,20 @@
 "use client";
 import React from "react";
+import { HomeIcon, UserCircleIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
+
+const icons = {
+  home: HomeIcon,
+  user: UserCircleIcon,
+  clipboard: ClipboardDocumentListIcon,
+};
+
+type IconType = keyof typeof icons;
+
+const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
+  const Icon = icons[icon];
+  return <Icon className="h-6 w-6 text-blue-500" />;
+};
+
 import {
   Modal,
   ModalContent,
@@ -22,7 +37,7 @@ const Sidebar = extendVariants(Modal, {
         base: "h-[50%] max-h-[50%]",
       },
       full: {
-        base: "h-full max-h-full",
+        base: "h-full",
       },
     },
     placement: {
@@ -73,27 +88,34 @@ function App() {
   return (
     <div className="flex flex-col gap-2">
       {/* Sidebar Content for Larger Screens */}
-      <div className="hidden md:flex md:flex-col bg-[#0A3A7A] h-[1024px] text-white w-[230px]">
+      <div className="hidden md:flex md:flex-col bg-[#254061] h-[1024px] text-white w-[230px]   hover:">
         <div className="flex flex-col gap-1 p-4">
-          <img src="/img/logo_IMG&Title.svg" alt="Logo" />
+          <img
+            src="/img/logo_IMG&Title.png"
+            alt="Logo"
+            className="whitespace-normal"
+          />
           <div className="flex-col flex mt-5">
             <Link href="/">
-              <button className="flex text-white gap-4 pb-[1rem]">
-                  <img src="/img/homeIcon.svg" alt="Home" />
-                  <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
+              <button className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white active:bg-common-white focus:bg-common-white">
+                <HomeIcon className="h-6 w-6   " />
+                <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
             {/* <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p> */}
-            <Link href={'/history'}>
-              <button  className="flex text-white gap-4 pb-[1rem]">
-                <img src="/img/clipboard-document-check.svg" alt="DUC" />
+            <Link href={"/history"}>
+              <button className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white active:bg-common-white focus:bg-common-white">
+              <ClipboardDocumentListIcon className="h-6 w-6   " />
                 <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
               </button>
             </Link>
-          <button disabled className="flex text-white gap-4 pb-[1rem]">
-            <img src="/img/user-circle.png" alt="User" />
-            <span className="pt-[0.1rem]">គណនី</span>
-          </button>
+            <button
+              disabled
+              className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white active:bg-common-white focus:bg-common-white"
+            >
+              <UserCircleIcon className="h-6 w-6   " />
+              <span className="pt-[0.1rem]">គណនី</span>
+            </button>
           </div>
         </div>
       </div>

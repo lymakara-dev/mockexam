@@ -13,6 +13,11 @@ module.exports = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      colors: { 
+        'common-white': 'rgba(217, 217, 217, 0.12)',
+        'common-gray': '#94A3B8',
+        
+      },
     },
   },
   darkMode: "class",
