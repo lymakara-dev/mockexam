@@ -4,6 +4,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, 
 import EyeIcon from "./EyeIcon";
 import Cookies from "js-cookie";
 
+
 interface Result {
     id: number;
     subject: string;
