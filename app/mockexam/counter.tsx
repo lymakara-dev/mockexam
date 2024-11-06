@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 
 type CountdownTimerProps = {
   initialTime: number; // time in seconds
-  onSubmit: () => void; // function to call on auto-submit
+  onSubmit: () => void;
+  onTimeUpdate: (timeLeft: number) => void;  // function to call on auto-submit
 };
 
-const CountdownTimer: React.FC<CountdownTimerProps> = ({ initialTime, onSubmit }) => {
+const CountdownTimer: React.FC<CountdownTimerProps> = ({ initialTime, onSubmit , onTimeUpdate }) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [submissionCountdown, setSubmissionCountdown] = useState<number | null>(null);
 
@@ -45,6 +46,10 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ initialTime, onSubmit }
     const remainingSeconds = seconds % 60;
     return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
   };
+
+  useEffect(() => {
+    onTimeUpdate(timeLeft);
+  }, [timeLeft, onTimeUpdate]);
 
   return (
     <div className='text-center'>

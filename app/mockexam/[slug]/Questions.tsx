@@ -65,6 +65,7 @@ export default function Page() {
   const [correctedAnswer, setCorrectAnswer] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(true);
   const [warning, setWarning] = useState(false);
+  const [currentTime , setCurrentTime] = useState<number>()
   const router = useParams();
   const routerLink = useRouter();
   const {slug} = router;
@@ -130,7 +131,7 @@ function postRecord(accessToken:any) {
     "email": Cookies.get('authenticated'),
     "score": correctedAnswer,
     "type": slug,
-    "timeRemain": "",
+    "timeRemain": currentTime,
   };
 	const url = 'https://techbox.developimpact.net/o/c/mockresults/';
 
@@ -264,6 +265,10 @@ fetch(url, {
     setIsSubmitted(false);
   }
 
+  const handleTimeUpdate = (timeLeft: number) => {
+    setCurrentTime(timeLeft); // Store the current time left in the parent state    
+  };
+
   useEffect(() => {
     getForm();
   }, []);
@@ -279,7 +284,7 @@ fetch(url, {
               <h1>{slug} ប្រលងសាកល្បង</h1>
               <ThemeSwitch />
             </div>
-            <CountdownTimer initialTime={1*60*60} onSubmit={handleAutoSubmit}/>
+            <CountdownTimer onTimeUpdate={handleTimeUpdate} initialTime={1*60*60} onSubmit={handleAutoSubmit}/>
             <div className="flex gap-4 justify-center items-center mr-4">
               <div>{index+1}/{mathItems.length} សំណួរ</div>
               <button onClick={handleleft}>
