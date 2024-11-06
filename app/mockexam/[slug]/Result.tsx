@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import DoughnutChart from '../Doughnut';
 import React from 'react'
 import { Button } from '@nextui-org/button';
 import { Kantumruy } from '@/config/fonts';
+import {Progress} from "@nextui-org/progress";
 
 const Result =({score}:{score:number})=> {
 
@@ -71,7 +71,14 @@ const Result =({score}:{score:number})=> {
         <div className="flex justify-center items-center mt-4 flex-grow">
             <div className={`${Kantumruy.className} w-full md:w-4/6`}>
                 <h1 className="text-2xl font-bold text-center mb-4">ក្រាបលទ្ធផល</h1>
-                <DoughnutChart data={data} options={options} />
+                <div className="flex flex-col gap-6 w-full max-w-md">
+                    <Progress color="default" aria-label="Loading..." value={70} />
+                    <Progress showValueLabel={true} color="primary" aria-label="Loading..." value={70} />
+                    <Progress color="secondary" aria-label="Loading..." value={70} />
+                    <Progress color="success" aria-label="Loading..." value={70} />
+                    <Progress color="warning" aria-label="Loading..." value={70} />
+                    <Progress color="danger" aria-label="Loading..." value={70} />
+                </div> 
             </div>
         </div>
         <Button

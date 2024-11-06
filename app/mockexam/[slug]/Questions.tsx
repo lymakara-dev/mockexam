@@ -9,18 +9,8 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import { FaCircleChevronLeft } from "react-icons/fa6";
 import RotateToLandscape from "../RotateToLandscape";
 import Result from "./Result";
-
-interface child {
-  option: string;
-  amount: number;
-}
-interface ans {
-  option: string;
-}
-interface RadioOption {
-  value: string;
-  label: string;
-}
+import Cookies from "js-cookie";
+import CountdownTimer from "../counter";
 interface Data {
   id: number;
   picquestions: {
@@ -85,7 +75,6 @@ export default function Page() {
   enum ans {ក, ខ, គ, ឃ, ង, ច, ឆ}
   var checkScore : boolean | null = false;
   
-
   const getForm = async () => {
     const clientId = "id-ff33fd67-2662-23d2-e387-7e660796b71";
     const clientSecret = "secret-16433662-63e6-dea2-91b5-c0be0d0db7c";
@@ -112,6 +101,57 @@ export default function Page() {
       console.log("Error obtaining token");
     }
   };
+
+  async function submitForm(){
+
+    const clientId = 'id-ff33fd67-2662-23d2-e387-7e660796b71';
+    const clientSecret = 'secret-16433662-63e6-dea2-91b5-c0be0d0db7c';
+    const tokenUrl = 'https://techbox.developimpact.net/o/oauth2/token';
+    const response = await fetch(tokenUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'grant_type': 'client_credentials',
+            'client_id': clientId,
+            'client_secret': clientSecret
+        })
+		});
+    if (response.ok) {
+        const data = await response.json();
+			  postRecord(data.access_token);
+    } else {
+        console.log("Error");
+    }
+}
+function postRecord(accessToken:any) {
+  const jsonObject = {
+    "email": Cookies.get('authenticated'),
+    "score": correctedAnswer,
+    "type": slug,
+    "timeRemain": "",
+  };
+	const url = 'https://techbox.developimpact.net/o/c/mockresults/';
+
+fetch(url, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+			    "Authorization": "Bearer " + accessToken
+       },
+        body: JSON.stringify(jsonObject)
+  })
+	//  .then(url => url.json())
+  .then(url => {
+    console.log("Record created successfully!", url)
+    // setCheck(false);
+    // router.push('/signin')
+  })
+  .catch(error => {
+    console.log("Error creating record:", url);
+		});
+    }
 
   function fetchRecord(accessToken: string) {
     const url =
@@ -194,13 +234,14 @@ export default function Page() {
   function handlesubmit(): void {
       if(index + 1 == mathItems.length - 1){
         setBtn("បញ្ជូន")
-        setBg("#ffffff")
       }
       if(index == mathItems.length -1){
         if(checkScore){
           setCorrectAnswer(correctedAnswer + 1)
           setIsSubmitted(false)
+            submitForm()
           }else{
+            submitForm()
           setIsSubmitted(false)
         }
       }else if (checkScore == null){
@@ -219,6 +260,10 @@ export default function Page() {
     }
   }
 
+  function handleAutoSubmit(){
+    setIsSubmitted(false);
+  }
+
   useEffect(() => {
     getForm();
   }, []);
@@ -234,6 +279,7 @@ export default function Page() {
               <h1>{slug} ប្រលងសាកល្បង</h1>
               <ThemeSwitch />
             </div>
+            <CountdownTimer initialTime={1*60*60} onSubmit={handleAutoSubmit}/>
             <div className="flex gap-4 justify-center items-center mr-4">
               <div>{index+1}/{mathItems.length} សំណួរ</div>
               <button onClick={handleleft}>
