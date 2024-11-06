@@ -84,10 +84,12 @@ function App() {
               </button>
             </Link>
             {/* <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p> */}
-          <button disabled className="flex text-white gap-4 pb-[1rem]">
-            <img src="/img/clipboard-document-check.svg" alt="DUC" />
-            <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
-          </button>
+            <Link href={'/history'}>
+              <button  className="flex text-white gap-4 pb-[1rem]">
+                <img src="/img/clipboard-document-check.svg" alt="DUC" />
+                <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
+              </button>
+            </Link>
           <button disabled className="flex text-white gap-4 pb-[1rem]">
             <img src="/img/user-circle.png" alt="User" />
             <span className="pt-[0.1rem]">គណនី</span>
