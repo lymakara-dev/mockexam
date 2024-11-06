@@ -48,7 +48,7 @@ const SigninPage = () => {
   };
 
   function fetchRecord(accessToken: string) {
-    const url = "https://techbox.developimpact.net/o/c/users/";
+    const url = "https://techbox.developimpact.net/o/c/users/?pageSize=-1";
 
     // Clear the users array to avoid duplication
     users.length = 0;
