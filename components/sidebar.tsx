@@ -1,6 +1,10 @@
 "use client";
 import React from "react";
-import { HomeIcon, UserCircleIcon, ClipboardDocumentListIcon } from "@heroicons/react/24/solid";
+import {
+  HomeIcon,
+  UserCircleIcon,
+  ClipboardDocumentListIcon,
+} from "@heroicons/react/24/solid";
 
 const icons = {
   home: HomeIcon,
@@ -97,16 +101,15 @@ function App() {
           />
           <div className="flex-col flex mt-5">
             <Link href="/">
-            <button className="flex text-white bg-common-white focus:text-white focus:bg-common-white gap-4 pb-[1rem] rounded-[10px] px-4 py-3 w-full hover:bg-common-white hover:text-white active:bg-common-white active:text-white">
-
+              <button className="flex text-white bg-common-white focus:text-white focus:bg-common-white gap-4 pb-[1rem] rounded-[10px] px-4 py-3 w-full hover:bg-common-white hover:text-white active:bg-common-white active:text-white">
                 <HomeIcon className="h-6 w-6   " />
-                <span className="pt-[0.1rem]">Homepage</span>
+                <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
             {/* <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p> */}
             <Link href={"/history"}>
               <button className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white active:bg-common-white focus:bg-common-white">
-              <ClipboardDocumentListIcon className="h-6 w-6   " />
+                <ClipboardDocumentListIcon className="h-6 w-6   " />
                 <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
               </button>
             </Link>
