@@ -91,6 +91,7 @@ function App() {
 
   return (
     <div className="flex flex-col gap-2">
+      
       {/* Sidebar Content for Larger Screens */}
       <div className="hidden md:flex md:flex-col bg-[#254061] h-[1024px] text-white w-[230px]   ">
         <div className="flex flex-col gap-1 p-4">
@@ -106,7 +107,7 @@ function App() {
                 <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
-            {/* <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p> */}
+            
             <Link href={"/history"}>
               <button className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white active:bg-common-white focus:bg-common-white">
                 <ClipboardDocumentListIcon className="h-6 w-6   " />
