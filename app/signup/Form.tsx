@@ -131,24 +131,32 @@ function postRecord(accessToken:any) {
   };
 	const url = 'https://techbox.developimpact.net/o/c/users/';
 
-fetch(url, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-			    "Authorization": "Bearer " + accessToken
-       },
-        body: JSON.stringify(jsonObject)
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + accessToken
+    },
+    body: JSON.stringify(jsonObject)
   })
-	//  .then(url => url.json())
-  .then(url => {
-    // console.log("Record created successfully!", url)
-    setCheck(false);
-    router.push('/signin')
-  })
-  .catch(error => {
-    console.log("Error creating record:", url);
-		});
-    }
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to create record');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Record created successfully
+      // alert("Record created successfully!");
+      setCheck(false);
+      router.push('/signin');
+    })
+    .catch(error => {
+      alert("Error creating account. Please make sure you have good internet connectivity");
+      setCheck(false);
+      console.log("Error creating record:", error);
+    });
+  }  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ,
   )=> {
@@ -157,10 +165,6 @@ fetch(url, {
       setError(true)
       submitForm();
       setCheck(true);
-      // setTimeout(() => {
-      //   setCheck(false);
-      //   router.push('/signin');
-      // },2000)
     }else{
       setBtnErr("Please fill in all required fields*");  
     }
