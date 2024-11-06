@@ -179,7 +179,7 @@ const MyNavBar = () => {
               <span className="mt-1">មើលពេញ</span>
             </button>
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <ThemeSwitch />
+              {/* <ThemeSwitch /> */}
               <span className="mt-1"> ម៉ូត</span>
             </button>
           </ModalBody>
