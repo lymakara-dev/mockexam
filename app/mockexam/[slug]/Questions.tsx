@@ -70,7 +70,7 @@ export default function Page() {
   const router = useParams();
   const routerLink = useRouter();
   const {slug} = router;
-  const mathItems = testquestion.filter((item) => item.type?.name === slug).slice(0,30);
+  const mathItems = testquestion.filter((item) => item.type?.name === slug).slice(0,2);
 
   const url = "https://techbox.developimpact.net";
   
@@ -145,7 +145,7 @@ fetch(url, {
   })
 	//  .then(url => url.json())
   .then(url => {
-    // console.log("Record created successfully!", url)
+    console.log("Record created successfully!", url)
     // setCheck(false);
     // router.push('/signin')
   })
@@ -233,16 +233,6 @@ fetch(url, {
   function handlesubmit(): void {
       if(index + 1 == mathItems.length - 1){
         setBtn("បញ្ជូន")
-      }
-      if(index + 1 == mathItems.length){
-        if(checkScore){
-            setCorrectAnswer(correctedAnswer + 1)
-            submitForm()
-            setIsSubmitted(false)
-          }else{
-            submitForm()
-            setIsSubmitted(false)
-        }
       }
       if(index == mathItems.length -1){
         if(checkScore){

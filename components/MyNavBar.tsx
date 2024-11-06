@@ -103,7 +103,7 @@ const MyNavBar = () => {
         {/* Navigation Links for Desktop */}
         <ul className="hidden md:flex gap-x-6 text-black items-center">
           <li className="flex items-center">
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
           </li>
           {/* <li>
             <Link href="/">
