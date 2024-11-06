@@ -10,6 +10,7 @@ import { FaCircleChevronLeft } from "react-icons/fa6";
 import RotateToLandscape from "../RotateToLandscape";
 import Result from "./Result";
 import Cookies from "js-cookie";
+import CountdownTimer from "../counter";
 interface Data {
   id: number;
   picquestions: {
@@ -259,6 +260,10 @@ fetch(url, {
     }
   }
 
+  function handleAutoSubmit(){
+    setIsSubmitted(false);
+  }
+
   useEffect(() => {
     getForm();
   }, []);
@@ -274,6 +279,7 @@ fetch(url, {
               <h1>{slug} ប្រលងសាកល្បង</h1>
               <ThemeSwitch />
             </div>
+            <CountdownTimer initialTime={1*60*60} onSubmit={handleAutoSubmit}/>
             <div className="flex gap-4 justify-center items-center mr-4">
               <div>{index+1}/{mathItems.length} សំណួរ</div>
               <button onClick={handleleft}>
