@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
-import { Bars3Icon } from "@heroicons/react/24/solid";
+import { Bars3Icon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
   Modal,
   ModalContent,
@@ -13,6 +13,7 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
+import ExamPage from "@/app/exam/page";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -51,6 +52,29 @@ const Sidebar = extendVariants(Modal, {
 
 const MyNavBar = () => {
   const { onOpen, isOpen: sidebarOpen, onOpenChange } = useDisclosure();
+  const [name, setName] = useState(""); // State to store the user's email
+
+  useEffect(() => {
+    // Simulating an API call to get the email or username from the cookie or API
+    const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
+    if (nameFromCookie) {
+      setName(nameFromCookie); // Set the name to the state
+    } else {
+      // If the cookie is not found, you can call an API to fetch user info
+      fetch("/api/getUser") // Replace with your API endpoint
+        .then((response) => response.json())
+        .then((data) => {
+          if (data && data.email) {
+            setName(data.email); // Set email from API response
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user info:", error);
+        });
+    }
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
+
+
 
   return (
     <>
@@ -91,19 +115,29 @@ const MyNavBar = () => {
       >
         <ModalContent className="bg-common-blue">
           <ModalHeader>
-            <img src="/img/logo_IMG&Title.svg" alt="" />
+            {/* <img src="/img/logo_IMG&Title.svg" alt="" /> */}
+          
+          <div className="flex flex-wrap gap-2 profile">
+      <UserCircleIcon className="h-14 w-14 text-common-gray" />
+      <div className="flex flex-col justify-center gap-1">
+        <p className="text-[16px] font-normal not-italic text-[#64748B] flex flex-col">
+          <span>ស្វាគមន៍,&nbsp;</span>
+          <span>{name}</span> {/* Display the name here */}
+        </p>
+      </div>
+    </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
             <Link href={"/exam"}>
               <button className="flex items-center gap-x-6 pb-[0.5rem] ">
-                <span className="mt-1 ">ថ្នាក់ប្រលង</span>
+                <img src="/img/homeIcon.svg" alt="Home" />
+                <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
-            <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p>
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
+             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/clipboard-document-check.svg" alt="" />
               <span className="mt-1">ប្រវត្តិការប្រលង</span>
-            </button>
+            </button> {/*
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/user-circle.png" alt="" />
               <span className="mt-1">គណនី</span>
@@ -130,8 +164,8 @@ const MyNavBar = () => {
             </button>
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               {/* <ThemeSwitch /> */}
-              <span className="mt-1"> ម៉ូត</span>
-            </button>
+              {/* <span className="mt-1"> ម៉ូត</span>
+            </button> */}
           </ModalBody>
         </ModalContent>
       </Sidebar>
