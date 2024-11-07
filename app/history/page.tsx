@@ -160,7 +160,7 @@ export default function App() {
         <Sidebars/>
         <div className="m-4 w-full">
             
-            <h1 className="text-xl font-semibold p-2 ">ប្រវត្តនៃការប្រលង</h1>
+            <h1 className="text-xl font-semibold p-2 text-common-gray">ប្រវត្តិនៃការប្រលង</h1>
             <Table aria-label="Example table with custom cells">
                 <TableHeader columns={columns}>
                     {(column) => (
