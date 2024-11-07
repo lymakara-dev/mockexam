@@ -1,23 +1,18 @@
-'use client'
-import React, { useState } from 'react'
-import { useParams } from 'next/navigation';
-import Page from './Questions';
-import Exambar from './Exambar';
+"use client";
+import React, { useState } from "react";
+import { useParams } from "next/navigation";
+import Page from "./Questions";
 
-export const runtime = 'edge';
-  
-  
-  function page() {
+export const runtime = "edge";
+
+function page() {
   const router = useParams();
-  const {slug} = router;
-  
-  const [start, setStart] = useState<boolean>(false);
-  return (
-    <div className='flex justify-center items-center flex-col'>
-      <Exambar/>
-      {start? "" : <Page/>}
-    </div>
-  )
-}
+  const { slug } = router;
 
-export default page
+  const [start, setStart] = useState<boolean>(false);
+  return<>
+    {start? "<p>Hello</p" : <Page/>}
+  </> 
+  }
+  
+  export default page;

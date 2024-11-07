@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
 import {
   Modal,
@@ -102,9 +103,9 @@ const MyNavBar = () => {
         {/* Navigation Links for Desktop */}
         <ul className="hidden md:flex gap-x-6 text-black items-center">
           <li className="flex items-center">
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
           </li>
-          <li>
+          {/* <li>
             <Link href="/">
               <img
                 src="/img/notification.png"
@@ -116,15 +117,15 @@ const MyNavBar = () => {
             <Link href="/">
               <img src="/img/flag_kh.png" alt="flag of language Icon" />
             </Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link href="/">
               <img src="/img/fullscr.png" alt="Fullscreen or normal Icon" />
             </Link>
-          </li>
+          </li> */}
           <li>
-            <Link href="/">
-              <img src="/img/user-circle.png" alt="User setting Icon" />
+            <Link href="/signout">
+              <PiSignOutBold className="w-6 h-full" />
             </Link>
           </li>
         </ul>
@@ -178,7 +179,7 @@ const MyNavBar = () => {
               <span className="mt-1">មើលពេញ</span>
             </button>
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <ThemeSwitch />
+              {/* <ThemeSwitch /> */}
               <span className="mt-1"> ម៉ូត</span>
             </button>
           </ModalBody>

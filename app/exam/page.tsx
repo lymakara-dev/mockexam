@@ -83,11 +83,6 @@ function ExamPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-row gap-2">
-        {/* <Image
-          className="rounded-full w-[64px] h-[64px]"
-          src="/images/orng.jpeg"
-          width="100%"
-        /> */}
         <IoPersonCircleOutline className="w-12 h-full" />
         <div className="flex flex-col justify-center gap-1">
           <p className="text-xl font-normal not-italic text-[#64748B]">
@@ -105,7 +100,7 @@ function ExamPage() {
         ថ្នាក់ប្រលង
       </p>
 
-      <div className="flex flex-col gap-4 md:flex-row items-center flex-wrap">
+      <div className="grid grid-cols-2 gap-4 md:flex ">
         {list.map((item, index) => (
             <ExamCard
               key={index}
