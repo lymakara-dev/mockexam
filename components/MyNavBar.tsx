@@ -3,18 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
 import { Bars3Icon } from "@heroicons/react/24/solid";
-
-const icons = {
-  bars: Bars3Icon,
-};
-
-type IconType = keyof typeof icons;
-
-const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
-  const Icon = icons[icon];
-  return <Icon className="h-6 w-6 text-common-gray" />;
-};
-
 import {
   Modal,
   ModalContent,
@@ -25,8 +13,6 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
-import { tree } from "next/dist/build/templates/app-page";
-import Router from "next/router";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -43,9 +29,9 @@ const Sidebar = extendVariants(Modal, {
           "left-0",
           "bottom-0",
           "items-start",
-          "w-full",
-          "[--slide-x-enter:0px]",
-          "[--slide-x-exit:-200px]",
+          "w-64", // Adjust sidebar width here
+          "[--slide-x-enter:0px]", // Slide in from left on open
+          "[--slide-x-exit:-100%]", // Slide out to the left on close
         ],
         base: ["m-0", "rounded-none"],
         closeButton: [],
@@ -64,33 +50,7 @@ const Sidebar = extendVariants(Modal, {
 });
 
 const MyNavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
   const { onOpen, isOpen: sidebarOpen, onOpenChange } = useDisclosure();
-
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-
-  // Handle clicks outside of the dropdown
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current) {
-        closeMenu();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
 
   return (
     <>
@@ -100,9 +60,13 @@ const MyNavBar = () => {
         <div className="flex items-center md:hidden">
           <img src="/img/logo_IMG&Title.png" alt="" className="h-10 " />
         </div>
+        
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex items-center">
-          <button className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full">
+          <button
+            className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full"
+            onClick={onOpen} // Open the sidebar on click
+          >
             <Bars3Icon className="text-white w-6 h-6" />
           </button>
         </div>
@@ -110,24 +74,6 @@ const MyNavBar = () => {
         {/* Navigation Links for Desktop */}
         <ul className="hidden md:flex gap-x-6 text-black items-center">
           <li className="flex items-center">{/* <ThemeSwitch /> */}</li>
-          {/* <li>
-            <Link href="/">
-              <img
-                src="/img/notification.png"
-                alt="Notification setting Icon"
-              />
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <img src="/img/flag_kh.png" alt="flag of language Icon" />
-            </Link>
-          </li> */}
-          {/* <li>
-            <Link href="/">
-              <img src="/img/fullscr.png" alt="Fullscreen or normal Icon" />
-            </Link>
-          </li> */}
           <li>
             <Link href="/signout">
               <PiSignOutBold className="w-6 h-full" />
@@ -141,7 +87,7 @@ const MyNavBar = () => {
         placement="left"
         isOpen={sidebarOpen}
         height={"full"}
-        onOpenChange={onOpenChange}
+        onOpenChange={onOpenChange} // Control sidebar visibility
       >
         <ModalContent className="bg-common-blue">
           <ModalHeader>
