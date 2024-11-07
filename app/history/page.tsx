@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, Tooltip, Button, Link } from "@nextui-org/react";
 import EyeIcon from "./EyeIcon";
 import Cookies from "js-cookie";
+import Sidebars from "@/components/sidebar";
+
 
 interface Result {
     id: number;
@@ -153,8 +155,12 @@ export default function App() {
     }, [statusColorMap2]);
 
     return (
-        <div className="m-4">
-            <h1 className="text-xl font-semibold p-2 ">ប្រវត្តនៃការប្រលង</h1>
+        <div className="flex">
+
+        <Sidebars/>
+        <div className="m-4 w-full">
+            
+            <h1 className="text-xl font-semibold p-2 text-common-gray">ប្រវត្តិនៃការប្រលង</h1>
             <Table aria-label="Example table with custom cells">
                 <TableHeader columns={columns}>
                     {(column) => (
@@ -179,6 +185,7 @@ export default function App() {
                         </Link>
                     </button>
             </div>}
+        </div>
         </div>
     );
 }
