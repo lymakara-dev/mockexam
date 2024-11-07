@@ -112,7 +112,7 @@ function Sidebars() {
                 <ClipboardDocumentListIcon className="h-6 w-6   " />
                 <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
               </button>
-            </Link>``
+            </Link>
             <button
               disabled
               className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white"
