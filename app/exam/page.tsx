@@ -95,9 +95,9 @@ function ExamPage() {
   return (
     <div className="flex flex-col gap-5 ">
       <div className="flex flex-wrap gap-2">
-      <UserCircleIcon className="h-[60px] w-[60px] text-common-gray" />
+      <UserCircleIcon className="h-14 w-14 text-common-gray" />
         <div className="flex flex-col justify-center gap-1">
-          <p className="text-xl font-normal not-italic text-[#64748B]">
+          <p className="text-[16px] font-normal not-italic text-[#64748B]">
             ស្វាគមន៍,&nbsp;
             <span>{name}</span>
           </p>
