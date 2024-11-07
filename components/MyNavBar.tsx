@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
-
+import { Bars3Icon } from "@heroicons/react/24/solid";
 import {
   Modal,
   ModalContent,
@@ -13,8 +13,6 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
-import { tree } from "next/dist/build/templates/app-page";
-import Router from "next/router";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -31,13 +29,13 @@ const Sidebar = extendVariants(Modal, {
           "left-0",
           "bottom-0",
           "items-start",
-          "w-[230px]",
-          "[--slide-x-enter:0px]",
-          "[--slide-x-exit:-200px]",
+          "w-64", // Adjust sidebar width here
+          "[--slide-x-enter:0px]", // Slide in from left on open
+          "[--slide-x-exit:-100%]", // Slide out to the left on close
         ],
         base: ["m-0", "rounded-none"],
-        closeButton: ["right-3", "top-3"],
-        header: ["pr-12"],
+        closeButton: [],
+        header: ["px-[8px]"],
       },
     },
   },
@@ -52,76 +50,30 @@ const Sidebar = extendVariants(Modal, {
 });
 
 const MyNavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
   const { onOpen, isOpen: sidebarOpen, onOpenChange } = useDisclosure();
-
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-
-  // Handle clicks outside of the dropdown
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current) {
-        closeMenu();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
 
   return (
     <>
       {/* Navbar container */}
-      <div className="dark:bg-[#0A3A7A] flex w-full h-[56px] p-[7px_16px] md:justify-end justify-between items-center md:bg-white bg-[#0A3A7A] shadow-md relative">
+      <div className="dark:bg-common-blue flex w-full h-[56px] p-[10px_16px] md:justify-end justify-between items-center md:bg-white bg-common-blue shadow-md relative">
         {/* Logo for Mobile */}
         <div className="flex items-center md:hidden">
-          <img src="/img/logo_IMG&Title.svg" alt="" />
+          <img src="/img/logo_IMG&Title.png" alt="" className="h-10 " />
         </div>
-
+        
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex items-center">
-          <Button
-            variant="flat"
-            color="warning"
-            onPress={onOpen}
-            className="bg-[#0A3A7A]"
+          <button
+            className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full"
+            onClick={onOpen} // Open the sidebar on click
           >
-            <img src="/img/setting.png" alt="Menu logo" />
-          </Button>
+            <Bars3Icon className="text-white w-6 h-6" />
+          </button>
         </div>
 
         {/* Navigation Links for Desktop */}
         <ul className="hidden md:flex gap-x-6 text-black items-center">
           <li className="flex items-center">{/* <ThemeSwitch /> */}</li>
-          {/* <li>
-            <Link href="/">
-              <img
-                src="/img/notification.png"
-                alt="Notification setting Icon"
-              />
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <img src="/img/flag_kh.png" alt="flag of language Icon" />
-            </Link>
-          </li> */}
-          {/* <li>
-            <Link href="/">
-              <img src="/img/fullscr.png" alt="Fullscreen or normal Icon" />
-            </Link>
-          </li> */}
           <li>
             <Link href="/signout">
               <PiSignOutBold className="w-6 h-full" />
@@ -135,7 +87,7 @@ const MyNavBar = () => {
         placement="left"
         isOpen={sidebarOpen}
         height={"full"}
-        onOpenChange={onOpenChange}
+        onOpenChange={onOpenChange} // Control sidebar visibility
       >
         <ModalContent className="bg-common-blue">
           <ModalHeader>

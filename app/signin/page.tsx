@@ -8,6 +8,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import Link from "next/link";
 
+
 import Loading from "../signup/Loading";
 
 interface Quiz2 {
@@ -110,7 +111,7 @@ const SigninPage = () => {
   const handlelogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!emailError) {
-      setBtnInit("Invalid email address");
+      setBtnInit("មិនទាន់មានគណនី​ សូមបង្កើតគណនី");
     } else if (!passwordError) {
       setBtnInit("Password must be at least 8 characters");
     } else {
@@ -130,13 +131,14 @@ const SigninPage = () => {
       }
     }
   };
+  const newLocal = "my-3";
   return (
-    <>
-      <section className="bg-[#EBF1FA] flex justify-center items-center w-screen h-screen">
+    <div className="my-3">
+      <section className="bg-background-color flex justify-center items-center w-screen h-screen  ">
         {check ? <Loading /> : ""}
         {check ? <Loading /> : ""}
-        <div className=" container rounded-2xl md:grid-cols-2 grid-cols-1 py-12 md:py-0 grid bg-white md:w-[60%] w-[80%]">
-          <div className="left flex flex-col justify-center items-center gap-3">
+        <div className=" container rounded-2xlxl md:grid-cols-2 grid-cols-1 py-12 md:py-0 grid bg-white md:w-[60%] w-[80%] rounded-3xl">
+          <div className="left flex flex-col justify-center items-center gap-3 my-3 ">
             <Image
               alt="ITC logo"
               className=""
@@ -145,7 +147,7 @@ const SigninPage = () => {
               width={250}
             />
             <form onSubmit={handlelogin}>
-              <div className="my-3">
+              <div className={newLocal}>
                 <Input
                   className="border-1 border-gray-500 rounded-xl"
                   endContent={<MdOutlineEmail />}
@@ -156,7 +158,7 @@ const SigninPage = () => {
                   onChange={handleEmailChange}
                 />
                 {emailError && (
-                  <p className="text-red-500 text-sm">{emailError}</p>
+                  <p className="text-red-500 text-sm​​ gap-1">{emailError}</p>
                 )}
               </div>
               <div className="mb-4">
@@ -177,23 +179,28 @@ const SigninPage = () => {
                 {BtnInit}
               </p>
               <button
-                className="shadow-submit py-2 rounded-2xl dark:shadow-submit-dark flex w-full items-center justify-center bg-blue-800 text-base font-medium text-white duration-300 hover:bg-primary/90"
+                className="shadow-submit py-2 rounded-xl dark:shadow-submit-dark flex w-full items-center justify-center bg-normal-blue text-base font-medium text-white duration-300 hover:bg-primary/90"
                 type="submit"
               >
-                ចូល
+                ចូលប្រព័ន្ធ
               </button>
-              <div className="flex justify-center items-center w-full">
+              <div className="flex justify-evenly items-center w-full my-2">
                 <span className=" h-[1px] w-full max-w-[60px] bg-gray-500 sm:block" />
                 <p className="text-gray-500 px-4">បង្កើតគណនី</p>
                 <span className="bg-gray-500 h-[1px] w-full max-w-[60px] sm:block" />
               </div>
               <Link href={"/signup"} className="w-[55%]">
-                <button className="w-full shadow-submit py-2 rounded-2xl dark:shadow-submit-dark flex items-center justify-center border-1 border-blue-600 bg-white text-base font-medium text-blue-600 duration-300 hover:bg-blue-900">
+                <button className="w-full shadow-submit py-2 rounded-custom-12 dark:shadow-submit-dark flex items-center justify-center border-1 border-normal-blue bg-white text-base font-medium text-normal-blue duration-300 hover:bg-normal-blue hover:text-white">
                   ចុះឈ្មោះ
                 </button>
               </Link>
             </form>
-            <p>Made by <strong>25<sup>th</sup> GIC student</strong></p>
+            <p>
+              Made by{" "}
+              <strong>
+                25<sup>th</sup> GIC Student
+              </strong>
+            </p>
           </div>
           <div className="md:flex hidden right justify-end aspect-square w-full">
             <Image
@@ -208,7 +215,7 @@ const SigninPage = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
