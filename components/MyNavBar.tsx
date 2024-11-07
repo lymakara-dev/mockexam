@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
+
 import {
   Modal,
   ModalContent,
@@ -102,9 +103,7 @@ const MyNavBar = () => {
 
         {/* Navigation Links for Desktop */}
         <ul className="hidden md:flex gap-x-6 text-black items-center">
-          <li className="flex items-center">
-            <ThemeSwitch />
-          </li>
+          <li className="flex items-center">{/* <ThemeSwitch /> */}</li>
           {/* <li>
             <Link href="/">
               <img
@@ -138,15 +137,14 @@ const MyNavBar = () => {
         height={"full"}
         onOpenChange={onOpenChange}
       >
-        <ModalContent className="bg-[#0A3A7A]">
+        <ModalContent className="bg-common-blue">
           <ModalHeader>
             <img src="/img/logo_IMG&Title.svg" alt="" />
           </ModalHeader>
           <ModalBody className="flex flex-col">
             <Link href={"/exam"}>
-              <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-                <img src="/img/homeIcon.svg" alt="" />
-                <span className="mt-1">ថ្នាក់ប្រលង</span>
+              <button className="flex items-center gap-x-6 pb-[0.5rem] ">
+                <span className="mt-1 ">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
             <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p>
@@ -179,7 +177,7 @@ const MyNavBar = () => {
               <span className="mt-1">មើលពេញ</span>
             </button>
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <ThemeSwitch />
+              {/* <ThemeSwitch /> */}
               <span className="mt-1"> ម៉ូត</span>
             </button>
           </ModalBody>
