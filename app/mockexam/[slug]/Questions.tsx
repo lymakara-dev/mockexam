@@ -1,17 +1,17 @@
 "use client";
+
 import React from "react";
 import { useState, useEffect } from "react";
-
 import { useParams, useRouter } from "next/navigation";
 import { SyncLoader } from "react-spinners";
 import { Radio, RadioGroup } from "@nextui-org/react";
-import { ThemeSwitch } from "@/components/theme-switch";
 import { FaCircleChevronLeft } from "react-icons/fa6";
 import RotateToLandscape from "../RotateToLandscape";
 import Result from "./Result";
 import Cookies from "js-cookie";
 import CountdownTimer from "../counter";
 import { log } from "console";
+
 interface Data {
   id: number;
   picquestions: {
@@ -66,7 +66,6 @@ export default function Page() {
   const [correctedAnswer, setCorrectAnswer] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(true);
   const [warning, setWarning] = useState(false);
-  // const [currentTime , setCurrentTime] = useState<number>()
   let currentTime = 0;
   const router = useParams();
   const routerLink = useRouter();
@@ -118,9 +117,17 @@ export default function Page() {
   };
 
   async function submitForm() {
-    const clientId = "id-ff33fd67-2662-23d2-e387-7e660796b71";
-    const clientSecret = "secret-16433662-63e6-dea2-91b5-c0be0d0db7c";
+    // Access the environment variables
+    const clientId = process.env.CLIENT_ID;
+    const clientSecret = process.env.CLIENT_SECRET;
     const tokenUrl = "https://techbox.developimpact.net/o/oauth2/token";
+
+    // Ensure the clientId and clientSecret are defined
+    if (!clientId || !clientSecret) {
+      console.error("Client ID or Client Secret is missing");
+      return; // Exit if the environment variables are not set
+    }
+    
     const response = await fetch(tokenUrl, {
       method: "POST",
       headers: {
@@ -294,7 +301,7 @@ export default function Page() {
                 <img src="" alt="" />
                 <h1>{slug} ប្រលងសាកល្បង</h1>
                 {/* <ThemeSwitch /> */}
-              </div>
+              </div>  
               <CountdownTimer
                 onTimeUpdate={handleTimeUpdate}
                 initialTime={randomMathItems.length * 2 * 60}
