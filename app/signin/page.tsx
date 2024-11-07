@@ -139,6 +139,7 @@ const SigninPage = () => {
         {check ? <Loading /> : ""}
         <div className=" container rounded-2xlxl md:grid-cols-2 grid-cols-1 py-12 md:py-0 grid bg-white md:w-[60%] w-[80%] rounded-3xl">
           <div className="left flex flex-col justify-center items-center gap-3 my-3 ">
+            <h1 className="text-red-600 font-bold">System is under maintenance!!!</h1>
             <Image
               alt="ITC logo"
               className=""

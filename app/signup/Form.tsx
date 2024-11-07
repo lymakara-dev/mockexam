@@ -173,8 +173,10 @@ function postRecord(accessToken:any) {
   return (
     <section className="bg-[#EBF1FA] flex justify-center items-center w-screen h-screen">
       {check? <Loading/> : ""} 
+      
         <div className=" container rounded-2xl md:grid-cols-2 grid-cols-1 md:p-0 grid bg-white md:w-[60%] w-[90%]">
           <div className="left flex flex-col justify-center items-center gap-3 p-4 md:p-12">
+          <h1 className="text-red-600 font-bold">System is under maintenance!!!</h1>
             <form onSubmit={handleSubmit} >
               <fieldset className='border-2 p-5 rounded-xl'>
               <legend className='ml-7 text-xl'>​បង្កើតគណនី</legend>
