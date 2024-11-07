@@ -2,6 +2,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
+import { Bars3Icon } from "@heroicons/react/24/solid";
+
+const icons = {
+  bars: Bars3Icon,
+};
+
+type IconType = keyof typeof icons;
+
+const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
+  const Icon = icons[icon];
+  return <Icon className="h-6 w-6 text-common-gray" />;
+};
 
 import {
   Modal,
@@ -31,13 +43,13 @@ const Sidebar = extendVariants(Modal, {
           "left-0",
           "bottom-0",
           "items-start",
-          "w-[230px]",
+          "w-full",
           "[--slide-x-enter:0px]",
           "[--slide-x-exit:-200px]",
         ],
         base: ["m-0", "rounded-none"],
-        closeButton: ["right-3", "top-3"],
-        header: ["pr-12"],
+        closeButton: [],
+        header: ["px-[8px]"],
       },
     },
   },
@@ -83,22 +95,16 @@ const MyNavBar = () => {
   return (
     <>
       {/* Navbar container */}
-      <div className="dark:bg-[#0A3A7A] flex w-full h-[56px] p-[7px_16px] md:justify-end justify-between items-center md:bg-white bg-[#0A3A7A] shadow-md relative">
+      <div className="dark:bg-common-blue flex w-full h-[56px] p-[10px_16px] md:justify-end justify-between items-center md:bg-white bg-common-blue shadow-md relative">
         {/* Logo for Mobile */}
         <div className="flex items-center md:hidden">
-          <img src="/img/logo_IMG&Title.svg" alt="" />
+          <img src="/img/logo_IMG&Title.png" alt="" className="h-10 " />
         </div>
-
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex items-center">
-          <Button
-            variant="flat"
-            color="warning"
-            onPress={onOpen}
-            className="bg-[#0A3A7A]"
-          >
-            <img src="/img/setting.png" alt="Menu logo" />
-          </Button>
+          <button className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full">
+            <Bars3Icon className="text-white w-6 h-6" />
+          </button>
         </div>
 
         {/* Navigation Links for Desktop */}
