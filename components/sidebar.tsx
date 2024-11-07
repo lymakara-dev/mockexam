@@ -16,7 +16,7 @@ type IconType = keyof typeof icons;
 
 const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
   const Icon = icons[icon];
-  return <Icon className="h-6 w-6 text-blue-500" />;
+  return <Icon className="h-6 w-6 text-common-gray" />;
 };
 
 import {
@@ -35,10 +35,10 @@ const Sidebar = extendVariants(Modal, {
   variants: {
     height: {
       "half-full": {
-        base: "h-[50%] max-h-full",
+        base: "max-h-full",
       },
       half: {
-        base: "h-[50%] max-h-[50%]",
+        base: "max-h-full",
       },
       full: {
         base: "h-full",
@@ -82,7 +82,7 @@ const Sidebar = extendVariants(Modal, {
   },
 });
 
-function App() {
+function Sidebars() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const handleOpen = () => {
@@ -90,9 +90,9 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 bg-common-blue h-[100vh]">
       {/* Sidebar Content for Larger Screens */}
-      <div className="hidden md:flex md:flex-col bg-[#254061] h-[1024px] text-white w-[230px]   ">
+      <div className="hidden md:flex md:flex-col   text-white w-[230px] h-full   ">
         <div className="flex flex-col gap-1 p-4">
           <img
             src="/img/logo_IMG&Title.png"
@@ -101,21 +101,21 @@ function App() {
           />
           <div className="flex-col flex mt-5">
             <Link href="/">
-              <button className="flex text-white bg-common-white focus:text-white focus:bg-common-white gap-4 pb-[1rem] rounded-[10px] px-4 py-3 w-full hover:bg-common-white hover:text-white active:bg-common-white active:text-white">
+              <button className="flex text-white bg-common-white hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ">
                 <HomeIcon className="h-6 w-6   " />
                 <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
             {/* <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p> */}
             <Link href={"/history"}>
-              <button className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white active:bg-common-white focus:bg-common-white">
+              <button className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white">
                 <ClipboardDocumentListIcon className="h-6 w-6   " />
                 <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
               </button>
             </Link>
             <button
               disabled
-              className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white active:bg-common-white focus:bg-common-white"
+              className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white"
             >
               <UserCircleIcon className="h-6 w-6   " />
               <span className="pt-[0.1rem]">គណនី</span>
@@ -127,4 +127,4 @@ function App() {
   );
 }
 
-export default App;
+export default Sidebars;

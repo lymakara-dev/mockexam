@@ -137,7 +137,7 @@ const MyNavBar = () => {
         height={"full"}
         onOpenChange={onOpenChange}
       >
-        <ModalContent className="bg-[#0A3A7A]">
+        <ModalContent className="bg-common-blue">
           <ModalHeader>
             <img src="/img/logo_IMG&Title.svg" alt="" />
           </ModalHeader>
