@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   HomeIcon,
   UserCircleIcon,
@@ -30,6 +30,7 @@ import {
 } from "@nextui-org/react";
 import Router from "next/router";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -88,6 +89,8 @@ function Sidebars() {
   const handleOpen = () => {
     onOpen();
   };
+  const pathname = usePathname()
+
 
   return (
     <div className="flex flex-col gap-2 bg-common-blue h-[100vh]">
@@ -101,21 +104,22 @@ function Sidebars() {
           />
           <div className="flex-col flex mt-5">
             <Link href="/">
-              <button className="flex text-white bg-common-white hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ">
+              <button className={`flex text-white hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ${pathname == "/" ? "bg-common-white" : ""}`}>
                 <HomeIcon className="h-6 w-6   " />
                 <span className="pt-[0.1rem]">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
             {/* <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p> */}
             <Link href={"/history"}>
-              <button className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white">
+              <button className={`flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ${pathname == "/history" ? "bg-common-white" : ""}`}>
                 <ClipboardDocumentListIcon className="h-6 w-6   " />
                 <span className="pt-[0.1rem]">ប្រវត្តិការប្រលង</span>
               </button>
             </Link>
+
             <button
               disabled
-              className="flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white"
+              className={`flex text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white`}
             >
               <UserCircleIcon className="h-6 w-6   " />
               <span className="pt-[0.1rem]">គណនី</span>
