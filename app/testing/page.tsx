@@ -1,34 +1,10 @@
-"use client"
-import React from 'react';
-import { MathJaxProvider, MathJaxHtml } from 'mathjax3-react';
+import dynamic from "next/dynamic";
 
-// The original string with MathJax placeholders (#...#)
-const originalString = "នេះគឺជាឧទាហរណ៍នៃវិធីសាស្ត្រនៃការបញ្ចូលសមីការគណនា៖ #\[E = mc^2\]# សមីការនេះមានន័យថា អនុគមន៍កម្លាំងគ្រួសការអុបទិចរបស់រ៉ែតមួយមានទំនាក់ទំនងជាមួយម៉ាសនិងល្បឿនភ្លើង។";
-
-
-// Function to split the string and render MathJax where necessary
-const splitStringWithMath = (input: string) => {
-  return input.split(/(#.*?#)/g).map((part, index) => {
-    if (part.startsWith('#') && part.endsWith('#')) {
-      const mathContent = part.slice(1, -1); // Remove the enclosing #
-      return (
-        <MathJaxHtml key={index} html={`\\(${mathContent}\\)`} />
-      );
-    }
-    return <span key={index}>{part}</span>;
-  });
-};
-
-const MathJaxComponent = () => {
+export default function testingPage() {
+  const encoded = "%E1%9E%93%E1%9F%81%E1%9F%87%E1%9E%82%E1%9E%BA%E1%9E%87%E1%9E%B6%E1%9E%A7%E1%9E%91%E1%9E%B6%E1%9E%A0%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%93%E1%9F%83%E1%9E%9C%E1%9E%B7%E1%9E%92%E1%9E%B8%E1%9E%9F%E1%9E%B6%E1%9E%9F%E1%9F%92%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9E%89%E1%9F%92%E1%9E%85%E1%9E%BC%E1%9E%9B%E1%9E%9F%E1%9E%98%E1%9E%B8%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%82%E1%9E%8E%E1%9E%93%E1%9E%B6%E1%9F%96%20%23%5BE%20%3D%20mc%5E2%5D%23%20%E1%9E%9F%E1%9E%98%E1%9E%B8%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%93%E1%9F%81%E1%9F%87%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%93%E1%9F%90%E1%9E%99%E1%9E%90%E1%9E%B6%20%E1%9E%A2%E1%9E%93%E1%9E%BB%E1%9E%82%E1%9E%98%E1%9E%93%E1%9F%8D%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%9B%E1%9E%B6%E1%9F%86%E1%9E%84%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9E%BD%E1%9E%9F%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%BB%E1%9E%94%E1%9E%91%E1%9E%B7%E1%9E%85%E1%9E%9A%E1%9E%94%E1%9E%9F%E1%9F%8B%E1%9E%9A%E1%9F%89%E1%9F%82%E1%9E%8F%E1%9E%98%E1%9E%BD%E1%9E%99%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%91%E1%9F%86%E1%9E%93%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%91%E1%9F%86%E1%9E%93%E1%9E%84%E1%9E%87%E1%9E%B6%E1%9E%98%E1%9E%BD%E1%9E%99%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%9B%E1%9F%92%E1%9E%94%E1%9E%BF%E1%9E%93%E1%9E%97%E1%9F%92%E1%9E%9B%E1%9E%BE%E1%9E%84%E1%9F%94"
+  const MathJaxComponent = dynamic(() => import('@/components/math_jax'), { ssr: false });
   return (
-    <div>
-      <MathJaxProvider>
-        <div>
-          {splitStringWithMath(originalString)}
-        </div>
-      </MathJaxProvider>
-    </div>
-  );
-};
+    <MathJaxComponent text={encoded}/>
+  )
 
-export default MathJaxComponent;
+}
