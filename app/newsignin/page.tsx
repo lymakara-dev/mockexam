@@ -134,7 +134,7 @@ const SigninPage = () => {
   const newLocal = "my-3";
   return (
     <div className=" flex items-center justify-center h-screen w-full">
-      <div className=" w-[50vw] h-[60vh] flex rounded-3xl max-md:w-[80vw] max-md:h-[50vh] max-lg:h-[60vh] max-lg:w-[40vw] ">
+      <div className=" w-[50vw] h-[60vh] flex rounded-3xl max-md:w-[80vw] max-md:h-[50vh] max-lg:h-[40vh] max-lg:w-[40vw] ">
      
       <div className="flex flex-col w-1/2   max-md:w-full max-lg:w-[50vw] items-center justify-center bg-white  rounded-3xl ">
       <Image src={GIC} alt="GICLogo" width={250} height={250} className="mb-4" />

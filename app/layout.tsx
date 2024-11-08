@@ -33,9 +33,9 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <head />
-      <body
+      <body 
         className={clsx(
-          "bg-background-color font-sans antialiased",
+          "bg-background-color h-screen font-sans antialiased",
           fontSans.variable
         )}
       >
