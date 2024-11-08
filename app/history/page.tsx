@@ -156,8 +156,7 @@ export default function App() {
 
     return (
         <div className="flex">
-
-        <Sidebars/>
+            <Sidebars/>
         <div className="m-4 w-full">
             
             <h1 className="text-xl font-semibold p-2 text-common-gray">ប្រវត្តិនៃការប្រលង</h1>
