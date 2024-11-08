@@ -1,8 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import {  } from "react-icons/pi";
+import {} from "react-icons/pi";
 import Link from "next/link";
-import { Bars3Icon, HomeIcon, UserCircleIcon, ArrowRightStartOnRectangleIcon, } from "@heroicons/react/24/solid";
+
+import {
+  Bars3Icon,
+  HomeIcon,
+  UserCircleIcon,
+  ArrowRightStartOnRectangleIcon,
+} from "@heroicons/react/24/solid";
 import {
   Modal,
   ModalContent,
@@ -16,7 +22,6 @@ import { ThemeSwitch } from "./theme-switch";
 import ExamPage from "@/app/exam/page";
 
 const icons = {
-  
   logout: ArrowRightStartOnRectangleIcon,
 };
 
@@ -26,7 +31,6 @@ const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
   const Icon = icons[icon];
   return <Icon className="h-6 w-6 text-common-gray" />;
 };
-
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -46,7 +50,6 @@ const Sidebar = extendVariants(Modal, {
           "w-[70%] md:w-[30%]",
           "[--slide-x-enter:0px]",
           "[--slide-x-exit:-100%]",
-          
         ],
         base: ["m-0", "rounded-none"],
         closeButton: [],
@@ -102,7 +105,7 @@ const MyNavBar = () => {
         <div className="flex items-center md:hidden">
           <img src="/img/logo_IMG&Title.png" alt="" className="h-10 " />
         </div>
-    {/* fix */}
+        {/* fix */}
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex items-center">
           <button
@@ -118,10 +121,9 @@ const MyNavBar = () => {
           <li className="flex items-center">{/* <ThemeSwitch /> */}</li>
           <li>
             <Link href="/signout">
-            <div className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full">
-            <ArrowRightStartOnRectangleIcon className="w-6 h-6 text-gray-600" />
-            </div>
-             
+              <div className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full">
+                <ArrowRightStartOnRectangleIcon className="w-6 h-6 text-gray-600" />
+              </div>
             </Link>
           </li>
         </ul>
@@ -150,16 +152,19 @@ const MyNavBar = () => {
             </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
-            <Link href="/exam">
+            <Link href='/'>
               <button className="flex items-center gap-x-6 pb-[0.5rem]">
                 <img src="/img/homeIcon.svg" alt="Home" />
                 <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
+            <Link href="/history">
+            
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/clipboard-document-check.svg" alt="" />
               <span className="mt-1">ប្រវត្តិការប្រលង</span>
             </button>
+            </Link>
           </ModalBody>
         </ModalContent>
       </Sidebar>
