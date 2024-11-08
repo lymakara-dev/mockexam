@@ -10,6 +10,20 @@ import Link from "next/link";
 import back from "../../public/Auth/back.jpeg";
 import GIC from "../../public/Auth/ITCLogo.png";
 import Loading from "../signup/Loading";
+import { EnvelopeIcon, LockClosedIcon, } from "@heroicons/react/24/solid";
+
+const icons = {
+  mail: EnvelopeIcon ,
+  lock: LockClosedIcon,
+  
+};
+
+type IconType = keyof typeof icons;
+
+const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
+  const Icon = icons[icon];
+  return <Icon className="h-6 w-6 text-common-gray" />;
+};
 
 interface Quiz2 {
   email: string;
@@ -134,16 +148,16 @@ const SigninPage = () => {
   const newLocal = "my-3";
   return (
     <div className=" flex items-center justify-center h-screen w-full">
-      <div className=" w-[50vw] h-[60vh] flex rounded-3xl max-md:w-[80vw] max-md:h-[50vh] max-lg:h-[60vh] max-lg:w-[40vw] ">
+      <div className="bg-white w-[50vw] h-[60vh] flex rounded-3xl max-md:w-[80vw] max-md:h-[50vh] max-lg:h-[60vh] max-lg:w-[40vw] ">
      
-      <div className="flex flex-col w-1/2   max-md:w-full max-lg:w-[50vw] items-center justify-center bg-white  rounded-3xl ">
+      <div className="flex flex-col w-1/2   max-md:w-full max-lg:w-[50vw] items-center justify-center    ">
       <Image src={GIC} alt="GICLogo" width={250} height={250} className="mb-4" />
       <div className="flex flex-col w-[80%]  ">
       <form onSubmit={handlelogin}>
               <div className={newLocal}>
                 <Input
                   className="border-1 border-gray-500 rounded-xl flex"
-                  endContent={<MdOutlineEmail />}
+                  endContent={<EnvelopeIcon className=" w-5 h-5 text-gray-500" />}
                   name="email"
                   placeholder="អ៊ីម៉ែល"
                   type="email"
@@ -156,13 +170,13 @@ const SigninPage = () => {
               </div>
               <div className="mb-4">
                 <Input
-                  className="border-1 border-gray-500 rounded-xl"
+                  className="border-1 border-gray-600 rounded-xl"
                   name="password"
                   placeholder="លេខសម្ងាត់"
                   type="password"
                   value={password}
                   onChange={handlePasswordChange}
-                  endContent={<RiLockPasswordFill />}
+                  endContent={<LockClosedIcon className="w-5 h-5 text-gray-600" />}
                 />
                 {passwordError && (
                   <p className="text-red-500 text-sm">{passwordError}</p>
