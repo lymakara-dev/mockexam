@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { PiSignOutBold } from "react-icons/pi";
+import {  } from "react-icons/pi";
 import Link from "next/link";
-import { Bars3Icon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, HomeIcon, UserCircleIcon, ArrowRightStartOnRectangleIcon, } from "@heroicons/react/24/solid";
 import {
   Modal,
   ModalContent,
@@ -14,6 +14,17 @@ import {
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
 import ExamPage from "@/app/exam/page";
+const icons = {
+  
+  logout: ArrowRightStartOnRectangleIcon,
+};
+
+type IconType = keyof typeof icons;
+
+const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
+  const Icon = icons[icon];
+  return <Icon className="h-6 w-6 text-common-gray" />;
+};
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -30,7 +41,7 @@ const Sidebar = extendVariants(Modal, {
           "left-0",
           "bottom-0",
           "items-start",
-          "w-64", // Adjust sidebar width here
+          "w-[70%] md:w-[30%] ", // Adjust sidebar width here
           "[--slide-x-enter:0px]", // Slide in from left on open
           "[--slide-x-exit:-100%]", // Slide out to the left on close
         ],
@@ -74,8 +85,6 @@ const MyNavBar = () => {
     }
   }, []); // Empty dependency array ensures this runs only once when the component mounts
 
-
-
   return (
     <>
       {/* Navbar container */}
@@ -84,7 +93,7 @@ const MyNavBar = () => {
         <div className="flex items-center md:hidden">
           <img src="/img/logo_IMG&Title.png" alt="" className="h-10 " />
         </div>
-        
+
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex items-center">
           <button
@@ -100,7 +109,10 @@ const MyNavBar = () => {
           <li className="flex items-center">{/* <ThemeSwitch /> */}</li>
           <li>
             <Link href="/signout">
-              <PiSignOutBold className="w-6 h-full" />
+            <div className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full">
+            <ArrowRightStartOnRectangleIcon className="w-6 h-6 text-gray-600" />
+            </div>
+             
             </Link>
           </li>
         </ul>
@@ -113,19 +125,21 @@ const MyNavBar = () => {
         height={"full"}
         onOpenChange={onOpenChange} // Control sidebar visibility
       >
-        <ModalContent className="bg-common-blue">
+        <ModalContent className="bg-common-blue ">
           <ModalHeader>
             {/* <img src="/img/logo_IMG&Title.svg" alt="" /> */}
-          
-          <div className="flex flex-wrap gap-2 profile">
-      <UserCircleIcon className="h-14 w-14 text-common-gray" />
-      <div className="flex flex-col justify-center gap-1">
-        <p className="text-[16px] font-normal not-italic text-[#64748B] flex flex-col">
-          <span>ស្វាគមន៍,&nbsp;</span>
-          <span>{name}</span> {/* Display the name here */}
-        </p>
-      </div>
-    </div>
+
+            <div className="flex flex-wrap gap-2 profile">
+              <div className="flex items-center justify-center gap-1  p-4">
+                <div className="flex items-center gap-2">
+                  <UserCircleIcon className="h-12 w-12 text-common-second-gray" />
+                  <p className="text-[14px] font-normal not-italic text-white">
+                    <span>ស្វាគមន៍,&nbsp;</span><br />
+                    <span>{name}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
             <Link href={"/exam"}>
@@ -134,10 +148,11 @@ const MyNavBar = () => {
                 <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
-             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
+            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/clipboard-document-check.svg" alt="" />
               <span className="mt-1">ប្រវត្តិការប្រលង</span>
-            </button> {/*
+            </button>{" "}
+            {/*
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/user-circle.png" alt="" />
               <span className="mt-1">គណនី</span>
@@ -164,7 +179,7 @@ const MyNavBar = () => {
             </button>
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               {/* <ThemeSwitch /> */}
-              {/* <span className="mt-1"> ម៉ូត</span>
+            {/* <span className="mt-1"> ម៉ូត</span>
             </button> */}
           </ModalBody>
         </ModalContent>

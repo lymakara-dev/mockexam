@@ -17,6 +17,7 @@ module.exports = {
         'common-white': 'rgba(217, 217, 217, 0.12)',
         'common-gray': '#94A3B8',
         'common-blue': '#254061',
+        'common-second-gray': '#94A3B8',
         'background-color': '#F1F5F9',
         'normal-blue': '#0D4DA2',
         
