@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "next/navigation";
 import Page from "./Questions";
 
+
 export const runtime = "edge";
 
 function page() {
@@ -11,6 +12,7 @@ function page() {
 
   const [start, setStart] = useState<boolean>(false);
   return<>
+    
     {start? "<p>Hello</p" : <Page/>}
   </> 
   }

@@ -42,7 +42,8 @@ function Page() {
   };
 
   const fetchRecord = async (accessToken: string) => {
-    const url = "https://techbox.developimpact.net/o/c/mockresults/?pageSize=15";
+    const url =
+      "https://techbox.developimpact.net/o/c/mockresults/?pageSize=15";
 
     try {
       const response = await fetch(url, {
@@ -95,6 +96,13 @@ function Page() {
       ) : (
         <p>No exam history available</p>
       )}
+      <div>
+        <select name="" id="">
+          <option value="">1</option>
+          <option value="">2</option>
+        </select>
+      </div>
+      ;
     </section>
   );
 }
