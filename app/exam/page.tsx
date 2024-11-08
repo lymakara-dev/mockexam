@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 
-
 import ExamCard from "@/components/card";
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
@@ -33,7 +32,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -49,7 +48,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -65,7 +64,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -81,7 +80,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -98,7 +97,7 @@ function ExamPage() {
       
     <div className="flex flex-col gap-5 ">
       <div className="flex flex-wrap gap-2">
-      <UserCircleIcon className="h-14 w-14 text-common-gray" />
+        <UserCircleIcon className="h-14 w-14 text-common-gray" />
         <div className="flex flex-col justify-center gap-1">
           <p className="text-[16px] font-normal not-italic text-[#64748B]">
             ស្វាគមន៍,&nbsp;

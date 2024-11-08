@@ -36,7 +36,7 @@ const ExamCard: React.FC<ExamCardProps> = ({
           />
         </CardBody>
         <CardFooter className="grow flex flex-col p-0 pt-[10px] items-start">
-          <p className="grow text-[16px] font-normal​​ font-medium">{title}</p>
+          <p className="grow text-[16px] font-normal​​ font-normal">{title}</p>
           <div className="grow-0">
             <div className="flex flex-row gap-1">
               <Image src="/svg/clock.svg" />
