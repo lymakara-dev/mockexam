@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { PiSignOutBold } from "react-icons/pi";
 import Link from "next/link";
+import { Bars3Icon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
   Modal,
   ModalContent,
@@ -12,8 +13,7 @@ import {
   ModalHeader,
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
-import { tree } from "next/dist/build/templates/app-page";
-import Router from "next/router";
+import ExamPage from "@/app/exam/page";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -30,13 +30,13 @@ const Sidebar = extendVariants(Modal, {
           "left-0",
           "bottom-0",
           "items-start",
-          "w-[230px]",
-          "[--slide-x-enter:0px]",
-          "[--slide-x-exit:-200px]",
+          "w-64", // Adjust sidebar width here
+          "[--slide-x-enter:0px]", // Slide in from left on open
+          "[--slide-x-exit:-100%]", // Slide out to the left on close
         ],
         base: ["m-0", "rounded-none"],
-        closeButton: ["right-3", "top-3"],
-        header: ["pr-12"],
+        closeButton: [],
+        header: ["px-[8px]"],
       },
     },
   },
@@ -51,78 +51,53 @@ const Sidebar = extendVariants(Modal, {
 });
 
 const MyNavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
   const { onOpen, isOpen: sidebarOpen, onOpenChange } = useDisclosure();
+  const [name, setName] = useState(""); // State to store the user's email
 
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-
-  // Handle clicks outside of the dropdown
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current) {
-        closeMenu();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+    // Simulating an API call to get the email or username from the cookie or API
+    const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
+    if (nameFromCookie) {
+      setName(nameFromCookie); // Set the name to the state
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      // If the cookie is not found, you can call an API to fetch user info
+      fetch("/api/getUser") // Replace with your API endpoint
+        .then((response) => response.json())
+        .then((data) => {
+          if (data && data.email) {
+            setName(data.email); // Set email from API response
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching user info:", error);
+        });
     }
+  }, []); // Empty dependency array ensures this runs only once when the component mounts
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
+
 
   return (
     <>
       {/* Navbar container */}
-      <div className="dark:bg-[#0A3A7A] flex w-full h-[56px] p-[7px_16px] md:justify-end justify-between items-center md:bg-white bg-[#0A3A7A] shadow-md relative">
+      <div className="dark:bg-common-blue flex w-full h-[56px] p-[10px_16px] md:justify-end justify-between items-center md:bg-white bg-common-blue shadow-md relative">
         {/* Logo for Mobile */}
         <div className="flex items-center md:hidden">
-          <img src="/img/logo_IMG&Title.svg" alt="" />
+          <img src="/img/logo_IMG&Title.png" alt="" className="h-10 " />
         </div>
-
+        
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex items-center">
-          <Button
-            variant="flat"
-            color="warning"
-            onPress={onOpen}
-            className="bg-[#0A3A7A]"
+          <button
+            className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full"
+            onClick={onOpen} // Open the sidebar on click
           >
-            <img src="/img/setting.png" alt="Menu logo" />
-          </Button>
+            <Bars3Icon className="text-white w-6 h-6" />
+          </button>
         </div>
 
         {/* Navigation Links for Desktop */}
         <ul className="hidden md:flex gap-x-6 text-black items-center">
-          <li className="flex items-center">
-            <ThemeSwitch />
-          </li>
-          {/* <li>
-            <Link href="/">
-              <img
-                src="/img/notification.png"
-                alt="Notification setting Icon"
-              />
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <img src="/img/flag_kh.png" alt="flag of language Icon" />
-            </Link>
-          </li> */}
-          {/* <li>
-            <Link href="/">
-              <img src="/img/fullscr.png" alt="Fullscreen or normal Icon" />
-            </Link>
-          </li> */}
+          <li className="flex items-center">{/* <ThemeSwitch /> */}</li>
           <li>
             <Link href="/signout">
               <PiSignOutBold className="w-6 h-full" />
@@ -136,24 +111,33 @@ const MyNavBar = () => {
         placement="left"
         isOpen={sidebarOpen}
         height={"full"}
-        onOpenChange={onOpenChange}
+        onOpenChange={onOpenChange} // Control sidebar visibility
       >
-        <ModalContent className="bg-[#0A3A7A]">
+        <ModalContent className="bg-common-blue">
           <ModalHeader>
-            <img src="/img/logo_IMG&Title.svg" alt="" />
+            {/* <img src="/img/logo_IMG&Title.svg" alt="" /> */}
+          
+          <div className="flex flex-wrap gap-2 profile">
+      <UserCircleIcon className="h-14 w-14 text-common-gray" />
+      <div className="flex flex-col justify-center gap-1">
+        <p className="text-[16px] font-normal not-italic text-[#64748B] flex flex-col">
+          <span>ស្វាគមន៍,&nbsp;</span>
+          <span>{name}</span> {/* Display the name here */}
+        </p>
+      </div>
+    </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
             <Link href={"/exam"}>
-              <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-                <img src="/img/homeIcon.svg" alt="" />
-                <span className="mt-1">ថ្នាក់ប្រលង</span>
+              <button className="flex items-center gap-x-6 pb-[0.5rem] ">
+                <img src="/img/homeIcon.svg" alt="Home" />
+                <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
-            <p className="mb-2 mt-3 text-red-500 font-bold">Coming soon!!</p>
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
+             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/clipboard-document-check.svg" alt="" />
               <span className="mt-1">ប្រវត្តិការប្រលង</span>
-            </button>
+            </button> {/*
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/user-circle.png" alt="" />
               <span className="mt-1">គណនី</span>
@@ -179,9 +163,9 @@ const MyNavBar = () => {
               <span className="mt-1">មើលពេញ</span>
             </button>
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <ThemeSwitch />
-              <span className="mt-1"> ម៉ូត</span>
-            </button>
+              {/* <ThemeSwitch /> */}
+              {/* <span className="mt-1"> ម៉ូត</span>
+            </button> */}
           </ModalBody>
         </ModalContent>
       </Sidebar>

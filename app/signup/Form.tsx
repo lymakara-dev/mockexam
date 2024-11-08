@@ -131,24 +131,32 @@ function postRecord(accessToken:any) {
   };
 	const url = 'https://techbox.developimpact.net/o/c/users/';
 
-fetch(url, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-			    "Authorization": "Bearer " + accessToken
-       },
-        body: JSON.stringify(jsonObject)
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + accessToken
+    },
+    body: JSON.stringify(jsonObject)
   })
-	//  .then(url => url.json())
-  .then(url => {
-    // console.log("Record created successfully!", url)
-    setCheck(false);
-    router.push('/signin')
-  })
-  .catch(error => {
-    console.log("Error creating record:", url);
-		});
-    }
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to create record');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Record created successfully
+      // alert("Record created successfully!");
+      setCheck(false);
+      router.push('/signin');
+    })
+    .catch(error => {
+      alert("Error creating account. Please make sure you have good internet connectivity");
+      setCheck(false);
+      console.log("Error creating record:", error);
+    });
+  }  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement> ,
   )=> {
@@ -157,10 +165,6 @@ fetch(url, {
       setError(true)
       submitForm();
       setCheck(true);
-      // setTimeout(() => {
-      //   setCheck(false);
-      //   router.push('/signin');
-      // },2000)
     }else{
       setBtnErr("Please fill in all required fields*");  
     }
@@ -169,8 +173,10 @@ fetch(url, {
   return (
     <section className="bg-[#EBF1FA] flex justify-center items-center w-screen h-screen">
       {check? <Loading/> : ""} 
+      
         <div className=" container rounded-2xl md:grid-cols-2 grid-cols-1 md:p-0 grid bg-white md:w-[60%] w-[90%]">
           <div className="left flex flex-col justify-center items-center gap-3 p-4 md:p-12">
+          <h1 className="text-red-600 font-bold">System is under maintenance!!!</h1>
             <form onSubmit={handleSubmit} >
               <fieldset className='border-2 p-5 rounded-xl'>
               <legend className='ml-7 text-xl'>​បង្កើតគណនី</legend>
