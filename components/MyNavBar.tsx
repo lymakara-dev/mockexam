@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
 import ExamPage from "@/app/exam/page";
+import { useRouter } from "next/router";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -31,8 +32,18 @@ const Sidebar = extendVariants(Modal, {
           "bottom-0",
           "items-start",
           "w-64", // Adjust sidebar width here
-          "[--slide-x-enter:0px]", // Slide in from left on open
-          "[--slide-x-exit:-100%]", // Slide out to the left on close
+          "sm:items-start",
+          "[--scale-enter:100%]",
+          "[--scale-exit:100%]",
+          "[--opacity-enter:100%]",
+          "[--opacity-exit:0%]",
+          "[--slide-y-enter:0px]",
+          "[--slide-y-exit:0px]",
+          "[--slide-x-enter:0px]",
+          "[--slide-x-exit:-200px]", // Ensure sliding from the left
+          "sm:[--scale-enter:100%]",
+          "sm:[--scale-exit:100%]",
+          "justify-start",
         ],
         base: ["m-0", "rounded-none"],
         closeButton: [],
@@ -51,7 +62,22 @@ const Sidebar = extendVariants(Modal, {
 });
 
 const MyNavBar = () => {
-  const { onOpen, isOpen: sidebarOpen, onOpenChange } = useDisclosure();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setSidebarOpen(false); // Close the sidebar
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router.events]);
+
+
   const [name, setName] = useState(""); // State to store the user's email
 
   useEffect(() => {
@@ -89,7 +115,7 @@ const MyNavBar = () => {
         <div className="md:hidden flex items-center">
           <button
             className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full"
-            onClick={onOpen} // Open the sidebar on click
+            onClick={() => setSidebarOpen(true)} // Open sidebar
           >
             <Bars3Icon className="text-white w-6 h-6" />
           </button>
@@ -111,7 +137,7 @@ const MyNavBar = () => {
         placement="left"
         isOpen={sidebarOpen}
         height={"full"}
-        onOpenChange={onOpenChange} // Control sidebar visibility
+        onOpenChange={(open) => setSidebarOpen(open)}  // Control sidebar visibility // Ensure sidebarOpen state stays in sync
       >
         <ModalContent className="bg-common-blue">
           <ModalHeader>
@@ -128,7 +154,7 @@ const MyNavBar = () => {
     </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
-            <Link href={"/exam"}>
+            <Link href="/exam" onClick={() => setSidebarOpen(false)}>
               <button className="flex items-center gap-x-6 pb-[0.5rem] ">
                 <img src="/img/homeIcon.svg" alt="Home" />
                 <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
