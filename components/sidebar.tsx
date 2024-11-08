@@ -31,6 +31,7 @@ import {
 import Router from "next/router";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MyNavBar from "./MyNavBar";
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -96,6 +97,7 @@ function Sidebars() {
       
         <div className="flex flex-col gap-2 bg-common-blue h-full">
           {/* Sidebar Content for Larger Screens */}
+          
           <div className="hidden md:flex md:flex-col   text-white w-[230px] h-full   ">
             <div className="flex flex-col gap-1 p-4">
               <img

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import ExamCard from "@/components/card";
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import MyNavBar from "@/components/MyNavBar";
 
 const icons = {
   user: UserCircleIcon,
@@ -92,6 +93,8 @@ function ExamPage() {
   }, []);
 
   return (
+    <div>
+      
     <div className="flex flex-col gap-5 ">
       <div className="flex flex-wrap gap-2">
         <UserCircleIcon className="h-14 w-14 text-common-gray" />
@@ -121,6 +124,7 @@ function ExamPage() {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 }

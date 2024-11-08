@@ -5,6 +5,7 @@ export default function ExamsLayout({
 }) {
   return (
     <section className="p-8">
+      
       <div className="">{children}</div>
     </section>
   );

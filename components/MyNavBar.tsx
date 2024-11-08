@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
 import ExamPage from "@/app/exam/page";
+
 const icons = {
   
   logout: ArrowRightStartOnRectangleIcon,
@@ -25,6 +26,7 @@ const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
   const Icon = icons[icon];
   return <Icon className="h-6 w-6 text-common-gray" />;
 };
+
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -41,9 +43,10 @@ const Sidebar = extendVariants(Modal, {
           "left-0",
           "bottom-0",
           "items-start",
-          "w-[70%] md:w-[30%] ", // Adjust sidebar width here
-          "[--slide-x-enter:0px]", // Slide in from left on open
-          "[--slide-x-exit:-100%]", // Slide out to the left on close
+          "w-[70%] md:w-[30%]",
+          "[--slide-x-enter:0px]",
+          "[--slide-x-exit:-100%]",
+          
         ],
         base: ["m-0", "rounded-none"],
         closeButton: [],
@@ -64,26 +67,32 @@ const Sidebar = extendVariants(Modal, {
 const MyNavBar = () => {
   const { onOpen, isOpen: sidebarOpen, onOpenChange } = useDisclosure();
   const [name, setName] = useState(""); // State to store the user's email
+  const [isClient, setIsClient] = useState(false); // State to check if the code is running on the client side
 
   useEffect(() => {
-    // Simulating an API call to get the email or username from the cookie or API
-    const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
-    if (nameFromCookie) {
-      setName(nameFromCookie); // Set the name to the state
-    } else {
-      // If the cookie is not found, you can call an API to fetch user info
-      fetch("/api/getUser") // Replace with your API endpoint
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.email) {
-            setName(data.email); // Set email from API response
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching user info:", error);
-        });
+    setIsClient(true); // This ensures that the code below only runs on the client side
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      // Simulating an API call to get the email or username from the cookie or API
+      const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
+      if (nameFromCookie) {
+        setName(nameFromCookie); // Set the name to the state
+      } else {
+        fetch("/api/getUser") // Replace with your API endpoint
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.email) {
+              setName(data.email); // Set email from API response
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user info:", error);
+          });
+      }
     }
-  }, []); // Empty dependency array ensures this runs only once when the component mounts
+  }, [isClient]); // Empty dependency array ensures this runs only once when the component mounts
 
   return (
     <>
@@ -98,7 +107,7 @@ const MyNavBar = () => {
         <div className="md:hidden flex items-center">
           <button
             className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full"
-            onClick={onOpen} // Open the sidebar on click
+            onClick={onOpen} // Open sidebar
           >
             <Bars3Icon className="text-white w-6 h-6" />
           </button>
@@ -123,18 +132,17 @@ const MyNavBar = () => {
         placement="left"
         isOpen={sidebarOpen}
         height={"full"}
-        onOpenChange={onOpenChange} // Control sidebar visibility
+        onOpenChange={onOpenChange} // Control sidebar visibility // Ensure sidebarOpen state stays in sync
       >
         <ModalContent className="bg-common-blue ">
           <ModalHeader>
-            {/* <img src="/img/logo_IMG&Title.svg" alt="" /> */}
-
-            <div className="flex flex-wrap gap-2 profile">
+            <div className="flex flex-wrap gap-2 ">
               <div className="flex items-center justify-center gap-1  p-4">
                 <div className="flex items-center gap-2">
                   <UserCircleIcon className="h-12 w-12 text-common-second-gray" />
                   <p className="text-[14px] font-normal not-italic text-white">
-                    <span>ស្វាគមន៍,&nbsp;</span><br />
+                    <span>ស្វាគមន៍,&nbsp;</span>
+                    <br />
                     <span>{name}</span>
                   </p>
                 </div>
@@ -142,8 +150,8 @@ const MyNavBar = () => {
             </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
-            <Link href={"/exam"}>
-              <button className="flex items-center gap-x-6 pb-[0.5rem] ">
+            <Link href="/exam">
+              <button className="flex items-center gap-x-6 pb-[0.5rem]">
                 <img src="/img/homeIcon.svg" alt="Home" />
                 <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
               </button>
@@ -151,36 +159,7 @@ const MyNavBar = () => {
             <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
               <img src="/img/clipboard-document-check.svg" alt="" />
               <span className="mt-1">ប្រវត្តិការប្រលង</span>
-            </button>{" "}
-            {/*
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <img src="/img/user-circle.png" alt="" />
-              <span className="mt-1">គណនី</span>
             </button>
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <img
-                src="/img/language.png"
-                alt="language switch"
-                className="w-6"
-              />
-              <span className="mt-1">ភាសារ</span>
-            </button>
-            <button className="flex items-center text-white gap-x-4  pb-[0.5rem]">
-              <img
-                src="/img/noti.png"
-                alt="notification ring"
-                className="w-10 -ml-2"
-              />
-              <span className="mt-1">ជូនដំណឹង</span>
-            </button>
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <img src="/img/full.png" alt="full xd" />
-              <span className="mt-1">មើលពេញ</span>
-            </button>
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              {/* <ThemeSwitch /> */}
-            {/* <span className="mt-1"> ម៉ូត</span>
-            </button> */}
           </ModalBody>
         </ModalContent>
       </Sidebar>
