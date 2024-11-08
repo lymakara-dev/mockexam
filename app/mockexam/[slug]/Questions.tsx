@@ -215,7 +215,7 @@ export default function Page() {
         <SyncLoader className="mt-12" color="#0A3A7A" />
       ) : (
         <div className="flex flex-col mt-4">
-          <nav className="flex w-[1200px] text-white justify-between bg-[#0D4DA2] p-2 rounded-[10px]">
+          <nav className="flex w-full text-white justify-between bg-[#0D4DA2] p-2 rounded-[10px]">
             <div className="">
               <div className="flex items-center justify-center gap-2">
                 <img src="" alt="" />

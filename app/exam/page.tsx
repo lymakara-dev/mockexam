@@ -94,37 +94,36 @@ function ExamPage() {
 
   return (
     <div>
-      
-    <div className="flex flex-col gap-5 ">
-      <div className="flex flex-wrap gap-2">
-        <UserCircleIcon className="h-14 w-14 text-common-gray" />
-        <div className="flex flex-col justify-center gap-1">
-          <p className="text-[16px] font-normal not-italic text-[#64748B]">
-            ស្វាគមន៍,&nbsp;
-            <span>{name}</span>
-          </p>
-          <p className="text-[14px] font-normal not-italic text-[#64748B]">
-            មើលប្រូហ្វាល់ &gt;
-          </p>
+      <div className="flex flex-col gap-5 ">
+        <div className="flex flex-wrap gap-2">
+          <UserCircleIcon className="h-14 w-14 text-common-gray" />
+          <div className="flex flex-col justify-center gap-1">
+            <p className="text-[16px] font-normal not-italic text-[#64748B]">
+              ស្វាគមន៍,&nbsp;
+              <span>{name}</span>
+            </p>
+            <p className="text-[14px] font-normal not-italic text-[#64748B]">
+              មើលប្រូហ្វាល់ &gt;
+            </p>
+          </div>
+        </div>
+        <p className="text-2xl not-italic font-medium text-[#64748B] mt-5">
+          ថ្នាក់ប្រលង
+        </p>
+
+        <div className="grid grid-cols-2 gap-4 md:flex max-md:flex-wrap flex-wrap">
+          {list.map((item, index) => (
+            <ExamCard
+              key={index}
+              date={item.date}
+              href={item.href}
+              img={item.img}
+              time={item.time}
+              title={item.title}
+            />
+          ))}
         </div>
       </div>
-      <p className="text-2xl not-italic font-medium text-[#64748B] mt-5">
-        ថ្នាក់ប្រលង
-      </p>
-
-      <div className="grid grid-cols-2 gap-4 md:flex max-md:flex-wrap ">
-        {list.map((item, index) => (
-          <ExamCard
-            key={index}
-            date={item.date}
-            href={item.href}
-            img={item.img}
-            time={item.time}
-            title={item.title}
-          />
-        ))}
-      </div>
-    </div>
     </div>
   );
 }
