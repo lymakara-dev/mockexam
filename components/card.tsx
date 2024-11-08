@@ -24,7 +24,7 @@ const ExamCard: React.FC<ExamCardProps> = ({
         shadow="sm"
         isPressable
         onPress={() => console.log("item pressed")}
-        className="w-[185px] h-[279px] p-[12px] flex flex-col items-cente"
+        className="w-[11.563rem] h-[17.438rem] p-[12px] flex flex-col items-cente max-420:scale-90 max-md:scale-90"
       >
         <CardBody className="grow-0">
           <Image
