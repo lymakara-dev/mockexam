@@ -102,7 +102,7 @@ const MyNavBar = () => {
         <div className="flex items-center md:hidden">
           <img src="/img/logo_IMG&Title.png" alt="" className="h-10 " />
         </div>
-
+    {/* fix */}
         {/* Hamburger Menu for Mobile */}
         <div className="md:hidden flex items-center">
           <button
