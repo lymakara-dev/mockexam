@@ -5,7 +5,16 @@ import ExamPage from "./exam/page";
 
 function page() {
   return (
-    <ExamPage />
+    <div className="flex">
+      <Sidebars />
+      <div className="flex flex-col flex-grow">
+        <MyNavBar />
+        <div className="p-5 flex flex-col gap-4 ">
+        <ExamPage />
+        </div>
+        
+      </div>
+    </div>
   );
 }
 
