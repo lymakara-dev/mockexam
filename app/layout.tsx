@@ -35,12 +35,12 @@ export default function RootLayout({
       <head />
       <body 
         className={clsx(
-          "bg-background-color h-screen font-sans antialiased",
-          fontSans.variable
+          `bg-background-color h-screen font-sans antialiased,
+          fontSans.variable ${Kantumruy.className}`
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className={`relative flex flex-col ${Kantumruy.className}`}>
+          <div className={`relative flex flex-col `}>
             {/* <Navbar /> */}
             <div className="bg-background" />
             <main className="flex-grow">{children}</main>
