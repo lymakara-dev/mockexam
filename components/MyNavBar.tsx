@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { PiSignOutBold } from "react-icons/pi";
+import {  } from "react-icons/pi";
 import Link from "next/link";
-import { Bars3Icon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, HomeIcon, UserCircleIcon, ArrowRightStartOnRectangleIcon, } from "@heroicons/react/24/solid";
 import {
   Modal,
   ModalContent,
@@ -14,6 +14,17 @@ import {
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
 import ExamPage from "@/app/exam/page";
+const icons = {
+  
+  logout: ArrowRightStartOnRectangleIcon,
+};
+
+type IconType = keyof typeof icons;
+
+const IconComponent: React.FC<{ icon: IconType }> = ({ icon }) => {
+  const Icon = icons[icon];
+  return <Icon className="h-6 w-6 text-common-gray" />;
+};
 
 const Sidebar = extendVariants(Modal, {
   variants: {
@@ -98,7 +109,10 @@ const MyNavBar = () => {
           <li className="flex items-center">{/* <ThemeSwitch /> */}</li>
           <li>
             <Link href="/signout">
-              <PiSignOutBold className="w-6 h-full" />
+            <div className="w-11 h-11 hover:bg-common-white active:bg-common-white flex items-center justify-center rounded-full">
+            <ArrowRightStartOnRectangleIcon className="w-6 h-6 text-gray-600" />
+            </div>
+             
             </Link>
           </li>
         </ul>
