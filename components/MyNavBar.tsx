@@ -147,7 +147,7 @@ const MyNavBar = () => {
                   <p className="text-[14px] font-normal not-italic text-white">
                     <span>ស្វាគមន៍,&nbsp;</span>
                     <br />
-                    <span>{name.split("@")[0]}</span>
+                    <span>{name}</span>
                   </p>
                 </div>
               </div>
