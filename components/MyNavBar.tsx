@@ -145,7 +145,7 @@ const MyNavBar = () => {
                 <div className="flex items-center gap-2">
                   <UserCircleIcon className="h-12 w-12 text-common-second-gray" />
                   <p className="text-[14px] font-normal not-italic text-white">
-                    <span>ស្វាគមន៍</span>
+                    <span>ស្វាគមន៍,&nbsp;</span>
                     <br />
                     <span>{name}</span>
                   </p>
