@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans, Kantumruy } from "@/config/fonts";
+import SessionWrapper from "@/components/SessionWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -31,22 +32,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
-      <head />
-      <body
-        className={clsx(
-          "bg-background-color font-sans antialiased",
-          fontSans.variable
-        )}
-      >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className={`relative flex flex-col ${Kantumruy.className}`}>
-            {/* <Navbar /> */}
-            <div className="bg-background" />
-            <main className="flex-grow">{children}</main>
-          </div>
-        </Providers>
-      </body>
-    </html>
+      <html suppressHydrationWarning lang="en">
+        <head />
+        <body
+          className={clsx(
+            ` bg-background-color h-screen font-sans antialiased,
+            fontSans.variable ${Kantumruy.className}`
+          )}
+        >
+          <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+            <div className={`relative flex flex-col `}>
+              {/* <Navbar /> */}
+              <div className="bg-background" />
+              <main className="flex-grow">
+              <SessionWrapper>
+                {children}
+                </SessionWrapper>
+              
+              </main>
+            </div>
+          </Providers>
+        </body>
+      </html>
   );
 }

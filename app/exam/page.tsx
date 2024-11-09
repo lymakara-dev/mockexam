@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 
-
 import ExamCard from "@/components/card";
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
+import MyNavBar from "@/components/MyNavBar";
 
 const icons = {
   user: UserCircleIcon,
@@ -32,7 +32,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -48,7 +48,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -64,7 +64,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -80,7 +80,7 @@ function ExamPage() {
       }),
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: "short",
         day: "numeric",
       }),
     },
@@ -93,9 +93,11 @@ function ExamPage() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-5 ">
+    <div>
+      
+    <div className="flex flex-col gap-5  ">
       <div className="flex flex-wrap gap-2">
-      <UserCircleIcon className="h-14 w-14 text-common-gray" />
+        <UserCircleIcon className="h-14 w-14 text-common-gray" />
         <div className="flex flex-col justify-center gap-1">
           <p className="text-[16px] font-normal not-italic text-[#64748B]">
             ស្វាគមន៍,&nbsp;
@@ -110,7 +112,7 @@ function ExamPage() {
         ថ្នាក់ប្រលង
       </p>
 
-      <div className="grid grid-cols-2 gap-4 md:flex max-md:flex-wrap ">
+      <div className="grid grid-cols-2 gap-4 md:flex max-md:flex-wrap  flex-wrap max-420:gap-2">
         {list.map((item, index) => (
           <ExamCard
             key={index}
@@ -122,6 +124,7 @@ function ExamPage() {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 }

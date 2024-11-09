@@ -24,7 +24,7 @@ const ExamCard: React.FC<ExamCardProps> = ({
         shadow="sm"
         isPressable
         onPress={() => console.log("item pressed")}
-        className="w-[185px] h-[279px] p-[12px] flex flex-col items-cente"
+        className="w-[11.563rem] h-[17.438rem] p-[12px] flex flex-col items-cente max-420:scale-90 max-md:scale-90"
       >
         <CardBody className="grow-0">
           <Image
@@ -36,7 +36,7 @@ const ExamCard: React.FC<ExamCardProps> = ({
           />
         </CardBody>
         <CardFooter className="grow flex flex-col p-0 pt-[10px] items-start">
-          <p className="grow text-[16px] font-normal​​ font-medium">{title}</p>
+          <p className="grow text-[16px] font-normal​​ font-normal">{title}</p>
           <div className="grow-0">
             <div className="flex flex-row gap-1">
               <Image src="/svg/clock.svg" />
