@@ -1,7 +1,9 @@
+"use client";
 import MyNavBar from "@/components/MyNavBar";
 import Sidebars from "@/components/sidebar";
 import React from "react";
 import ExamPage from "./exam/page";
+import { signIn } from "next-auth/react";
 
 function page() {
   return (
@@ -12,6 +14,7 @@ function page() {
         <div className="p-6">
           <ExamPage />
         </div>
+        <button onClick={() => signIn("google")}>singin</button>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, 
 import EyeIcon from "./EyeIcon";
 import Cookies from "js-cookie";
 import Sidebars from "@/components/sidebar";
+import MyNavBar from "@/components/MyNavBar";
 
 
 interface Result {
@@ -155,11 +156,15 @@ export default function App() {
     }, [statusColorMap2]);
 
     return (
-        <div className="flex">
+        <div className="flex ">
             <Sidebars/>
-        <div className="m-4 w-full">
             
-            <h1 className="text-xl font-semibold p-2 text-common-gray">ប្រវត្តិនៃការប្រលង</h1>
+        <div className=" w-full ">
+            <MyNavBar/>
+            <div className="mx-4 ">
+
+            
+            <h1 className="text-xl font-semibold p-2 text-gray-500 my-4 ">ប្រវត្តិនៃការប្រលង</h1>
             <Table aria-label="Example table with custom cells">
                 <TableHeader columns={columns}>
                     {(column) => (
@@ -176,6 +181,7 @@ export default function App() {
                     )}
                 </TableBody>
             </Table>
+            </div>
             {isLoading? "" : result.length>0? "" : <div className="flex flex-col gap-4 m-2">
                 <h2 className="text-red-500">គ្មានទិន្នន័យ</h2>
                     <button className="text-sm p-3 rounded-xl font-normal bg-default-100">
@@ -183,6 +189,7 @@ export default function App() {
                             ប្រលងសាកល្បង
                         </Link>
                     </button>
+                    
             </div>}
         </div>
         </div>
