@@ -78,27 +78,26 @@ const MyNavBar = () => {
   }, []);
   const pathname = usePathname();
 
-  useEffect(() => {
-    if (isClient) {
-      // Simulating an API call to get the email or username from the cookie or API
-      const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
-      if (nameFromCookie) {
-        setName(nameFromCookie); // Set the name to the state
-      } else {
-        fetch("/api/getUser") // Replace with your API endpoint
-          .then((response) => response.json())
-          .then((data) => {
-            if (data && data.email) {
-              setName(data.email);
-              // Set email from API response
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching user info:", error);
-          });
-      }
-    }
-  }, [isClient]); // Empty dependency array ensures this runs only once when the component mounts
+  // useEffect(() => {
+  //   if (isClient) {
+  //     // Simulating an API call to get the email or username from the cookie or API
+  //     const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
+  //     if (nameFromCookie) {
+  //       setName(nameFromCookie); // Set the name to the state
+  //     } else {
+  //       fetch("/api/getUser") // Replace with your API endpoint
+  //         .then((response) => response.json())
+  //         .then((data) => {
+  //           if (data && data.email) {
+  //             setName(data.email); // Set email from API response
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           console.error("Error fetching user info:", error);
+  //         });
+  //     }
+  //   }
+  // }, [isClient]); // Empty dependency array ensures this runs only once when the component mounts
 
   return (
     <>
