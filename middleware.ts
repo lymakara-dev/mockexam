@@ -16,6 +16,15 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/mockexam", "/", "/signin","/api","/about",
+  matcher: ["/mockexam", "/", "/signin","/api","/about","/history",
     "/mockexam/chemistry","/mockexam/math","/mockexam/iq","/mockexam/physic","/exam"],
 };
+
+// middleware.ts
+import { withAuth } from "next-auth/middleware";
+
+export default withAuth({
+  callbacks: {
+    authorized: ({ token }) => !!token,
+  },
+});
