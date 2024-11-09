@@ -20,6 +20,7 @@ import {
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
 import ExamPage from "@/app/exam/page";
+import { usePathname } from "next/navigation";
 
 const icons = {
   logout: ArrowRightStartOnRectangleIcon,
@@ -75,6 +76,7 @@ const MyNavBar = () => {
   useEffect(() => {
     setIsClient(true); // This ensures that the code below only runs on the client side
   }, []);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (isClient) {
@@ -87,7 +89,8 @@ const MyNavBar = () => {
           .then((response) => response.json())
           .then((data) => {
             if (data && data.email) {
-              setName(data.email); // Set email from API response
+              setName(data.email);
+              // Set email from API response
             }
           })
           .catch((error) => {
@@ -145,25 +148,28 @@ const MyNavBar = () => {
                   <p className="text-[14px] font-normal not-italic text-white">
                     <span>ស្វាគមន៍,&nbsp;</span>
                     <br />
-                    <span>{name}</span>
+                    <span>{name.split("@")[0]}</span>
                   </p>
                 </div>
               </div>
             </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
-            <Link href='/'>
-              <button className="flex items-center gap-x-6 pb-[0.5rem]">
+            <Link href="/">
+              <button
+                className={`flex items-center gap-x-6 text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ${pathname == "/" ? "bg-common-white text-white" : ""}`}
+              >
                 <img src="/img/homeIcon.svg" alt="Home" />
-                <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
+                <span className="mt-1 ">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
             <Link href="/history">
-            
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <img src="/img/clipboard-document-check.svg" alt="" />
-              <span className="mt-1">ប្រវត្តិការប្រលង</span>
-            </button>
+              <button
+                className={`flex  items-center  gap-x-6 text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ${pathname == "/history" ? "bg-common-white text-white" : ""}`}
+              >
+                <img src="/img/clipboard-document-check.svg" alt="" />
+                <span className="mt-1">ប្រវត្តិការប្រលង</span>
+              </button>
             </Link>
           </ModalBody>
         </ModalContent>
