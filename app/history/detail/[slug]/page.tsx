@@ -6,6 +6,9 @@ import {  useParams, useRouter } from 'next/navigation';
 import { SyncLoader } from 'react-spinners';
 import useToggleVisibility from '../../useToggleVisibility';
 
+
+export const runtime = "edge";
+
 interface Data {
     id: number;
     picquestions: {
