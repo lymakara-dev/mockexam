@@ -10,8 +10,8 @@ function page() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     Cookies.remove("authenticated");
-    signOut();
     router.push('/signin')
+    // signOut();
   }, []);
 
   return <>signed out</>

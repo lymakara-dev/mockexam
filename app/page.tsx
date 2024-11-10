@@ -13,9 +13,8 @@ function page() {
       <div className="flex flex-col flex-grow">
         <MyNavBar />
         <div className="p-5 flex flex-col gap-4 ">
-        <ExamPage />
+          <ExamPage />
         </div>
-        <button onClick={()=>signIn('google')}>singin</button>
       </div>
     </div>
   );

@@ -49,7 +49,6 @@ function postRecord(accessToken:any,email:string,lastname:string,firstname:strin
       window.location.href='/signin'
     })
     .catch(error => {
-      alert("Error creating account. Please make sure you have good internet connectivity");
       console.log("Error creating record:", error);
     });
   }  

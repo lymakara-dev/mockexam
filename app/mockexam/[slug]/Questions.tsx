@@ -11,7 +11,6 @@ import RotateToLandscape from "../RotateToLandscape";
 import Result from "./Result";
 import Cookies from "js-cookie";
 import CountdownTimer from "../counter";
-import { log } from "console";
 interface Data {
   id: number;
   picquestions: {
@@ -56,6 +55,10 @@ interface Data {
     label_i18n: string;
   };
 }
+interface History {
+  questionID: number;
+  answerChosed: number;
+}
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
@@ -64,10 +67,14 @@ export default function Page() {
   const [bg, setBg] = useState<string>("#0D4DA2");
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
+  const [lastScore, setLastScore] = useState<string>(); 
   const [isSubmitted, setIsSubmitted] = useState(true);
   const [warning, setWarning] = useState(false);
-  // const [currentTime , setCurrentTime] = useState<number>()
+  const [userHistory, setUserHistory] = useState<History[]>([]);
   let currentTime = 0;
+  let checkBox = 0;
+  let tempScore = 0;
+  let history : string = "";
   const router = useParams();
   const routerLink = useRouter();
   const { slug } = router;
@@ -76,7 +83,7 @@ export default function Page() {
   // random question
   const randomMathItems = mathItems
     .sort(() => 0.5 - Math.random())
-    .slice(0, 30);
+    .slice(0, 3);
 
   const url = "https://techbox.developimpact.net";
 
@@ -142,9 +149,10 @@ export default function Page() {
   function postRecord(accessToken: any) {
     const jsonObject = {
       email: Cookies.get("authenticated"),
-      score: correctedAnswer,
+      score: tempScore,
       type: slug,
       timeRemain: currentTime,
+      history: history,
     };
     const url = "https://techbox.developimpact.net/o/c/mockresults/";
 
@@ -220,10 +228,12 @@ export default function Page() {
 
     const handleChange = (value: string) => {
       setSelectedValue(value);
-      const checkBox = parseInt(value);
+      checkBox = parseInt(value);
 
       if (checkBox === randomMathItems[index].correctedAns) {
         checkScore = true;
+        console.log(true);
+        
       } else {
         checkScore = false;
       }
@@ -242,27 +252,62 @@ export default function Page() {
     );
   };
 
-  function handlesubmit(): void {
-    if (index + 1 == randomMathItems.length - 1) {
+  const addHistory = (questionID: number, answerChosed: number) => {
+    // Create the new history entry
+    const newHistory: History = { questionID, answerChosed };
+
+    // Update the state by appending the new entry to the existing array
+    setUserHistory((prevHistory) => [...prevHistory, newHistory]);
+
+    console.log("History added:", newHistory);
+    console.log("Updated user history:", newHistory);
+  };
+
+  const historyToString = (): string => {
+    return userHistory
+      .map((history) => `${history.questionID}:${history.answerChosed}`)
+      .join(', ');
+  };
+
+  const handlesubmit = () => {
+    // Capture history
+    addHistory(randomMathItems[index].picquestions.id, checkBox);
+    history = historyToString(); // Capture the updated history
+  
+    // Ensure index is updated properly
+    if (index + 1 === randomMathItems.length - 1) {
       setBtn("បញ្ជូន");
     }
-    if (index == randomMathItems.length - 1) {
+  
+    if (index === randomMathItems.length - 1) {
+      // Temporarily capture the score to ensure the correct value is used
+      tempScore = correctedAnswer;
+      
+      // If the answer is correct, increment the score
       if (checkScore) {
-        setCorrectAnswer(correctedAnswer + 1);
-        submitForm();
-        setIsSubmitted(false);
-        console.log(true);
+        setCorrectAnswer(prevState => prevState + 1);
+        tempScore += 1; // Update the temp score here
+        console.log("here1");
       } else {
-        submitForm();
-        setIsSubmitted(false);
+        console.log("here2");
+      }
+
+      if (window.confirm("Confirm submission")) {
+        // Wait for state update to complete
+        setTimeout(() => {
+          submitForm(); // Submit the form at the end
+          setIsSubmitted(false);    
+          console.log(history + "  "+ lastScore);
+                
+        }, 0);
       }
     } else if (checkScore == null) {
       alert("សូមជ្រើសរើសចម្លើយ");
     } else {
       setIndex(index + 1);
-      if (checkScore) setCorrectAnswer(correctedAnswer + 1);
+      if (checkScore) setCorrectAnswer(prevState => prevState + 1);
     }
-  }
+  };
 
   function handleleft() {
     if (window.confirm("Are you sure you want to leave?")) {
@@ -312,7 +357,7 @@ export default function Page() {
           </nav>
           <div className="mt-10 p-8">
             <h1 className={"font-bold text-2xl text-left"}>សំណួរ</h1>
-            <span className="bg-gray-500 h-[1px] w-full max-w-[500px] ml-4 mt-4 sm:block" />
+            <span className="bg-gray-500 mb-4 h-[1px] w-full max-w-[500px] ml-4 mt-4 sm:block" />
             {randomMathItems[0]?.picquestions?.link?.href ? (
               <div className="w-[100%] md:h-[100%] flex items-center">
                 <img
@@ -340,7 +385,7 @@ export default function Page() {
               ""
             )}
             <h1 className="font-bold text-2xl text-left mt-2">ចម្លើយ</h1>
-            <span className="bg-gray-500 h-[1px] w-full max-w-[500px] ml-4 mt-4 sm:block" />
+            <span className="bg-gray-500 mb-4  h-[1px] w-full max-w-[500px] ml-4 mt-4 sm:block" />
             <div className="multiplechoice">{createCard(testquestion[0])}</div>
             <button
               className={`

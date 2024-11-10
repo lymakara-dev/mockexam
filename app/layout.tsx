@@ -36,7 +36,7 @@ export default function RootLayout({
         <head />
         <body
           className={clsx(
-            ` bg-background-color h-screen font-sans antialiased,
+            `h-screen font-sans antialiased,
             fontSans.variable ${Kantumruy.className}`
           )}
         >
