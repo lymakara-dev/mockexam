@@ -20,6 +20,7 @@ import {
 } from "@nextui-org/react";
 import { ThemeSwitch } from "./theme-switch";
 import ExamPage from "@/app/exam/page";
+import { usePathname } from "next/navigation";
 
 const icons = {
   logout: ArrowRightStartOnRectangleIcon,
@@ -75,27 +76,28 @@ const MyNavBar = () => {
   useEffect(() => {
     setIsClient(true); // This ensures that the code below only runs on the client side
   }, []);
+  const pathname = usePathname();
 
-  // useEffect(() => {
-  //   if (isClient) {
-  //     // Simulating an API call to get the email or username from the cookie or API
-  //     const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
-  //     if (nameFromCookie) {
-  //       setName(nameFromCookie); // Set the name to the state
-  //     } else {
-  //       fetch("/api/getUser") // Replace with your API endpoint
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           if (data && data.email) {
-  //             setName(data.email); // Set email from API response
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.error("Error fetching user info:", error);
-  //         });
-  //     }
-  //   }
-  // }, [isClient]); // Empty dependency array ensures this runs only once when the component mounts
+  useEffect(() => {
+    if (isClient) {
+      // Simulating an API call to get the email or username from the cookie or API
+      const nameFromCookie = document.cookie.split("authenticated=")[1]; // Extract name from cookie
+      if (nameFromCookie) {
+        setName(nameFromCookie); // Set the name to the state
+      } else {
+        fetch("/api/getUser") // Replace with your API endpoint
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.email) {
+              setName(data.email); // Set email from API response
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user info:", error);
+          });
+      }
+    }
+  }, [isClient]); // Empty dependency array ensures this runs only once when the component mounts
 
   return (
     <>
@@ -143,7 +145,7 @@ const MyNavBar = () => {
                 <div className="flex items-center gap-2">
                   <UserCircleIcon className="h-12 w-12 text-common-second-gray" />
                   <p className="text-[14px] font-normal not-italic text-white">
-                    <span>ស្វាគមន៍,&nbsp;</span>
+                    <span>ស្វាគមន៍</span>
                     <br />
                     <span>{name}</span>
                   </p>
@@ -152,18 +154,21 @@ const MyNavBar = () => {
             </div>
           </ModalHeader>
           <ModalBody className="flex flex-col">
-            <Link href='/'>
-              <button className="flex items-center gap-x-6 pb-[0.5rem]">
+            <Link href="/">
+              <button
+                className={`flex items-center gap-x-6 text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ${pathname == "/" ? "bg-common-white text-white" : ""}`}
+              >
                 <img src="/img/homeIcon.svg" alt="Home" />
-                <span className="mt-1 text-white">ថ្នាក់ប្រលង</span>
+                <span className="mt-1 ">ថ្នាក់ប្រលង</span>
               </button>
             </Link>
             <Link href="/history">
-            
-            <button className="flex items-center text-white gap-x-6 pb-[0.5rem]">
-              <img src="/img/clipboard-document-check.svg" alt="" />
-              <span className="mt-1">ប្រវត្តិការប្រលង</span>
-            </button>
+              <button
+                className={`flex  items-center  gap-x-6 text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ${pathname == "/history" ? "bg-common-white text-white" : ""}`}
+              >
+                <img src="/img/clipboard-document-check.svg" alt="" />
+                <span className="mt-1">ប្រវត្តិការប្រលង</span>
+              </button>
             </Link>
           </ModalBody>
         </ModalContent>
