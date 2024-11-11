@@ -83,7 +83,7 @@ export default function Page() {
   // random question
   const randomMathItems = mathItems
     .sort(() => 0.5 - Math.random())
-    .slice(0, 3);
+    .slice(0, 30);
 
   const url = "https://techbox.developimpact.net";
 
