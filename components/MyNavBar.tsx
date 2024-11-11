@@ -170,6 +170,14 @@ const MyNavBar = () => {
                 <span className="mt-1">ប្រវត្តិការប្រលង</span>
               </button>
             </Link>
+            <Link href="/signout">
+              <button
+                className={`flex  items-center  gap-x-6 text-common-gray hover:text-white focus:text-white gap-4 pb-[1rem]  rounded-[10px] px-4 py-3 w-full hover:bg-common-white  focus:bg-common-white ${pathname == "/history" ? "bg-common-white text-white" : ""}`}
+              >
+                <ArrowRightStartOnRectangleIcon className="w-6 h-6" />
+                <span className="mt-1">ចាកចេញ</span>
+              </button>
+            </Link>
           </ModalBody>
         </ModalContent>
       </Sidebar>
