@@ -7,13 +7,12 @@ import { Input } from "@nextui-org/input";
 import Link from "next/link";
 import back from "../../public/Auth/back.jpeg";
 import GIC from "../../public/Auth/ITCLogo.png";
-import { EnvelopeIcon, LockClosedIcon, } from "@heroicons/react/24/solid";
+import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/solid";
 import { SessionProvider, signIn } from "next-auth/react";
 
 const icons = {
   mail: EnvelopeIcon,
   lock: LockClosedIcon,
-
 };
 
 type IconType = keyof typeof icons;
@@ -71,14 +70,11 @@ const SigninPage = () => {
 
   const handlelogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(captcha);
 
     if (!emailError) {
       setBtnInit("សូមបញ្ចូលគណនី");
     } else if (!passwordError) {
       setBtnInit("Password must be at least 8 characters");
-    } else if (captcha == null) {
-      setBtnInit("Captcha is required");
     } else {
       const user = users.find(
         (u) => u.email === email && u.password === password
@@ -97,57 +93,68 @@ const SigninPage = () => {
   };
 
   return (
-      <div className=" flex items-center justify-center h-screen w-full bg-[#EBF1FA]">
-        {check? <Loading/> : ""}
-        <div className="bg-white w-[50vw] h-[60vh] flex rounded-3xl max-md:w-[80vw] max-md:h-[50vh] max-lg:h-[60vh] max-lg:w-[40vw] ">
-          <div className="flex flex-col w-1/2 max-md:w-full max-lg:w-[50vw] items-center justify-center    ">
-            <Image src={GIC} alt="GICLogo" width={250} height={250} className="mb-4" />
-            <div className="flex flex-col w-[80%]">
-              <form onSubmit={handlelogin}>
-                <div className={'mb-2'}>
-                  <Input
-                    className="border-1 border-gray-500 rounded-xl flex"
-                    endContent={<EnvelopeIcon className=" w-5 h-5 text-gray-500" />}
-                    name="email"
-                    placeholder="អ៊ីម៉ែល"
-                    type="email"
-                    value={email}
-                    onChange={handleEmailChange}
-                  />
-                  {emailError && (
-                    <p className="text-red-500 text-sm">{emailError}</p>
-                  )}
-                </div>
-                <div className="mb-4">
-                  <Input
-                    className="border-1 border-gray-600 rounded-xl"
-                    name="password"
-                    placeholder="លេខសម្ងាត់"
-                    type="password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    endContent={<LockClosedIcon className="w-5 h-5 text-gray-600" />}
-                  />
-                  {passwordError && (
-                    <p className="text-red-500 text-sm">{passwordError}</p>
-                  )}
-                </div>
-                <p className="text-center text-red-500 text-sm mt-2">
-                  {BtnInit}
-                </p>
+    <div className=" flex items-center justify-center h-screen w-full bg-[#EBF1FA]">
+      {check ? <Loading /> : ""}
+      <div className="bg-white w-[50vw] h-[60vh] flex rounded-3xl max-md:w-[80vw] max-md:h-[50vh] max-lg:h-[60vh] max-lg:w-[40vw] ">
+        <div className="flex flex-col w-1/2 max-md:w-full max-lg:w-[50vw] items-center justify-center    ">
+          <Image
+            src={GIC}
+            alt="GICLogo"
+            width={250}
+            height={250}
+            className="mb-4"
+          />
+          <div className="flex flex-col w-[80%]">
+            <form onSubmit={handlelogin}>
+              <div className={"mb-2"}>
+                <Input
+                  className="border-1 border-gray-500 rounded-xl flex"
+                  endContent={
+                    <EnvelopeIcon className=" w-5 h-5 text-gray-500" />
+                  }
+                  name="email"
+                  placeholder="អ៊ីម៉ែល"
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+                {emailError && (
+                  <p className="text-red-500 text-sm">{emailError}</p>
+                )}
+              </div>
+              <div className="mb-4">
+                <Input
+                  className="border-1 border-gray-600 rounded-xl"
+                  name="password"
+                  placeholder="លេខសម្ងាត់"
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  endContent={
+                    <LockClosedIcon className="w-5 h-5 text-gray-600" />
+                  }
+                />
+                {passwordError && (
+                  <p className="text-red-500 text-sm">{passwordError}</p>
+                )}
+              </div>
+              <p className="text-center text-red-500 text-sm mt-2">{BtnInit}</p>
 
-                {/* <ReCAPTCHA className="w-full mb-4 " sitekey="6Ld4AHkqAAAAAHRWk0IBg6lJZwtB-S127yYkWHMa" onChange={setCaptcha} /> */}
-                <button className="shadow-submit w-full py-2 rounded-xl bg-normal-blue text-white" type="submit">
-                  ចូលប្រព័ន្ធ
-                </button>
-                {/* <div className="flex justify-evenly items-center w-full my-2">
+              {/* <ReCAPTCHA className="w-full mb-4 " sitekey="6Ld4AHkqAAAAAHRWk0IBg6lJZwtB-S127yYkWHMa" onChange={setCaptcha} /> */}
+              <button
+                className="shadow-submit w-full py-2 rounded-xl bg-normal-blue text-white"
+                type="submit"
+              >
+                ចូលប្រព័ន្ធ
+              </button>
+              {/* <div className="flex justify-evenly items-center w-full my-2">
                   <span className="h-[1px] w-full max-w-[60px] bg-gray-500 sm:block" />
                   <p className="text-gray-500 px-4">ចូលប្រព័ន្ធជាមួយ Google </p>
                   <span className="bg-gray-500 h-[1px] w-full max-w-[60px] sm:block" />
                 </div> */}
 
-                {/* //Sign in with google */}
-                {/* <button onClick={() => {
+              {/* //Sign in with google */}
+              {/* <button onClick={() => {
                   const a = signIn('google')
                   console.log(a);
 
@@ -188,27 +195,30 @@ const SigninPage = () => {
                   </span>
                   Sign in with Google
                 </button> */}
-                <div className="flex justify-evenly items-center w-full my-2">
-                  <span className="h-[1px] w-full max-w-[60px] bg-gray-500 sm:block" />
-                  <p className="text-gray-500 px-4">បង្កើតគណនី</p>
-                  <span className="bg-gray-500 h-[1px] w-full max-w-[60px] sm:block" />
-                </div>
-                <Link href="/signup" className="flex justify-center">
-                  <button className="w-[50%] shadow-submit py-2 rounded-custom-12 border-1 border-normal-blue bg-white text-normal-blue hover:bg-normal-blue hover:text-white">
-                    ចុះឈ្មោះ
-                  </button>
-                </Link>
-              </form>
-            </div>
-          </div>
-          <div className="w-1/2  max-md:hidden relative max-lg:hidden max[1400px]:hidden ">
-            <Image src={back} alt="Picture of the author"
-              fill
-              className="object-cover rounded-r-3xl"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 400px, " />
+              <div className="flex justify-between items-center w-full my-2">
+                <span className="h-[1px] w-full max-w-[60px] bg-gray-500 sm:block" />
+                <p className="text-gray-500 px-4">បង្កើតគណនី</p>
+                <span className="bg-gray-500 h-[1px] w-full max-w-[60px] sm:block" />
+              </div>
+              <Link href="/signup" className="flex justify-center">
+                <button className="w-full shadow-submit py-2 rounded-custom-12 border-1 border-normal-blue bg-white text-normal-blue hover:bg-normal-blue hover:text-white">
+                  ចុះឈ្មោះ
+                </button>
+              </Link>
+            </form>
           </div>
         </div>
+        <div className="w-1/2  max-md:hidden relative max-lg:hidden max[1400px]:hidden ">
+          <Image
+            src={back}
+            alt="Picture of the author"
+            fill
+            className="object-cover rounded-r-3xl"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 400px, "
+          />
+        </div>
       </div>
+    </div>
   );
 };
 

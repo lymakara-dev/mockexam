@@ -143,7 +143,7 @@ function Page() {
                     const filteredItems = data.items.filter((item: { id: number }) => item.id === idnum);
                     setGetSlug(filteredItems);
                 } else {
-                    console.log("Unexpected data format:", data);
+                    // console.log("Unexpected data format:", data);
                 }
                 setIsLoading(false);
             })
@@ -174,9 +174,9 @@ function Page() {
                         questionIdsRef.current.includes(item.id)
                     );
                     setResult(filteredData);
-                    console.log("Filtered mock questions:", filteredData);
+                    // console.log("Filtered mock questions:", filteredData);
                 } else {
-                    console.log("Unexpected data format:", data);
+                    // console.log("Unexpected data format:", data);
                 }
                 setIsLoading(false);
             })
@@ -205,7 +205,7 @@ function Page() {
 
     function parseHistory(history: string) {
         if (!history) {
-            console.log("History is empty or undefined.");
+            // console.log("History is empty or undefined.");
             return [];
         }
 

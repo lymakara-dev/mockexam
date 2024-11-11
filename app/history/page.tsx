@@ -88,7 +88,7 @@ export default function App() {
                         setResult(formattedData); // Update the result state
                         setIsLoading(false); // Set loading state to false
                     } else {
-                        console.log("Unexpected data format:", data);
+                        // console.log("Unexpected data format:", data);
                     }
                 }
             })

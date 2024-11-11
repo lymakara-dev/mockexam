@@ -66,14 +66,14 @@ export default function Page() {
   const [bg, setBg] = useState<string>("#0D4DA2");
   const [testquestion, setTestQuestion] = React.useState<Data[]>([]);
   const [correctedAnswer, setCorrectAnswer] = useState(0);
-  const [lastScore, setLastScore] = useState<string>(); 
+  const [lastScore, setLastScore] = useState<string>();
   const [isSubmitted, setIsSubmitted] = useState(true);
   const [warning, setWarning] = useState(false);
   const [userHistory, setUserHistory] = useState<History[]>([]);
   let currentTime = 0;
   let checkBox = 0;
   let tempScore = 0;
-  let history : string = "";
+  let history: string = "";
   const router = useParams();
   const routerLink = useRouter();
   const { slug } = router;
@@ -165,7 +165,7 @@ export default function Page() {
     })
       //  .then(url => url.json())
       .then((url) => {
-        console.log("Record created successfully!", url);
+        // console.log("Record created successfully!", url);
         // setCheck(false);
         // router.push('/signin')
       })
@@ -197,7 +197,7 @@ export default function Page() {
           setTestQuestion(data.items); // Set testquestion with the API response
           setIsLoading(false);
         } else {
-          console.log("Unexpected data format:", data);
+          // console.log("Unexpected data format:", data);
         }
       })
       .catch((error) => {
@@ -231,8 +231,6 @@ export default function Page() {
 
       if (checkBox === randomMathItems[index].correctedAns) {
         checkScore = true;
-        console.log(true);
-        
       } else {
         checkScore = false;
       }
@@ -258,53 +256,52 @@ export default function Page() {
     // Update the state by appending the new entry to the existing array
     setUserHistory((prevHistory) => [...prevHistory, newHistory]);
 
-    console.log("History added:", newHistory);
-    console.log("Updated user history:", newHistory);
+    // console.log("History added:", newHistory);
+    // console.log("Updated user history:", newHistory);
   };
 
   const historyToString = (): string => {
     return userHistory
       .map((history) => `${history.questionID}:${history.answerChosed}`)
-      .join(', ');
+      .join(", ");
   };
 
   const handlesubmit = () => {
     // Capture history
     addHistory(randomMathItems[index].picquestions.id, checkBox);
     history = historyToString(); // Capture the updated history
-  
+
     // Ensure index is updated properly
     if (index + 1 === randomMathItems.length - 1) {
       setBtn("បញ្ជូន");
     }
-  
+
     if (index === randomMathItems.length - 1) {
       // Temporarily capture the score to ensure the correct value is used
       tempScore = correctedAnswer;
-      
+
       // If the answer is correct, increment the score
       if (checkScore) {
-        setCorrectAnswer(prevState => prevState + 1);
+        setCorrectAnswer((prevState) => prevState + 1);
         tempScore += 1; // Update the temp score here
-        console.log("here1");
+        // console.log("here1");
       } else {
-        console.log("here2");
+        // console.log("here2");
       }
 
       if (window.confirm("Confirm submission")) {
         // Wait for state update to complete
         setTimeout(() => {
           submitForm(); // Submit the form at the end
-          setIsSubmitted(false);    
-          console.log(history + "  "+ lastScore);
-                
+          setIsSubmitted(false);
+          // console.log(history + "  " + lastScore);
         }, 0);
       }
     } else if (checkScore == null) {
       alert("សូមជ្រើសរើសចម្លើយ");
     } else {
       setIndex(index + 1);
-      if (checkScore) setCorrectAnswer(prevState => prevState + 1);
+      if (checkScore) setCorrectAnswer((prevState) => prevState + 1);
     }
   };
 
