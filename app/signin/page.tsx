@@ -34,7 +34,7 @@ let users: Data[] = [];
 const SigninPage = () => {
   const [response, setResponse] = useState(false);
   const [check, setCheck] = useState(false);
-  const [captcha, setCaptcha] = useState<string | null>()
+  const [captcha, setCaptcha] = useState<string | null>("Auto Fill in Captcha");
   const router = useRouter();
 
   useEffect(() => {
@@ -136,7 +136,7 @@ const SigninPage = () => {
                   {BtnInit}
                 </p>
 
-                <ReCAPTCHA className="w-full mb-4 " sitekey="6Ld4AHkqAAAAAHRWk0IBg6lJZwtB-S127yYkWHMa" onChange={setCaptcha} />
+                {/* <ReCAPTCHA className="w-full mb-4 " sitekey="6Ld4AHkqAAAAAHRWk0IBg6lJZwtB-S127yYkWHMa" onChange={setCaptcha} /> */}
                 <button className="shadow-submit w-full py-2 rounded-xl bg-normal-blue text-white" type="submit">
                   ចូលប្រព័ន្ធ
                 </button>

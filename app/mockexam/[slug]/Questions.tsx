@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { SyncLoader } from "react-spinners";
 import { Radio, RadioGroup } from "@nextui-org/react";
-import { ThemeSwitch } from "@/components/theme-switch";
 import { FaCircleChevronLeft } from "react-icons/fa6";
 import RotateToLandscape from "../RotateToLandscape";
 import Result from "./Result";
