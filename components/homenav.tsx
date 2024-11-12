@@ -2,8 +2,6 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
-import { Providers } from "./providers";
-
 import { siteConfig } from "@/config/site";
 import { fontSans, Kantumruy } from "@/config/fonts";
 import SessionWrapper from "@/components/SessionWrapper";
@@ -32,24 +30,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
-      <head />
-      <body
-        className={clsx(
-          `h-screen font-sans antialiased,
+      <html suppressHydrationWarning lang="en">
+        <head />
+        <body
+          className={clsx(
+            `h-screen font-sans antialiased,
             fontSans.variable ${Kantumruy.className}`
-        )}
-      >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className={`relative flex flex-col `}>
-            {/* <Navbar /> */}
-            <div className="bg-background" />
-            <main className="flex-grow bg-red-600">
-              <SessionWrapper>{children}</SessionWrapper>
-            </main>
-          </div>
-        </Providers>
-      </body>
-    </html>
+          )}
+        >
+            <div className={`relative flex flex-col `}>
+              {/* <Navbar /> */}
+              <div className="bg-background-color" />
+              <main className="flex-grow">
+              <SessionWrapper>
+                {children}
+                </SessionWrapper>
+              
+              </main>
+            </div>
+          
+        </body>
+      </html>
   );
 }
+
