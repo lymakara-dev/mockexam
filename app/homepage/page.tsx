@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image"; // Import the Image component
 import logo from "../../public/Auth/GIC_Logo.png";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-
+import Footer from "../footer/page";
 const icons = {
   User: UserCircleIcon,
 };
@@ -28,7 +28,7 @@ const Navbar = () => {
             <ul className=" items-center gap-x-6 text-common-gray px-16  h-12 md:flex hidden">
               <li>
                 <Link href="" >
-                  <button className=" h-full py-6 px-6 focus:border-b-5 focus:border-common-blue focus:text-common-blue ease-in-out duration-300 ">ទំព័រដើម</button>
+                  <button className=" h-full p-y6 px-6 focus:border-b-5 focus:border-common-blue focus:text-common-blue ease-in-out duration-300 ">ទំព័រដើម</button>
                 </Link>
               </li>
               <li>
@@ -50,6 +50,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };
