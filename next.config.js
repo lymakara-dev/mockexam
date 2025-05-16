@@ -1,11 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    eslint:{
-        ignoreDuringBuilds:true,
-    },
-    images: {
-        domains: ['techbox.developimpact.net'], // Add the domain here
-      },
-}
+const createNextIntlPlugin = require("next-intl/plugin");
 
-module.exports = nextConfig
+const withNextIntl = createNextIntlPlugin();
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+module.exports = withNextIntl(nextConfig);
