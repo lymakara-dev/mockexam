@@ -1,6 +1,6 @@
 import LanguageSwitcher from '@/components/NavBar/LanguageSwitch'
 import React from 'react'
-
+export const runtime = 'edge';
 function page() {
   return (
     <div>
