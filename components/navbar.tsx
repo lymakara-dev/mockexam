@@ -52,7 +52,7 @@ export default function NavbarComponent({
   };
 
   const t = { ...translation_text, ...translations };
-  const menuItems = [t.home, t.purpose, t.aboutUs, t.contact];
+  const menuItems = [ t.purpose, t.aboutUs, t.contact];
 
   // Handle menu item click
   const handleMenuClick = (index: number) => {
@@ -82,8 +82,7 @@ export default function NavbarComponent({
   };
 
   return (
-    <div className='flex flex-col'>
-      <Navbar onMenuOpenChange={setIsMenuOpen}>
+      <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-[#F1F5F9]">
         <NavbarContent justify='start'>
           <NavbarMenuToggle
             className={`sm:hidden ${isMenuOpen ? "Close menu" : ""}`} // Rotate icon when open
@@ -93,8 +92,10 @@ export default function NavbarComponent({
             <img
               src='/navbar_images/MES_LOGO_WEB.png'
               alt=''
-              width={111}
-              height={36}
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-24 h-auto md:w-32"
             />
           </NavbarBrand>
         </NavbarContent>
@@ -107,8 +108,8 @@ export default function NavbarComponent({
                 className={`h-[40px] w-auto min-w-[92px] rounded-[100px] items-center justify-center 
                   ${
                     activeIndex === index
-                      ? "bg-blue-600 text-white"
-                      : " text-gray-800 hover:bg-blue-600 hover:text-white"
+                      ? "bg-primary text-white"
+                      : " text-gray-800 hover:bg-primary hover:text-white"
                   } 
                   transition-colors`}
                 href='#'
@@ -177,7 +178,7 @@ export default function NavbarComponent({
         </NavbarMenu>
 
         {/* Login / Sign Up Dialog */}
-        {isDialogOpen && (
+        {/* {isDialogOpen && (
           <div className='dialog'>
             <h2>{t.enterPassword}</h2>
             <form onSubmit={handleSubmit}>
@@ -194,16 +195,16 @@ export default function NavbarComponent({
             </form>
             <button onClick={() => setIsDialogOpen(false)}>{t.close}</button>
           </div>
-        )}
+        )} */}
 
         {/* Success Dialog */}
-        {isSuccessDialogOpen && (
+        {/* {isSuccessDialogOpen && (
           <div className='dialog'>
             <h2>{t.success}</h2>
             <p>{t.passwordCorrect}</p>
             <button onClick={closeSuccessDialog}>{t.close}</button>
           </div>
-        )}
+        )} */}
         <style jsx>{`
           .dialog {
             position: fixed;
@@ -240,31 +241,5 @@ export default function NavbarComponent({
           }
         `}</style>
       </Navbar>
-
-      {/* <div>
-        <div className="px-[5%] sm:px-[8%] lg:px-[100px] py-[32px] h-auto w-full flex flex-col lg:flex-row md:justify-center justify-evenly items-center">
-          <div className="flex flex-col text-center lg:text-left w-full lg:w-auto">
-            <div className="head-topic text-[36px] sm:text-[42px] lg:text-[48px] font-semibold leading-[45px] sm:leading-[50px] lg:leading-[57px] max-w-[385px] sm:max-w-[450px] text-[#06598F]">
-              សាកល្បងប្រលងចូលតិចណូ​និងរៀនត្រៀមដោយសេរី...!
-            </div>
-            <div className="body-topic w-full sm:w-[470px] text-[14px] sm:text-[18px] font-medium leading-[24px] sm:leading-[29px]">
-              ប្រព័ន្ធប្រលងសាកល្បង​​
-              ជាគេហទំព័រជំនួយដល់សិស្សានុសិស្ស​ដែលមានបំណងត្រៀមប្រលងចូលវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា។
-            </div>
-            <button className="start-btn w-full sm:w-auto max-w-[157px] h-[40px] rounded-2xl bg-[#06598F] gap-[8px] text-white mt-[16px] sm:mt-[24px]">
-              សាកល្បងឥឡូវនេះ
-            </button>
-          </div>
-
-          <div className="mt-[32px] sm:mt-0 w-full lg:w-auto">
-            <img
-              src="/navbar_images/Frame 638.png"
-              alt=""
-              className="w-full sm:w-[500px] lg:w-[800px] xl:w-[900px] h-auto max-w-full"
-            />
-          </div>
-        </div>
-      </div> */}
-    </div>
   );
 }

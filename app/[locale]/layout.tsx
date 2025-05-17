@@ -31,15 +31,12 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <div>
-            <div
-              className={`${khmerSuwan.className} flex flex-col min-h-screen`}
-            >
-              <NavbarComponent locale={locale} translations={messages} />
-              <HeroSection locale={locale} />
-              <main className='flex-grow'>{children}</main>
-              <Footer />
-            </div>
+          <div
+            className={`${khmerSuwan.className} flex flex-col min-h-screen bg-[#F1F5F9]`}
+          >
+            <NavbarComponent locale={locale} translations={messages} />
+            <main className='flex-grow md:mx-16 mx-2'>{children}</main>
+            <Footer />
           </div>
         </NextIntlClientProvider>
       </body>
