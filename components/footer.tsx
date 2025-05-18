@@ -32,13 +32,13 @@ const Footer = async () => {
                 />
               </div>
               <p className='text-[#1F3B5F] mb-6 md:mb-16'>
-                {t("descriptive1")}
+                បង្កើតដោយសិស្សនៃវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា
                 <br />
-                {t("descriptive2")}
+                ជួយប្អូនៗសិស្សទី១២
                 <br />
-                {t("descriptive3")}
+                ដើម្បីប្រលងចូលតាម
                 <br />
-                {t("descriptive4")}
+                សកលវិទ្យាល័យ
               </p>
               <p className='text-[#1F3B5F] mb-3'>{t("Contect")}</p>
               <div className='flex flex-wrap gap-4'>

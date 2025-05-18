@@ -7,8 +7,9 @@ import {
   FaInstagram,
   FaTiktok,
 } from "react-icons/fa";
+import { LampDemo } from "./Aceternity/lamp";
+import { GlowingEffectDemo } from "./Aceternity/glowcard";
 
-// Types for testimonial data
 interface TestimonialProps {
   name: string;
   text: string;
@@ -29,7 +30,7 @@ const GoalCard: React.FC = () => {
           និងអាចប្រើប្រាស់បានគ្រប់ទីកន្លែងគ្រាន់តែមានអ៊ីនធឺណិត។
         </p>
       </div>
-      <div className=''>
+      <div className='hidden md:block'>
         <Image
           src='/hero_images/logo-mobile.png' // Replace with the correct path to your logo
           alt='Logo icon'
@@ -109,17 +110,35 @@ const TestimonialsSection: React.FC = () => {
   ];
 
   return (
-    <div className='w-full bg-white p-6 rounded-3xl shadow mb-6'>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-        {testimonials.map((testimonial, index) => (
+    <div className='w-full bg-white  rounded-3xl shadow mb-6 p-12'>
+        {/* {testimonials.map((testimonial, index) => (
           <TestimonialCard
             key={index}
             name={testimonial.name}
             text={testimonial.text}
             imageSrc={testimonial.imageSrc}
           />
-        ))}
-      </div>
+        ))} */}
+        <LampDemo/>
+        <GlowingEffectDemo/>
+        {/* <div className="bg-gray-50 p-6 rounded-3xl shadow flex items-center">
+          <div className="flex-1">
+            <div className="flex items-center mb-4">
+              <span className="text-4xl text-blue-700 mr-2">“</span>
+              <p className="text-gray-600">មុខវិជ្ជាត្រៀមប្រលង</p>
+            </div>
+            <h3 className="text-xl font-bold text-gray-700">s</h3>
+          </div>
+          <div className="ml-6">
+            <Image
+              src={'/testimonial_images/math.png'}
+              alt={'name'}
+              width={60}
+              height={60}
+              className="aspect-square object-cover"
+            />
+          </div>
+        </div> */}
     </div>
   );
 };
@@ -129,7 +148,7 @@ const SpecialitySection: React.FC = () => {
     <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-6 mb-6'>
       {/* Left Column */}
       <div className='bg-white p-8 px-12 rounded-3xl relative overflow-hidden'>
-        <div className="flex items-end gap-8 mb-6">
+        <div className="flex items-end gap-4 md:gap-8 mb-6">
           <h2 className='text-4xl font-bold text-primary'>លក្ខណៈពិសេស</h2>
           <Image
             src='/hero_images/LightBulb.png'
@@ -154,7 +173,7 @@ const SpecialitySection: React.FC = () => {
           width={500}
           height={300}
           alt='Tablet view of application'
-          className="absolute right-20 opacity-10 -bottom-10 z-10"
+          className="absolute right-[10px] -bottom-[60px] md:right-20 opacity-10 md:-bottom-10 z-10"
         />
 
       </div>
@@ -201,7 +220,6 @@ const KhmerWebsitePage: React.FC = () => {
       <GoalCard />
       <SpecialitySection />
       <TestimonialsSection />
-      {/* <AboutUsSection /> */}
     </>
   );
 };

@@ -32,153 +32,126 @@ export default function NavbarComponent({
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false); // Track success dialog visibility
   const predefinedPassword = "123456"; // Predefined password
 
-  const translation_text = {
-    home: "Home",
-    purpose: "Purpose",
-    aboutUs: "About Us",
-    contact: "Contact",
-    login: "Login",
-    signUp: "Sign Up",
-    enterPassword: "Enter Password",
-    password: "Password",
-    submit: "Submit",
-    close: "Close",
-    success: "Success",
-    passwordCorrect: "Password is correct",
-    incorrectPassword: "Incorrect password",
-    mainHeading: "Try the Mock Tests now!",
-    subHeading: "Sub Heading",
-    startNow: "Start Now",
-  };
 
-  const t = { ...translation_text, ...translations };
-  const menuItems = [ t.purpose, t.aboutUs, t.contact];
+  const menuItems = [
+    {
+      id: 1,
+      title: "Purpose",
+      href: "/",
+    },
+    {
+      id: 2,
+      title: "Who are we?",
+      href: "/about",
+    },
+    {
+      id: 3,
+      title: "Contact Us",
+      href: "/contact",
+    },
+  ]
 
   // Handle menu item click
   const handleMenuClick = (index: number) => {
     setActiveIndex(index); // Set the active index
   };
 
-  // Handle password input change
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === predefinedPassword) {
-      setIsDialogOpen(false); // Close the dialog
-      setIsSuccessDialogOpen(true); // Open success dialog
-      setIsLoggedIn(true); // Set login status to true
-    } else {
-      alert(t.incorrectPassword);
-    }
-  };
-
-  // Close the success dialog
-  const closeSuccessDialog = () => {
-    setIsSuccessDialogOpen(false); // Close success dialog
-  };
-
   return (
-      <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-[#F1F5F9]">
-        <NavbarContent justify='start'>
-          <NavbarMenuToggle
-            className={`sm:hidden ${isMenuOpen ? "Close menu" : ""}`} // Rotate icon when open
-            onClick={() => setIsMenuOpen((prev) => !prev)} // Toggle the menu onClick
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-[#F1F5F9]">
+      <NavbarContent justify='start'>
+        <NavbarMenuToggle
+          className={`sm:hidden ${isMenuOpen ? "Close menu" : ""}`} // Rotate icon when open
+          onClick={() => setIsMenuOpen((prev) => !prev)} // Toggle the menu onClick
+        />
+        <NavbarBrand>
+          <img
+            src='/navbar_images/MES_LOGO_WEB.png'
+            alt=''
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-24 h-auto md:w-32"
           />
-          <NavbarBrand>
-            <img
-              src='/navbar_images/MES_LOGO_WEB.png'
-              alt=''
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="w-24 h-auto md:w-32"
-            />
-          </NavbarBrand>
-        </NavbarContent>
+        </NavbarBrand>
+      </NavbarContent>
 
-        <NavbarContent className='hidden sm:flex gap-8' justify='center'>
-          {menuItems.map((item, index) => (
-            <NavbarItem key={item} isActive={activeIndex === index}>
-              <Link
-                aria-current={activeIndex === index ? "page" : undefined}
-                className={`h-[40px] w-auto min-w-[92px] rounded-[100px] items-center justify-center 
-                  ${
-                    activeIndex === index
-                      ? "bg-primary text-white"
-                      : " text-gray-800 hover:bg-primary hover:text-white"
-                  } 
+      <NavbarContent className='hidden sm:flex gap-8' justify='center'>
+        {menuItems.map((item, index) => (
+          <NavbarItem key={item.id} isActive={activeIndex === index}>
+            <Link
+              aria-current={activeIndex === index ? "page" : undefined}
+              className={`h-[40px] px-4 w-auto min-w-[92px] rounded-[100px] items-center justify-center 
+                  ${activeIndex === index
+                  ? "bg-primary text-white"
+                  : " text-gray-800 hover:bg-primary hover:text-white"
+                } 
                   transition-colors`}
-                href='#'
-                onPress={() => handleMenuClick(index)}
-              >
-                {item}
+              href={item.href}
+              onPress={() => handleMenuClick(index)}
+            >
+              {item.title}
+            </Link>
+          </NavbarItem>
+        ))}
+      </NavbarContent>
+
+      <NavbarContent justify='end'>
+        <NavbarItem>
+          <LanguageSwitcher />
+          {/* <ThemeSwitch/> */}
+        </NavbarItem>
+        {/* {!isLoggedIn ? (
+          <>
+            <NavbarItem className='hidden lg:flex'>
+              <Link href='#' onPress={() => setIsDialogOpen(true)}>
+                {t.login}
               </Link>
             </NavbarItem>
-          ))}
-        </NavbarContent>
-
-        <NavbarContent justify='end'>
-          <NavbarItem>
-            <LanguageSwitcher />
-            {/* <ThemeSwitch/> */}
-          </NavbarItem>
-          {!isLoggedIn ? (
-            <>
-              <NavbarItem className='hidden lg:flex'>
-                <Link href='#' onPress={() => setIsDialogOpen(true)}>
-                  {t.login}
-                </Link>
-              </NavbarItem>
-              <NavbarItem>
-                <Button
-                  as={Link}
-                  color='primary'
-                  href='#'
-                  variant='flat'
-                  onPress={() => setIsDialogOpen(true)}
-                >
-                  {t.signUp}
-                </Button>
-              </NavbarItem>
-            </>
-          ) : (
-            <>
-              <NavbarItem>
-                <ThemeSwitch />
-              </NavbarItem>
-              <NavbarItem>
-                <BellIcon className='text-default-500 cursor-pointer' />
-              </NavbarItem>
-              <NavbarItem>
-                <ProfileIcon className='text-default-500 cursor-pointer' />
-              </NavbarItem>
-            </>
-          )}
-        </NavbarContent>
-
-        <NavbarMenu className={isMenuOpen ? "block" : "hidden"}>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                className={`w-full ${
-                  activeIndex === index ? "text-blue-600" : "text-gray-800"
-                } transition-colors`}
+            <NavbarItem>
+              <Button
+                as={Link}
+                color='primary'
                 href='#'
-                size='lg'
-                onPress={() => handleMenuClick(index)}
+                variant='flat'
+                onPress={() => setIsDialogOpen(true)}
               >
-                {item}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+                {t.signUp}
+              </Button>
+            </NavbarItem>
+          </>
+        ) : (
+          <>
+            <NavbarItem>
+              <ThemeSwitch />
+            </NavbarItem>
+            <NavbarItem>
+              <BellIcon className='text-default-500 cursor-pointer' />
+            </NavbarItem>
+            <NavbarItem>
+              <ProfileIcon className='text-default-500 cursor-pointer' />
+            </NavbarItem>
+          </>
+        )} */}
+      </NavbarContent>
 
-        {/* Login / Sign Up Dialog */}
-        {/* {isDialogOpen && (
+      <NavbarMenu className={isMenuOpen ? "block" : "hidden"}>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              className={`w-full ${activeIndex === index ? "text-blue-600" : "text-gray-800"
+                } transition-colors`}
+              href={item.href}
+              size='lg'
+              onPress={() => handleMenuClick(index)}
+            >
+              {item.title}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+
+      {/* Login / Sign Up Dialog */}
+      {/* {isDialogOpen && (
           <div className='dialog'>
             <h2>{t.enterPassword}</h2>
             <form onSubmit={handleSubmit}>
@@ -197,15 +170,15 @@ export default function NavbarComponent({
           </div>
         )} */}
 
-        {/* Success Dialog */}
-        {/* {isSuccessDialogOpen && (
+      {/* Success Dialog */}
+      {/* {isSuccessDialogOpen && (
           <div className='dialog'>
             <h2>{t.success}</h2>
             <p>{t.passwordCorrect}</p>
             <button onClick={closeSuccessDialog}>{t.close}</button>
           </div>
         )} */}
-        <style jsx>{`
+      <style jsx>{`
           .dialog {
             position: fixed;
             top: 50%;
@@ -240,6 +213,6 @@ export default function NavbarComponent({
             margin-bottom: 10px;
           }
         `}</style>
-      </Navbar>
+    </Navbar>
   );
 }
