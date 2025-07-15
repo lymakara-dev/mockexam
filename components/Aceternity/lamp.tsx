@@ -5,21 +5,9 @@ import { cn } from "@/lib/utils";
 
 export function LampDemo() {
   return (
-    <LampContainer>
-      <motion.h1
-        initial={{ opacity: 0.5, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className=" bg-gradient-to-br from-slate-300 to-slate-500 text-black py-4 bg-clip-text text-center text-xl font-medium tracking-tight text-transparent md:text-xl"
-      >
-        <span className="text-4xl font-semibold tracking-widest text-green-500">រៀនត្រៀម</span><br />
-        ប្រលងចូលសកលវិទ្យាល័យ
-      </motion.h1>
-    </LampContainer>
+    <div>
+      
+    </div>
   );
 }
 

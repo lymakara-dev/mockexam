@@ -18,25 +18,25 @@ interface TestimonialProps {
 
 const GoalCard: React.FC = () => {
   return (
-    <div className='bg-white shadow-xl p-12 rounded-3xl flex items-center mb-6 z-20'>
+    <div className='bg-white px-12 pt-12 pb-32 rounded-2xl flex items-center mb-6 z-20 mx-40'>
       <div className='flex-1'>
-        <h2 className='text-4xl font-bold text-primary mb-4'>អ្វីទៅជាប្រព័ន្ធ​ MES?</h2>
+        <h2 className='text-5xl font-semibold pb-5 text-primary mb-4'>អ្វីទៅជាប្រព័ន្ធ​ MES?</h2>
         <p className='text-gray-700 mb-2'>
-          <span className="font-bold text-primary">Mock Exam System</span> គឺជាប្រព័ន្ធប្រឡងសាកល្បងដោយឥតគិតថ្លៃ
+          <span className=" font-medium">Mock Exam System</span> គឺជាប្រព័ន្ធប្រឡងសាកល្បងដោយឥតគិតថ្លៃ
           ក្នុងន័យជួយដល់ប្អូនៗមានបំណងប្រលងចូលសាកលវិទ្យាល័យផ្សេងៗក្នុងរាជធានីភ្នំពេញ។
         </p>
         <p className='text-gray-700'>
-          <span className="text-primary font-bold">MES</span> ជាបណ្តុំផ្ទុកឯកសារប្រលងចាស់ៗ និងអត្រាកំណែហើយប្អួនៗអាចសាកល្បងបានដោយឥតគិតថ្លៃ
+          <span className=" font-medium">MES</span> ជាបណ្តុំផ្ទុកឯកសារប្រលងចាស់ៗ និងអត្រាកំណែហើយប្អួនៗអាចសាកល្បងបានដោយឥតគិតថ្លៃ
           និងអាចប្រើប្រាស់បានគ្រប់ទីកន្លែងគ្រាន់តែមានអ៊ីនធឺណិត។
         </p>
       </div>
-      <div className='hidden md:block'>
+      <div className='hidden md:block h-full ml-8'>
         <Image
           src='/hero_images/logo-mobile.png' // Replace with the correct path to your logo
           alt='Logo icon'
-          width={130}
-          height={130}
-          className="mx-12 rotate-12"
+          width={160}
+          height={160}
+          className="mx-14 rotate-12"
         />
       </div>
     </div>
@@ -64,7 +64,7 @@ const TestimonialCard: React.FC<TestimonialProps> = ({
   imageSrc,
 }) => {
   return (
-    <div className="bg-gray-50 p-6 rounded-3xl shadow flex items-center">
+    <div className="bg-gray-50 p-6 rounded-2xl flex items-center">
       <div className="flex-1">
         <div className="flex items-center mb-4">
           <span className="text-4xl text-blue-700 mr-2">“</span>
@@ -76,8 +76,8 @@ const TestimonialCard: React.FC<TestimonialProps> = ({
         <Image
           src={imageSrc}
           alt={name}
-          width={60}
-          height={60}
+          width={100}
+          height={100}
           className="rounded-full object-cover"
         />
       </div>
@@ -110,86 +110,71 @@ const TestimonialsSection: React.FC = () => {
   ];
 
   return (
-    <div className='w-full bg-white  rounded-3xl shadow mb-6 p-12'>
+    <div className=' bg-white mx-40 rounded-2xl  p-12 my-6'>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* {testimonials.map((testimonial, index) => (
-          <TestimonialCard
-            key={index}
-            name={testimonial.name}
-            text={testimonial.text}
-            imageSrc={testimonial.imageSrc}
-          />
+        <TestimonialCard
+          key={index}
+          name={testimonial.name}
+          text={testimonial.text}
+          imageSrc={testimonial.imageSrc}
+        />
         ))} */}
-        <LampDemo/>
-        <GlowingEffectDemo/>
-        {/* <div className="bg-gray-50 p-6 rounded-3xl shadow flex items-center">
-          <div className="flex-1">
-            <div className="flex items-center mb-4">
-              <span className="text-4xl text-blue-700 mr-2">“</span>
-              <p className="text-gray-600">មុខវិជ្ជាត្រៀមប្រលង</p>
-            </div>
-            <h3 className="text-xl font-bold text-gray-700">s</h3>
-          </div>
-          <div className="ml-6">
-            <Image
-              src={'/testimonial_images/math.png'}
-              alt={'name'}
-              width={60}
-              height={60}
-              className="aspect-square object-cover"
-            />
-          </div>
-        </div> */}
+      </div>
+      <LampDemo/>
+      <GlowingEffectDemo/>
+
     </div>
   );
 };
 
 const SpecialitySection: React.FC = () => {
   return (
-    <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-6 mb-6'>
+    <div className=' grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 mx-40'>
       {/* Left Column */}
-      <div className='bg-white p-8 px-12 rounded-3xl relative overflow-hidden'>
+      <div className='bg-white p-8 px-12 rounded-2xl relative overflow-hidden'>
         <div className="flex items-end gap-4 md:gap-8 mb-6">
-          <h2 className='text-4xl font-bold text-primary'>លក្ខណៈពិសេស</h2>
-          <Image
+          <h2 className='text-5xl pb-6 font-semibold text-primary'>លក្ខណៈពិសេស</h2>
+          {/* <Image
             src='/hero_images/LightBulb.png'
             alt='Light bulb icon'
             width={80}
             height={80}
-          />
+          /> */}
         </div>
         <ul className='text-gray-700 mb-2 list-disc list-inside'>
           <li>
-            ប្រើប្រាស់ដោយ <span className="text-green-600 font-bold text-2xl">ឥតគិតថ្លៃ</span> និងអាចប្រើប្រាស់បានគ្រប់ទីកន្លែង។
+            ប្រើប្រាស់ដោយ <span className="font-medium">ឥតគិតថ្លៃ</span> និងអាចប្រើប្រាស់បានគ្រប់ទីកន្លែង។
           </li>
           <li>
-            គន្លឹះក្នុងការធ្វើលំហាត់ និង<span className="text-green-600 font-bold text-2xl"> កម្មវិធីជំនួយ </span>ដើម្បីស្រាវជ្រាវ។
+            គន្លឹះក្នុងការធ្វើលំហាត់ និង<span className="font-medium"> កម្មវិធីជំនួយ </span>ដើម្បីស្រាវជ្រាវ។
           </li>
           <li>
-            ការរួមបញ្ចូល <span className="text-green-600 font-bold text-2xl">បញ្ញាសម្បនិម្មិត</span> ក្នុងការដោះស្រាយលំហាត់។
+            ការរួមបញ្ចូល <span className="font-medium">បញ្ញាសម្បនិម្មិត</span> ក្នុងការដោះស្រាយលំហាត់។
           </li>
         </ul>
-        <Image
+        {/* <Image
           src='/hero_images/LongMode.png'
           width={500}
           height={300}
           alt='Tablet view of application'
           className="absolute right-[10px] -bottom-[60px] md:right-20 opacity-10 md:-bottom-10 z-10"
-        />
+        /> */}
 
       </div>
 
       {/* Right Column */}
-      <div className='bg-white p-6 rounded-3xl shadow'>
-        <h2 className='text-xl font-bold text-blue-700 mb-4'>របៀបប្រើប្រាស់</h2>
-        <div className='bg-gray-100 rounded-3xl p-4 mb-4 flex items-center justify-center h-48'>
+      <div className='bg-white p-8 rounded-2xl w-full '>
+        <h2 className='text-5xl font-semibold text-primary mb-4 pb-6'>របៀបប្រើប្រាស់</h2>
+        <div className='bg-gray-100 rounded-2xl p-4 mb-4 flex items-center justify-center h-80'>
           <div className='rounded-full bg-gray-300 p-4'>
             <div className='h-8 w-8 flex items-center justify-center'>
               <span className='text-gray-500'>▶</span>
             </div>
           </div>
         </div>
-        <div className='mt-6'>
-          <p className='text-gray-700 mb-2'>ពួកយើងតាមរយៈ :</p>
+        <div className='mt-6 flex justify-between items-center p-4 '>
+          <p className='text-gray-700 mb-2'>ឬចូលមើលតាមរយះ :</p>
           <div className='flex space-x-4'>
             <a href='#' className='text-2xl text-blue-600'>
               <FaFacebook />

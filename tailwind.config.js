@@ -10,8 +10,9 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)"],
+        sans: ["var(--font-kantumruy-pro)", "var(--font-sans)"],
         mono: ["var(--font-mono)"],
+        kantumruy: ["var(--font-kantumruy-pro)"],
       },
       colors: {
         primary: {

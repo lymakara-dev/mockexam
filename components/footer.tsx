@@ -5,8 +5,8 @@ import { getTranslations } from "next-intl/server";
 const Footer = async () => {
   const t = await getTranslations("Footer");
   return (
-    <footer className='w-full mt-auto flex-shrink-0'>
-      <div className='bg-white rounded-t-2xl shadow-md mx-auto overflow-hidden relative px-4 sm:px-8'>
+    <footer className='mx-40'>
+      <div className='bg-white rounded-t-2xl overflow-hidden relative sm:px-8 py-24'>
         {/* Background Image */}
         <div className='absolute inset-0 w-full h-full z-0'>
           <Image
@@ -27,37 +27,35 @@ const Footer = async () => {
                 <Image
                   src={"/footer_images/mock-exam-logo.png"}
                   alt='Mock Exam Logo'
-                  width={166}
-                  height={54}
+                  width={155}
+                  height={45}
                 />
               </div>
-              <p className='text-[#1F3B5F] mb-6 md:mb-16'>
-                បង្កើតដោយសិស្សនៃវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា
-                <br />
-                ជួយប្អូនៗសិស្សទី១២
-                <br />
-                ដើម្បីប្រលងចូលតាម
-                <br />
-                សកលវិទ្យាល័យ
+              <p className='text-[#1F3B5F] mb-6 md:mb-16 w-80'>
+                បង្កើតដោយសិស្សនៃវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជាជួយប្អូនៗសិស្សទី១២ដើម្បីប្រលងចូលតាមដើម្បីប្រលងចូលតាម
               </p>
-              <p className='text-[#1F3B5F] mb-3'>{t("Contect")}</p>
-              <div className='flex flex-wrap gap-4'>
-                {[
-                  { name: "facebook", url: "https://facebook.com" },
-                  { name: "telegram", url: "https://t.me" },
-                  { name: "youtube", url: "https://youtube.com" },
-                  { name: "instagram", url: "https://instagram.com" },
-                  { name: "tik-tok", url: "https://tiktok.com" },
-                ].map((platform) => (
-                  <Link key={platform.name} href={platform.url} target='_blank'>
-                    <Image
-                      src={`/footer_images/${platform.name}.png`}
-                      alt={platform.name}
-                      width={30}
-                      height={30}
-                    />
-                  </Link>
-                ))}
+
+              <div className="flex flex-col items-start ">
+                <p className='text-[#1F3B5F] mb-6 md:mb-6 w-80 text-xl'>
+                  ទំនាក់ទំនងមកកាន់យើង               </p>
+                <div className='flex flex-wrap gap-4'>
+                  {[
+                    { name: "facebook", url: "https://facebook.com" },
+                    { name: "telegram", url: "https://t.me" },
+                    { name: "youtube", url: "https://youtube.com" },
+                    { name: "instagram", url: "https://instagram.com" },
+                    { name: "tik-tok", url: "https://tiktok.com" },
+                  ].map((platform) => (
+                    <Link key={platform.name} href={platform.url} target='_blank'>
+                      <Image
+                        src={`/footer_images/${platform.name}.png`}
+                        alt={platform.name}
+                        width={30}
+                        height={30}
+                      />
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 

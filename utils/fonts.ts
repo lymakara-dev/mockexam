@@ -1,4 +1,4 @@
-import { Suwannaphum } from "next/font/google";
+import { Kantumruy_Pro } from "next/font/google";
 
 export const fontMapping: { [key: string]: string } = {
   en: 'EnglishFont',
@@ -10,7 +10,9 @@ export const fontUrls: { [key: string]: string } = {
   KhmerFont: '/fonts/khmer/khmer.woff2',
 };
 
-export const khmerSuwan = Suwannaphum({
-  subsets:['khmer'],
-  weight: ['400']
+export const kantumruyPro = Kantumruy_Pro({
+  subsets: ['khmer', 'latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-kantumruy-pro',
 });
