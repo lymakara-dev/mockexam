@@ -32,7 +32,6 @@ export default function NavbarComponent({
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false); // Track success dialog visibility
   const predefinedPassword = "123456"; // Predefined password
 
-
   const menuItems = [
     {
       id: 1,
@@ -42,14 +41,14 @@ export default function NavbarComponent({
     {
       id: 2,
       title: "Who are we?",
-      href: "/about",
+      href: "/en/about",
     },
     {
       id: 3,
       title: "Contact Us",
-      href: "/contact",
+      href: "/en/contact",
     },
-  ]
+  ];
 
   // Handle menu item click
   const handleMenuClick = (index: number) => {
@@ -58,15 +57,15 @@ export default function NavbarComponent({
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-[#F1F5F9]">
-      <NavbarContent justify='start'>
+      <NavbarContent justify="start">
         <NavbarMenuToggle
           className={`sm:hidden ${isMenuOpen ? "Close menu" : ""}`} // Rotate icon when open
           onClick={() => setIsMenuOpen((prev) => !prev)} // Toggle the menu onClick
         />
         <NavbarBrand>
           <img
-            src='/navbar_images/MES_LOGO_WEB.png'
-            alt=''
+            src="/navbar_images/MES_LOGO_WEB.png"
+            alt=""
             width={0}
             height={0}
             sizes="100vw"
@@ -75,16 +74,17 @@ export default function NavbarComponent({
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className='hidden sm:flex gap-8' justify='center'>
+      <NavbarContent className="hidden sm:flex gap-8" justify="center">
         {menuItems.map((item, index) => (
           <NavbarItem key={item.id} isActive={activeIndex === index}>
             <Link
               aria-current={activeIndex === index ? "page" : undefined}
               className={`h-[40px] px-4 w-auto min-w-[92px] rounded-[100px] items-center justify-center 
-                  ${activeIndex === index
-                  ? "bg-primary text-white"
-                  : " text-gray-800 hover:bg-primary hover:text-white"
-                } 
+                  ${
+                    activeIndex === index
+                      ? "bg-primary text-white"
+                      : " text-gray-800 hover:bg-primary hover:text-white"
+                  } 
                   transition-colors`}
               href={item.href}
               onPress={() => handleMenuClick(index)}
@@ -95,10 +95,10 @@ export default function NavbarComponent({
         ))}
       </NavbarContent>
 
-      <NavbarContent justify='end'>
+      <NavbarContent justify="end">
         <NavbarItem>
           <LanguageSwitcher />
-          {/* <ThemeSwitch/> */}
+          {/* <ThemeSwitch /> */}
         </NavbarItem>
         {/* {!isLoggedIn ? (
           <>
@@ -138,10 +138,11 @@ export default function NavbarComponent({
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
-              className={`w-full ${activeIndex === index ? "text-blue-600" : "text-gray-800"
-                } transition-colors`}
+              className={`w-full ${
+                activeIndex === index ? "text-blue-600" : "text-gray-800"
+              } transition-colors`}
               href={item.href}
-              size='lg'
+              size="lg"
               onPress={() => handleMenuClick(index)}
             >
               {item.title}
@@ -179,40 +180,40 @@ export default function NavbarComponent({
           </div>
         )} */}
       <style jsx>{`
-          .dialog {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-          }
-          button {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-          }
-          button:hover {
-            background-color: #0056b3;
-          }
-          input {
-            margin-top: 10px;
-            padding: 8px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-          }
-          h2 {
-            margin-bottom: 10px;
-          }
-        `}</style>
+        .dialog {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          padding: 20px;
+          background-color: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          z-index: 999;
+        }
+        button {
+          margin-top: 10px;
+          padding: 10px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #0056b3;
+        }
+        input {
+          margin-top: 10px;
+          padding: 8px;
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        h2 {
+          margin-bottom: 10px;
+        }
+      `}</style>
     </Navbar>
   );
 }

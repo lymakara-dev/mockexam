@@ -18,7 +18,8 @@ const config = {
           DEFAULT: "#06598F",
           // foreground: "var(--color-primary-foreground)",
         },
-      }
+        background: "#F1F5F9",
+      },
     },
   },
   darkMode: "class",
