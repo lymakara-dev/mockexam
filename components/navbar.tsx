@@ -59,20 +59,22 @@ export default function NavbarComponent({
   };
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="bg-[#F1F5F9]">
-      <NavbarContent justify="start">
-        <NavbarMenuToggle
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      className="h-20 md:px-[100px] py-8 flex justify-evenly items-center"
+    >
+
+      {/* Brand & Mobile Toggle */}
+      <NavbarContent justify="start" className="gap-2">
+        {/* <NavbarMenuToggle
           aria-label="Toggle navigation"
           className={`sm:hidden transition-transform duration-300  ${isMenuOpen ? "rotate-90" : ""}`}
-        />
+        /> */}
         <NavbarBrand className="flex items-center gap-2 ">
           <img
             src="/navbar_images/MES_LOGO_WEB.png"
-            alt=""
-            width={0}
-            height={0}
-            sizes="100vw"
-            className="w-24 h-auto md:w-32"
+            alt="MES Logo"
+            className="h-8 w-auto md:h-12"
           />
         </NavbarBrand>
       </NavbarContent>
@@ -103,6 +105,10 @@ export default function NavbarComponent({
           <LanguageSwitcher />
           {/* <ThemeSwitch /> */}
         </NavbarItem>
+        <NavbarMenuToggle
+          aria-label="Toggle navigation"
+          className={`sm:hidden transition-transform duration-300  ${isMenuOpen ? "rotate-90" : ""}`}
+        />
         <NavbarItem className="hidden sm:flex">
           <ThemeSwitch />
         </NavbarItem>
