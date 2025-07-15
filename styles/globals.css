@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-kantumruy-pro), system-ui, sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-kantumruy-pro), system-ui, sans-serif;
+  }
+}
