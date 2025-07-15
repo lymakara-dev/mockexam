@@ -89,7 +89,7 @@ export default function NavbarComponent({
                     activeIndex === index
                       ? "bg-primary text-white"
                       : " text-gray-800 hover:bg-primary hover:text-white"
-                  } 
+                  }
                   transition-colors`}
               href={item.href}
               onPress={() => handleMenuClick(index)}
@@ -102,7 +102,9 @@ export default function NavbarComponent({
 
       <NavbarContent justify="end">
         <NavbarItem>
+          <div className="flex max-md:hidden">
           <LanguageSwitcher />
+          </div>
           {/* <ThemeSwitch /> */}
         </NavbarItem>
         <NavbarMenuToggle

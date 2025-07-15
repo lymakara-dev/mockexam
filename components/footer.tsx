@@ -5,8 +5,8 @@ import { getTranslations } from "next-intl/server";
 const Footer = async () => {
   const t = await getTranslations("Footer");
   return (
-    <footer className='md:mx-40 mx-6 '>
-      <div className='bg-white rounded-t-2xl overflow-hidden relative sm:px-8 py-24'>
+    <footer className='md:mx-40 mx-4 '>
+      <div className='bg-white rounded-t-2xl overflow-hidden relative sm:px-8 md:py-24'>
         {/* Background Image */}
         <div className='absolute inset-0 w-full h-full z-0'>
           <Image
@@ -19,11 +19,12 @@ const Footer = async () => {
         </div>
 
         {/* Content */}
-        <div className='relative z-10 py-8 md:py-12'>
+        <div className='relative z-10 py-6 md:py-12'>
           <div className='flex flex-wrap md:flex-nowrap justify-between gap-8'>
             {/* Left Column */}
             <div className='w-full md:w-1/3'>
-              <div className='mb-6'>
+              {/* for large screens */}
+              <div className='mb-6 flex items-center justify-center md:justify-start max-md:hidden'>
                 <Image
                   src={"/footer_images/mock-exam-logo.png"}
                   alt='Mock Exam Logo'
@@ -31,13 +32,23 @@ const Footer = async () => {
                   height={45}
                 />
               </div>
-              <p className='text-[#1F3B5F] mb-6 md:mb-16 w-80'>
+              {/* for small screens */}
+              <div className='mb-6 max-md:flex items-center justify-center md:justify-start md:hidden'>
+                <Image
+                  src={"/footer_images/mock-exam-logo.png"}
+                  alt='Mock Exam Logo'
+                  width={115}
+                  height={30}
+                />
+              </div>
+              <p className='text-[#1F3B5F] mb-6 md:mb-16 md:w-80 max-md:tex-base max-md:text-center w-full'>
                 បង្កើតដោយសិស្សនៃវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជាជួយប្អូនៗសិស្សទី១២ដើម្បីប្រលងចូលតាមដើម្បីប្រលងចូលតាម
               </p>
 
-              <div className="flex flex-col items-start ">
-                <p className='text-[#1F3B5F] mb-6 md:mb-6 w-80 text-xl'>
-                  ទំនាក់ទំនងមកកាន់យើង               </p>
+              <div className="flex flex-col items-start max-md:items-center">
+                <p className='text-[#1F3B5F] mb-6 md:mb-6 md:w-80 text-xl max-md:tex-base w-full max-md:text-center'>
+                  ទំនាក់ទំនងមកកាន់យើង
+                </p>
                 <div className='flex flex-wrap gap-4'>
                   {[
                     { name: "facebook", url: "https://facebook.com" },
