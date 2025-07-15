@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 const Footer = async () => {
   const t = await getTranslations("Footer");
   return (
-    <footer className='md:mx-40 mx-4'>
+    <footer className='md:mx-40 mx-6 '>
       <div className='bg-white rounded-t-2xl overflow-hidden relative sm:px-8 py-24'>
         {/* Background Image */}
         <div className='absolute inset-0 w-full h-full z-0'>
