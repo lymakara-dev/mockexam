@@ -22,7 +22,8 @@ const config = {
           secondgrey: "#94A3B8",
           // foreground: "var(--color-primary-foreground)",
         },
-      }
+        background: "#F1F5F9",
+      },
     },
   },
   darkMode: "class",

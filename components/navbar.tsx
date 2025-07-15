@@ -27,12 +27,29 @@ export default function NavbarComponent({
 }: NavbarComponentProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [isLoggedIn] = useState(false); // Track login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Track dialog visibility
+  const [password, setPassword] = useState(""); // Track password input
+  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false); // Track success dialog visibility
+  const predefinedPassword = "123456"; // Predefined password
 
   const menuItems = [
-    { id: 1, title: "Purpose", href: "/" },
-    { id: 2, title: "Who are we?", href: "/about" },
-    { id: 3, title: "Contact Us", href: "/contact" },
+    {
+      id: 1,
+      title: "Purpose",
+      href: "/",
+    },
+    {
+      id: 2,
+      title: "Who are we?",
+      href: "/en/about",
+    },
+    {
+      id: 3,
+      title: "Contact Us",
+      href: "/en/contact",
+    },
   ];
 
   // Handle menu item click
@@ -62,19 +79,18 @@ export default function NavbarComponent({
         </NavbarBrand>
       </NavbarContent>
 
-      {/* Center Nav Links */}
-      <NavbarContent
-        className="hidden sm:flex gap-6 lg:gap-8 text-base lg:text-lg font-medium "
-        justify="center"
-      >
+      <NavbarContent className="hidden sm:flex gap-8" justify="center">
         {menuItems.map((item, index) => (
           <NavbarItem key={item.id} isActive={activeIndex === index}>
             <Link
               aria-current={activeIndex === index ? "page" : undefined}
-              className={`relative px-3 py-1.5 rounded-full transition-colors duration-200 hover:bg-primary-500/10 dark:hover:bg-primary-400/10 ${activeIndex === index
-                  ? "text-primary-600 dark:text-primary-400 font-semibold "
-                  : "text-gray-700 dark:text-gray-200"
-                }`}
+              className={`h-[40px] px-4 w-auto min-w-[92px] rounded-[100px] items-center justify-center 
+                  ${
+                    activeIndex === index
+                      ? "bg-primary text-white"
+                      : " text-gray-800 hover:bg-primary hover:text-white"
+                  } 
+                  transition-colors`}
               href={item.href}
               onPress={() => handleMenuClick(index)}
             >
@@ -84,10 +100,10 @@ export default function NavbarComponent({
         ))}
       </NavbarContent>
 
-      {/* Right Actions */}
-      <NavbarContent justify="end" className="gap-3">
+      <NavbarContent justify="end">
         <NavbarItem>
           <LanguageSwitcher />
+          {/* <ThemeSwitch /> */}
         </NavbarItem>
         <NavbarMenuToggle
           aria-label="Toggle navigation"
@@ -108,7 +124,86 @@ export default function NavbarComponent({
         )}
       </NavbarContent>
 
-      
+      <NavbarMenu className={isMenuOpen ? "block" : "hidden"}>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              className={`w-full ${
+                activeIndex === index ? "text-blue-600" : "text-gray-800"
+              } transition-colors`}
+              href={item.href}
+              size="lg"
+              onPress={() => handleMenuClick(index)}
+            >
+              {item.title}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+
+      {/* Login / Sign Up Dialog */}
+      {/* {isDialogOpen && (
+          <div className='dialog'>
+            <h2>{t.enterPassword}</h2>
+            <form onSubmit={handleSubmit}>
+              <label>
+                {t.password}:
+                <input
+                  required
+                  type='password'
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              </label>
+              <button type='submit'>{t.submit}</button>
+            </form>
+            <button onClick={() => setIsDialogOpen(false)}>{t.close}</button>
+          </div>
+        )} */}
+
+      {/* Success Dialog */}
+      {/* {isSuccessDialogOpen && (
+          <div className='dialog'>
+            <h2>{t.success}</h2>
+            <p>{t.passwordCorrect}</p>
+            <button onClick={closeSuccessDialog}>{t.close}</button>
+          </div>
+        )} */}
+      <style jsx>{`
+        .dialog {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          padding: 20px;
+          background-color: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          z-index: 999;
+        }
+        button {
+          margin-top: 10px;
+          padding: 10px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #0056b3;
+        }
+        input {
+          margin-top: 10px;
+          padding: 8px;
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        h2 {
+          margin-bottom: 10px;
+        }
+      `}</style>
     </Navbar>
   );
 }
