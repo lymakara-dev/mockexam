@@ -18,19 +18,16 @@ interface TestimonialProps {
 
 const GoalCard: React.FC = () => {
   return (
-    <div className='bg-white px-12 pt-12 pb-32 rounded-2xl flex items-center mb-6 z-20 mx-40'>
-      <div className='flex-1'>
-        <h2 className='text-5xl font-semibold pb-5 text-primary mb-4'>អ្វីទៅជាប្រព័ន្ធ​ MES?</h2>
-        <p className='text-gray-700 mb-2'>
+    <div className='bg-white md:px-12 px-4 pt-12 md:pb-32 pb-8 rounded-2xl md:flex items-center mb-6 z-20 md:mx-40 mx-4 flex-col md:flex-row justify-between'>
+      <div className='flex-1 '>
+        <h2 className='md:text-5xl text-4xl font-semibold pb-5 text-primary mb-4 max-md:text-center'>អ្វីទៅជាប្រព័ន្ធ​ MES?</h2>
+        <p className='text-gray-700 mb-2 max-md:text-center max-md:text-base'>
           <span className=" font-medium">Mock Exam System</span> គឺជាប្រព័ន្ធប្រឡងសាកល្បងដោយឥតគិតថ្លៃ
-          ក្នុងន័យជួយដល់ប្អូនៗមានបំណងប្រលងចូលសាកលវិទ្យាល័យផ្សេងៗក្នុងរាជធានីភ្នំពេញ។
-        </p>
-        <p className='text-gray-700'>
-          <span className=" font-medium">MES</span> ជាបណ្តុំផ្ទុកឯកសារប្រលងចាស់ៗ និងអត្រាកំណែហើយប្អួនៗអាចសាកល្បងបានដោយឥតគិតថ្លៃ
+          ក្នុងន័យជួយដល់ប្អូនៗមានបំណងប្រលងចូលសាកលវិទ្យាល័យផ្សេងៗក្នុងរាជធានីភ្នំពេញ។ MES ជាបណ្តុំផ្ទុកឯកសារប្រលងចាស់ៗ និងអត្រាកំណែហើយប្អួនៗអាចសាកល្បងបានដោយឥតគិតថ្លៃ
           និងអាចប្រើប្រាស់បានគ្រប់ទីកន្លែងគ្រាន់តែមានអ៊ីនធឺណិត។
         </p>
       </div>
-      <div className='hidden md:block h-full ml-8'>
+      <div className='hidden md:block md:h-full ml-8'>
         <Image
           src='/hero_images/logo-mobile.png' // Replace with the correct path to your logo
           alt='Logo icon'
@@ -110,7 +107,7 @@ const TestimonialsSection: React.FC = () => {
   ];
 
   return (
-    <div className=' bg-white mx-40 rounded-2xl  p-12 my-6'>
+    <div className=' bg-white md:mx-40 mx-4 rounded-2xl  md:p-12 p-6 my-6'>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* {testimonials.map((testimonial, index) => (
         <TestimonialCard
@@ -130,19 +127,13 @@ const TestimonialsSection: React.FC = () => {
 
 const SpecialitySection: React.FC = () => {
   return (
-    <div className=' grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 mx-40'>
+    <div className=' grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 md:mx-40 mx-4 '>
       {/* Left Column */}
-      <div className='bg-white p-8 px-12 rounded-2xl relative overflow-hidden'>
+      <div className='bg-white md:p-8 p-6 md:px-12 rounded-2xl relative overflow-hidden'>
         <div className="flex items-end gap-4 md:gap-8 mb-6">
-          <h2 className='text-5xl pb-6 font-semibold text-primary'>លក្ខណៈពិសេស</h2>
-          {/* <Image
-            src='/hero_images/LightBulb.png'
-            alt='Light bulb icon'
-            width={80}
-            height={80}
-          /> */}
+          <h2 className='md:text-5xl md:pb-6 text-4xl max-md:text-center w-full font-semibold text-primary'>លក្ខណៈពិសេស</h2>
         </div>
-        <ul className='text-gray-700 mb-2 list-disc list-inside'>
+        <ul className='text-gray-700 mb-2 list-disc list-inside max-md:text-base'>
           <li>
             ប្រើប្រាស់ដោយ <span className="font-medium">ឥតគិតថ្លៃ</span> និងអាចប្រើប្រាស់បានគ្រប់ទីកន្លែង។
           </li>
@@ -164,8 +155,8 @@ const SpecialitySection: React.FC = () => {
       </div>
 
       {/* Right Column */}
-      <div className='bg-white p-8 rounded-2xl w-full '>
-        <h2 className='text-5xl font-semibold text-primary mb-4 pb-6'>របៀបប្រើប្រាស់</h2>
+      <div className='bg-white md:p-8 p-4 rounded-2xl w-full '>
+        <h2 className='md:text-5xl w-full text-4xl max-md:text-center font-semibold text-primary mb-4 md:pb-6 py-4'>របៀបប្រើប្រាស់</h2>
         <div className='bg-gray-100 rounded-2xl p-4 mb-4 flex items-center justify-center h-80'>
           <div className='rounded-full bg-gray-300 p-4'>
             <div className='h-8 w-8 flex items-center justify-center'>
@@ -173,8 +164,8 @@ const SpecialitySection: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className='mt-6 flex justify-between items-center p-4 '>
-          <p className='text-gray-700 mb-2'>ឬចូលមើលតាមរយះ :</p>
+        <div className='mt-6 md:flex-row justify-between items-center p-4 flex flex-col'>
+          <p className='text-gray-700 mb-2 text-nowrap max-md:text-base'>ឬចូលមើលតាមរយះ :</p>
           <div className='flex space-x-4'>
             <a href='#' className='text-2xl text-blue-600'>
               <FaFacebook />

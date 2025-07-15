@@ -17,6 +17,9 @@ const config = {
       colors: {
         primary: {
           DEFAULT: "#06598F",
+          background: "#F1F5F9",
+          grey: "#64748B",
+          secondgrey: "#94A3B8",
           // foreground: "var(--color-primary-foreground)",
         },
       }
